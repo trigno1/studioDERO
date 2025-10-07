@@ -26,24 +26,9 @@ import { getCategories } from "@/lib/cms";
 export default function Header() {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isCollectionDropdownOpen, setCollectionDropdownOpen] = useState(false);
-  const collectionTriggerRef = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
   const { cartCount } = useCart();
   const categories = getCategories();
-
-  const handleCollectionHover = () => {
-    // On desktop, open dropdown on hover
-    if (window.innerWidth >= 768) {
-      setCollectionDropdownOpen(true);
-    }
-  };
-
-  const handleCollectionLeave = () => {
-    // On desktop, close dropdown on leave
-    if (window.innerWidth >= 768) {
-      setCollectionDropdownOpen(false);
-    }
-  };
 
   const handleAboutClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (pathname === '/') {
@@ -81,7 +66,7 @@ export default function Header() {
               onClick={handleAboutClick}
               className={cn(
                 "text-sm font-medium transition-colors hover:text-primary",
-                pathname.includes("/about") ? "text-primary" : "text-muted-foreground"
+                pathname.includes("/#about") ? "text-primary" : "text-muted-foreground"
               )}
             >
               About
@@ -89,11 +74,7 @@ export default function Header() {
              <DropdownMenu open={isCollectionDropdownOpen} onOpenChange={setCollectionDropdownOpen}>
               <DropdownMenuTrigger asChild>
                  <Button
-                  ref={collectionTriggerRef}
                   variant="ghost"
-                  onClick={() => setCollectionDropdownOpen(prev => !prev)}
-                  onMouseEnter={handleCollectionHover}
-                  onMouseLeave={handleCollectionLeave}
                   className={cn(
                     "flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary",
                     pathname.startsWith('/collection') ? "text-primary" : "text-muted-foreground"
@@ -101,7 +82,7 @@ export default function Header() {
                   Collection <ChevronDown className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent onMouseLeave={handleCollectionLeave} align="start">
+              <DropdownMenuContent align="start">
                 {categories.map((category) => (
                   <DropdownMenuItem key={category.id} asChild>
                     <Link href={`/collection/${category.slug}`}>{category.name}</Link>
@@ -121,7 +102,7 @@ export default function Header() {
           </nav>
 
            <CartSheet>
-            <Button variant="ghost" size="icon" className="relative h-10 w-10 rounded-full bg-primary text-primary-foreground hover:bg-primary/90">
+            <Button variant="ghost" size="icon" className="relative ml-4 h-10 w-10 rounded-full bg-primary text-primary-foreground hover:bg-primary/90">
               <ShoppingCart className="h-5 w-5" />
               {cartCount > 0 && (
                 <Badge
