@@ -7,6 +7,92 @@ import ProductCard from "@/components/shared/ProductCard";
 import { getProducts } from "@/lib/cms";
 import { getPlaceholderImage } from "@/lib/placeholder-images";
 
+const LeafTopLeft = () => (
+    <svg
+      width="200"
+      height="150"
+      viewBox="0 0 200 150"
+      className="absolute top-0 left-0 -z-10"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ transform: "scaleX(-1)" }}
+    >
+      <path
+        d="M 50 50 C 70 20, 100 20, 120 50 S 150 80, 120 100 C 100 120, 70 120, 50 100 S 30 80, 50 50"
+        fill="#a3b18a"
+        opacity="0.6"
+      />
+      <path
+        d="M 60 30 C 80 0, 110 0, 130 30 S 160 60, 130 80 C 110 100, 80 100, 60 80 S 40 60, 60 30"
+        fill="#dda15e"
+        opacity="0.5"
+      />
+      <path
+        d="M 80 40 C 100 10, 130 10, 150 40 S 180 70, 150 90 C 130 110, 100 110, 80 90 S 60 70, 80 40"
+        fill="#a3b18a"
+        opacity="0.6"
+      />
+      <path
+        d="M 100 20 C 120 -10, 150 -10, 170 20 S 200 50, 170 70 C 150 90, 120 90, 100 70 S 80 50, 100 20"
+        fill="#dda15e"
+        opacity="0.5"
+      />
+    </svg>
+  );
+
+  const LeafTopRight = () => (
+    <svg
+      width="200"
+      height="150"
+      viewBox="0 0 200 150"
+      className="absolute top-0 right-0 -z-10"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M 50 50 C 70 20, 100 20, 120 50 S 150 80, 120 100 C 100 120, 70 120, 50 100 S 30 80, 50 50"
+        fill="#a3b18a"
+        opacity="0.6"
+      />
+      <path
+        d="M 60 30 C 80 0, 110 0, 130 30 S 160 60, 130 80 C 110 100, 80 100, 60 80 S 40 60, 60 30"
+        fill="#dda15e"
+        opacity="0.5"
+      />
+      <path
+        d="M 80 40 C 100 10, 130 10, 150 40 S 180 70, 150 90 C 130 110, 100 110, 80 90 S 60 70, 80 40"
+        fill="#a3b18a"
+        opacity="0.6"
+      />
+      <path
+        d="M 100 20 C 120 -10, 150 -10, 170 20 S 200 50, 170 70 C 150 90, 120 90, 100 70 S 80 50, 100 20"
+        fill="#dda15e"
+        opacity="0.5"
+      />
+    </svg>
+  );
+  
+  const Lantern = ({ top, right, size = 60 }: { top: number; right: number; size?: number }) => (
+    <svg
+      width={size}
+      height={size * 1.5}
+      viewBox="0 0 100 150"
+      className="absolute -z-10"
+      style={{ top: `${top}px`, right: `${right}px` }}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <line x1="50" y1="0" x2="50" y2="40" stroke="#c9a227" strokeWidth="2" />
+      <path
+        d="M 30 40 Q 50 30, 70 40 L 80 50 Q 50 45, 20 50 L 30 40"
+        fill="#f4a261"
+      />
+      <path d="M 20 50 H 80 V 100 H 20 V 50" fill="#f4a261" />
+      <rect x="25" y="55" width="50" height="40" fill="#fde4a0" />
+      <path
+        d="M 20 100 L 80 100 Q 50 110, 20 100"
+        fill="#f4a261"
+      />
+    </svg>
+  );
+
 export default function Home() {
   const featuredProducts = getProducts().slice(0, 4);
   const heroImage = getPlaceholderImage("hero-1");
@@ -36,7 +122,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col">
-      <section className="relative h-[60vh] w-full text-white md:h-[80vh]">
+      <section className="relative h-[60vh] w-full text-white md:h-[80vh] overflow-hidden">
         {heroImage && (
           <Image
             src={heroImage.imageUrl}
@@ -48,6 +134,10 @@ export default function Home() {
           />
         )}
         <div className="absolute inset-0 bg-black/30" />
+        <LeafTopLeft />
+        <LeafTopRight />
+        <Lantern top={50} right={80} />
+        <Lantern top={200} right={50} size={80} />
         <div className="relative z-10 flex h-full flex-col items-center justify-center space-y-6 px-4 text-center">
           <p className="font-body text-sm font-bold uppercase tracking-widest text-gray-200">
             Handcrafted with love
