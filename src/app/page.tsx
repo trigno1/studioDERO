@@ -10,7 +10,6 @@ import { TestimonialCarousel } from '@/components/shared/TestimonialCarousel';
 import { getCategories } from '@/lib/cms';
 
 export default function Home() {
-  const heroBgImage = getPlaceholderImage('hero.pg');
   const categories = getCategories();
 
   const features = [
@@ -49,16 +48,14 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       <section className="relative flex h-[90vh] w-full flex-col items-center justify-center overflow-hidden text-center text-primary-foreground">
-        {heroBgImage && (
-          <Image
-            src={heroBgImage.imageUrl}
-            alt={heroBgImage.description}
-            data-ai-hint={heroBgImage.imageHint}
-            fill
-            className="object-cover"
-            priority
-          />
-        )}
+        <Image
+          src="https://images.unsplash.com/photo-1572095509496-02d1a33d4d4a?q=80&w=2070&auto=format&fit=crop"
+          alt="Festive gift boxes background"
+          data-ai-hint="gift box background"
+          fill
+          className="object-cover"
+          priority
+        />
         <div className="absolute inset-0 bg-black/30" />
         <div className="relative z-10 flex flex-grow flex-col items-center justify-center space-y-6 px-4">
           <h1 className="font-headline text-4xl font-bold leading-tight text-white md:text-6xl lg:text-7xl">
