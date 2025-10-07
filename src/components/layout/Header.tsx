@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -25,12 +26,10 @@ import { getCategories } from "@/lib/cms";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
 ];
 
 export default function Header() {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isCollectionMenuOpen, setCollectionMenuOpen] = useState(false);
   const pathname = usePathname();
   const { cartCount } = useCart();
   const categories = getCategories();
@@ -41,8 +40,9 @@ export default function Header() {
         <Link href="/" className="font-headline text-2xl font-bold text-primary">
           DERO
         </Link>
-        <div className="flex items-center space-x-2">
-          <nav className="hidden items-center space-x-6 md:flex">
+        
+        <div className="flex items-center gap-2">
+          <nav className="hidden items-center gap-4 md:flex lg:gap-6">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -55,8 +55,8 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
-             <DropdownMenu open={isCollectionMenuOpen} onOpenChange={setCollectionMenuOpen}>
-              <DropdownMenuTrigger asChild onPointerEnter={() => setCollectionMenuOpen(true)}>
+             <DropdownMenu>
+              <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className={cn(
                   "flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary",
                   pathname.startsWith('/collection') ? "text-primary" : "text-muted-foreground"
@@ -64,7 +64,7 @@ export default function Header() {
                   Collection <ChevronDown className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent onPointerLeave={() => setCollectionMenuOpen(false)}>
+              <DropdownMenuContent>
                 {categories.map((category) => (
                   <DropdownMenuItem key={category.id} asChild>
                     <Link href={`/collection/${category.slug}`}>{category.name}</Link>
@@ -72,7 +72,17 @@ export default function Header() {
                 ))}
               </DropdownMenuContent>
             </DropdownMenu>
+            <Link
+              href="/contact"
+              className={cn(
+                "text-sm font-medium transition-colors hover:text-primary",
+                pathname === "/contact" ? "text-primary" : "text-muted-foreground"
+              )}
+            >
+              Contact
+            </Link>
           </nav>
+
            <CartSheet>
             <Button variant="ghost" size="icon" className="relative h-10 w-10 rounded-full bg-primary text-primary-foreground hover:bg-primary/90">
               <ShoppingCart className="h-5 w-5" />
@@ -87,6 +97,7 @@ export default function Header() {
               <span className="sr-only">Open shopping cart</span>
             </Button>
           </CartSheet>
+
           <div className="md:hidden">
             <Sheet open={isMobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
@@ -101,7 +112,7 @@ export default function Header() {
                     DERO
                   </Link>
                   <nav className="flex flex-col space-y-4">
-                    {navLinks.map((link) => (
+                    {[...navLinks, { href: "/contact", label: "Contact" }].map((link) => (
                       <Link
                         key={link.href}
                         href={link.href}

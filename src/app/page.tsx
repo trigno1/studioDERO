@@ -1,9 +1,10 @@
+
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Gift, Sparkles, Sprout, Star, ChevronDown } from 'lucide-react';
+import { Gift, Sparkles, Sprout, Star, ChevronDown, Users, CheckCircle } from 'lucide-react';
 import { getPlaceholderImage } from '@/lib/placeholder-images';
 import { TestimonialCarousel } from '@/components/shared/TestimonialCarousel';
 import { getCategories } from '@/lib/cms';
@@ -33,6 +34,16 @@ export default function Home() {
       title: 'Luxury Finishes',
       description: 'Exquisite details and premium materials for a lasting impression.',
     },
+    {
+      icon: <Users className="h-10 w-10 text-accent" />,
+      title: 'Corporate & Personal Orders',
+      description: 'Perfect for both business clients and individual celebrations.',
+    },
+    {
+      icon: <CheckCircle className="h-10 w-10 text-accent" />,
+      title: 'End-to-End Service',
+      description: 'Custom orders, concepts, designs, and deliveries handled with care.',
+    }
   ];
 
   return (
@@ -69,7 +80,7 @@ export default function Home() {
       <section id="about" className="py-16 md:py-24">
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-headline text-3xl font-bold md:text-4xl">
-            Discover Aesthetic & Ethic Treasures
+            About Us
           </h2>
           <div className="mx-auto mt-4 max-w-3xl">
             <p className="text-lg text-muted-foreground">
@@ -90,10 +101,10 @@ export default function Home() {
               Why Choose DERO?
             </h2>
             <p className="mt-2 text-lg text-secondary-foreground/80">
-              Our Commitment to Excellence
+              Celebrate every occasion in style, where luxury meets sustainability.
             </p>
           </div>
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {features.map(feature => (
               <Card
                 key={feature.title}
