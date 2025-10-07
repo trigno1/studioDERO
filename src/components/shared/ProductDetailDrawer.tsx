@@ -9,6 +9,8 @@ import { getPlaceholderImage } from "@/lib/placeholder-images";
 import { ShoppingCart, PackageCheck, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { loadStripe } from '@stripe/stripe-js';
+import { useCart } from "@/context/CartContext";
+import { useToast } from "@/hooks/use-toast";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
@@ -21,12 +23,14 @@ interface ProductDetailDrawerProps {
 export default function ProductDetailDrawer({ product, isOpen, onOpenChange }: ProductDetailDrawerProps) {
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const { addToCart } = useCart();
+  const { toast } = useToast();
 
   useEffect(() => {
     setCurrentImageIndex(0);
   }, [isOpen, product]);
 
-  const handleCheckout = async () => {
+  const handleBuyNow = async () => {
     setIsCheckingOut(true);
     try {
       const stripe = await stripePromise;
@@ -34,14 +38,18 @@ export default function ProductDetailDrawer({ product, isOpen, onOpenChange }: P
         throw new Error('Stripe.js has not loaded yet.');
       }
 
+      // We need to wrap the single product in the CartItem structure the API now expects
+      const cartItem = { product, quantity: 1 };
+
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ product }),
+        body: JSON.stringify({ cartItems: [cartItem] }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to create checkout session.');
+        const errorBody = await response.json();
+        throw new Error(errorBody.error || 'Failed to create checkout session.');
       }
 
       const session = await response.json();
@@ -52,10 +60,22 @@ export default function ProductDetailDrawer({ product, isOpen, onOpenChange }: P
       }
     } catch (error) {
       console.error("Checkout error:", error);
-      // You could show a toast message here
+      toast({
+        variant: "destructive",
+        title: "Checkout Error",
+        description: error instanceof Error ? error.message : "An unknown error occurred.",
+      });
     } finally {
       setIsCheckingOut(false);
     }
+  };
+  
+  const handleAddToCart = () => {
+    addToCart(product);
+    toast({
+      title: "Added to Cart",
+      description: `${product.name} has been added to your cart.`,
+    });
   };
 
   const nextImage = () => {
@@ -130,19 +150,24 @@ export default function ProductDetailDrawer({ product, isOpen, onOpenChange }: P
                <p className="font-body text-4xl font-bold text-primary">
                 ₹{product.price.toFixed(2)}
               </p>
-              <Button onClick={handleCheckout} size="lg" className="w-full" disabled={isCheckingOut}>
-                {isCheckingOut ? (
-                  <>
-                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                    Redirecting...
-                  </>
-                ) : (
-                  <>
-                    <ShoppingCart className="mr-2 h-5 w-5" />
-                    Buy Now
-                  </>
-                )}
-              </Button>
+              <div className="grid w-full grid-cols-2 gap-4">
+                <Button onClick={handleAddToCart} size="lg" variant="outline">
+                    Add to Cart
+                </Button>
+                <Button onClick={handleBuyNow} size="lg" className="w-full" disabled={isCheckingOut}>
+                  {isCheckingOut ? (
+                    <>
+                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                      Redirecting...
+                    </>
+                  ) : (
+                    <>
+                      <ShoppingCart className="mr-2 h-5 w-5" />
+                      Buy Now
+                    </>
+                  )}
+                </Button>
+              </div>
             </div>
           </div>
         </div>
