@@ -196,10 +196,30 @@ export default async function Home() {
               Curated gifts for every taste and occasion.
             </p>
           </div>
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {products.map((product: Product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {categories.map((category) => {
+              const categoryImage = getPlaceholderImage(category.image);
+              return (
+              <Link key={category.id} href={`/collection/${category.slug}`}>
+                <Card className="group flex h-full flex-col overflow-hidden rounded-lg border shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                  <div className="relative aspect-square w-full">
+                    {categoryImage && (
+                      <Image
+                        src={categoryImage.imageUrl}
+                        alt={category.name}
+                        data-ai-hint={categoryImage.imageHint}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    )}
+                  </div>
+                  <div className="flex-grow p-4">
+                    <h3 className="font-headline text-xl font-bold text-primary">{category.name}</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">{category.description}</p>
+                  </div>
+                </Card>
+              </Link>
+            )})}
           </div>
         </div>
       </section>
