@@ -22,6 +22,7 @@ import CartSheet from "@/components/cart/CartSheet";
 import { useCart } from "@/context/CartContext";
 import { Badge } from "@/components/ui/badge";
 import { getCategories } from "@/lib/cms";
+import Image from "next/image";
 
 export default function Header() {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -46,8 +47,8 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link href="/" className="font-headline text-2xl font-bold text-primary">
-          DERO
+        <Link href="/" className="flex items-center gap-2">
+          <Image src="/logo.png" alt="DERO logo" width={100} height={40} className="h-10 w-auto" />
         </Link>
         
         <div className="flex items-center gap-2">
@@ -126,8 +127,8 @@ export default function Header() {
               </SheetTrigger>
               <SheetContent side="left">
                 <div className="flex flex-col space-y-6 pt-10">
-                  <Link href="/" className="font-headline text-2xl font-bold text-primary">
-                    DERO
+                  <Link href="/">
+                    <Image src="/logo.png" alt="DERO logo" width={120} height={48} />
                   </Link>
                   <nav className="flex flex-col space-y-4">
                     {navLinks.map((link) => (

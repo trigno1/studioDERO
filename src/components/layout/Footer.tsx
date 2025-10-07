@@ -1,12 +1,16 @@
+
 import Link from "next/link";
 import { Instagram, Mail, Phone, Facebook, Heart } from "lucide-react";
+import Image from "next/image";
 
 export default function Footer() {
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto grid grid-cols-1 gap-8 px-4 py-12 md:grid-cols-4">
         <div>
-          <h3 className="font-headline text-xl font-bold">DERO</h3>
+          <Link href="/">
+            <Image src="/logo.png" alt="DERO logo" width={120} height={48} />
+          </Link>
           <p className="mt-2 text-sm text-primary-foreground/80">
             The Art of Festive Gifting.
           </p>
