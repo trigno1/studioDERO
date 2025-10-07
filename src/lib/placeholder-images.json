@@ -3,7 +3,7 @@
     {
       "id": "hero-bg",
       "description": "Fading background of gift boxes",
-      "imageUrl": "/hero.png",
+      "imageUrl": "https://images.unsplash.com/photo-1572095509496-02d1a33d4d4a?q=80&w=2070&auto=format&fit=crop",
       "imageHint": "gift box background"
     },
     {
