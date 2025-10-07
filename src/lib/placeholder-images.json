@@ -1,15 +1,9 @@
 {
   "placeholderImages": [
     {
-      "id": "hero-1",
-      "description": "Elegant Diwali gift box with festive lights",
-      "imageUrl": "https://picsum.photos/seed/hero1/1080/720",
-      "imageHint": "diwali gift"
-    },
-    {
       "id": "hero-bg",
       "description": "Fading background of gift boxes",
-      "imageUrl": "https://picsum.photos/seed/herobg2/1920/1080",
+      "imageUrl": "/hero.png",
       "imageHint": "gift box background"
     },
     {
