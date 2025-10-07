@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto grid grid-cols-1 gap-8 px-4 py-12 md:grid-cols-4">
         <div>
-          <h3 className="font-headline text-xl font-bold">DiwaliGlow</h3>
+          <h3 className="font-headline text-xl font-bold">DERO</h3>
           <p className="mt-2 text-sm text-primary-foreground/80">
             The Art of Festive Gifting.
           </p>
@@ -48,7 +48,7 @@ export default function Footer() {
               <Link href="#" className="hover:text-white">Privacy Policy</Link>
           </div>
           <p className="text-center md:text-left">
-              © 2025 DiwaliGlow. All rights reserved.
+              © 2025 DERO. All rights reserved.
           </p>
         </div>
       </div>

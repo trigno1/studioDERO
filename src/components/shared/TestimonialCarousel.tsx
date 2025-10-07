@@ -23,7 +23,7 @@ const testimonials = [
     name: "Rahul M.",
     location: "Delhi",
     rating: 5,
-    quote: "I ordered a corporate hamper and our clients were beyond impressed. DiwaliGlow is now our go-to for festive gifting.",
+    quote: "I ordered a corporate hamper and our clients were beyond impressed. DERO is now our go-to for festive gifting.",
   },
   {
     name: "Anjali K.",

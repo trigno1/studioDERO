@@ -3,13 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Gift, Sparkles, Sprout, Star } from "lucide-react";
+import { Gift, Sparkles, Sprout, Star, ChevronDown } from "lucide-react";
 import { getPlaceholderImage } from "@/lib/placeholder-images";
 import { TestimonialCarousel } from "@/components/shared/TestimonialCarousel";
 import { getCategories } from "@/lib/cms";
 
 export default function Home() {
-  const heroImage = getPlaceholderImage("hero-1");
   const heroBgImage = getPlaceholderImage("hero-bg");
   const categories = getCategories();
 
@@ -38,7 +37,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col">
-      <section className="relative flex h-[80vh] w-full items-center justify-center overflow-hidden text-center text-white">
+      <section className="relative flex h-[90vh] w-full flex-col items-center justify-center overflow-hidden text-center text-primary-foreground">
         {heroBgImage && (
           <Image
             src={heroBgImage.imageUrl}
@@ -49,15 +48,20 @@ export default function Home() {
             priority
           />
         )}
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="relative z-10 flex flex-col items-center justify-center space-y-6 px-4">
-          <h1 className="font-headline text-4xl font-bold leading-tight md:text-6xl lg:text-7xl">
+        <div className="absolute inset-0 bg-background/70" />
+        <div className="relative z-10 flex flex-grow flex-col items-center justify-center space-y-6 px-4">
+          <h1 className="font-headline text-4xl font-bold leading-tight text-primary md:text-6xl lg:text-7xl">
             The Art of <br /> Festive Gifting
           </h1>
-          <p className="max-w-xl text-lg text-white/90 md:text-xl">
-            Discover our curated collection of handcrafted Diwali gift boxes,
+          <p className="max-w-xl text-lg text-foreground/90 md:text-xl">
+            Discover our curated collection of handcrafted gift boxes,
             blending tradition with modern elegance. Each piece tells a story of craftsmanship and celebration.
           </p>
+        </div>
+         <div className="relative z-10 mb-8 flex flex-col items-center">
+            <a href="#about" aria-label="Scroll down">
+                <ChevronDown className="h-10 w-10 animate-bounce text-primary" />
+            </a>
         </div>
       </section>
 
@@ -68,7 +72,7 @@ export default function Home() {
           </h2>
           <div className="mx-auto mt-4 max-w-3xl">
             <p className="text-lg text-muted-foreground">
-              At DiwaliGlow, we believe Diwali is more than a festival; it’s an emotion. Our mission is to encapsulate this feeling in beautifully designed gift boxes that speak volumes of your affection. We blend timeless traditions with contemporary aesthetics to create gifts that are not just objects, but cherished memories.
+              At DERO, we believe Diwali is more than a festival; it’s an emotion. Our mission is to encapsulate this feeling in beautifully designed gift boxes that speak volumes of your affection. We blend timeless traditions with contemporary aesthetics to create gifts that are not just objects, but cherished memories.
             </p>
           </div>
         </div>
@@ -77,7 +81,7 @@ export default function Home() {
       <section className="bg-secondary py-16 text-secondary-foreground md:py-24">
         <div className="container mx-auto px-4">
           <div className="mb-12 text-left">
-            <h2 className="font-headline text-3xl font-bold md:text-4xl">Why Choose DiwaliGlow?</h2>
+            <h2 className="font-headline text-3xl font-bold md:text-4xl">Why Choose DERO?</h2>
             <p className="mt-2 text-lg text-secondary-foreground/80">Our Commitment to Excellence</p>
           </div>
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">

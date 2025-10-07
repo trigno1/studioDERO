@@ -20,8 +20,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "DiwaliGlow - The Art of Festive Gifting",
-  description: "Discover our curated collection of handcrafted Diwali gift boxes, blending tradition with modern elegance.",
+  title: "DERO - The Art of Festive Gifting",
+  description: "Discover our curated collection of handcrafted gift boxes, blending tradition with modern elegance.",
 };
 
 export default function RootLayout({

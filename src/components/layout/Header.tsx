@@ -39,7 +39,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" className="font-headline text-2xl font-bold text-primary">
-          DiwaliGlow
+          DERO
         </Link>
         <div className="flex items-center space-x-2">
           <nav className="hidden items-center space-x-6 md:flex">
@@ -98,7 +98,7 @@ export default function Header() {
               <SheetContent side="left">
                 <div className="flex flex-col space-y-6 pt-10">
                   <Link href="/" className="font-headline text-2xl font-bold text-primary">
-                    DiwaliGlow
+                    DERO
                   </Link>
                   <nav className="flex flex-col space-y-4">
                     {navLinks.map((link) => (
