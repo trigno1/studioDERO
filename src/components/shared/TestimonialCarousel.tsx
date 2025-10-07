@@ -50,7 +50,7 @@ export function TestimonialCarousel() {
         <div className="relative mb-12 text-center">
             <h2 className="font-headline text-3xl font-bold md:text-4xl">What Our Customers Say</h2>
             <p className="mt-2 text-lg text-muted-foreground">Heartfelt words from our valued clients</p>
-            <Quote className="absolute -top-4 left-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 text-primary/5" />
+            <Quote className="absolute -top-4 left-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 text-accent/10" />
         </div>
         <Carousel
           plugins={[plugin.current]}

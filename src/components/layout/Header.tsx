@@ -30,6 +30,7 @@ const navLinks = [
 
 export default function Header() {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isCollectionMenuOpen, setCollectionMenuOpen] = useState(false);
   const pathname = usePathname();
   const { cartCount } = useCart();
   const categories = getCategories();
@@ -54,8 +55,8 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
-             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
+             <DropdownMenu open={isCollectionMenuOpen} onOpenChange={setCollectionMenuOpen}>
+              <DropdownMenuTrigger asChild onPointerEnter={() => setCollectionMenuOpen(true)}>
                 <Button variant="ghost" className={cn(
                   "flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary",
                   pathname.startsWith('/collection') ? "text-primary" : "text-muted-foreground"
@@ -63,7 +64,7 @@ export default function Header() {
                   Collection <ChevronDown className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent>
+              <DropdownMenuContent onPointerLeave={() => setCollectionMenuOpen(false)}>
                 {categories.map((category) => (
                   <DropdownMenuItem key={category.id} asChild>
                     <Link href={`/collection/${category.slug}`}>{category.name}</Link>

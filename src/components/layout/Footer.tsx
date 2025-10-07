@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Instagram, Mail, Phone, Facebook } from "lucide-react";
+import { Instagram, Mail, Phone, Facebook, Heart } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -16,7 +16,7 @@ export default function Footer() {
           <ul className="mt-4 space-y-2">
             <li><Link href="/" className="text-sm text-primary-foreground/80 hover:text-white">Home</Link></li>
             <li><Link href="/about" className="text-sm text-primary-foreground/80 hover:text-white">About Us</Link></li>
-            <li><Link href="/collection" className="text-sm text-primary-foreground/80 hover:text-white">Collection</Link></li>
+            <li><Link href="/collection/gourmet" className="text-sm text-primary-foreground/80 hover:text-white">Collection</Link></li>
             <li><Link href="/contact" className="text-sm text-primary-foreground/80 hover:text-white">Contact Us</Link></li>
           </ul>
         </div>
@@ -43,13 +43,20 @@ export default function Footer() {
       </div>
       <div className="border-t border-primary-foreground/10 py-4">
         <div className="container mx-auto flex flex-col-reverse items-center justify-between gap-4 px-4 text-sm text-primary-foreground/60 md:flex-row">
-            <p className="text-center md:text-left">
-                © 2025 DiwaliGlow. All rights reserved.
-            </p>
-            <div className="flex gap-4">
-                <Link href="#" className="hover:text-white">Terms & Conditions</Link>
-                <Link href="#" className="hover:text-white">Privacy Policy</Link>
-            </div>
+          <div className="flex gap-4">
+              <Link href="#" className="hover:text-white">Terms & Conditions</Link>
+              <Link href="#" className="hover:text-white">Privacy Policy</Link>
+          </div>
+          <p className="text-center md:text-left">
+              © 2025 DiwaliGlow. All rights reserved.
+          </p>
+        </div>
+      </div>
+      <div className="bg-primary/80 py-2">
+        <div className="container mx-auto text-center text-xs text-primary-foreground/50">
+          <p className="flex items-center justify-center gap-1">
+            Made with <Heart className="h-3 w-3 fill-current" /> by YourName
+          </p>
         </div>
       </div>
     </footer>
