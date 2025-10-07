@@ -14,10 +14,17 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -26,8 +33,14 @@ const formSchema = z.object({
   email: z.string().email({
     message: "Please enter a valid email address.",
   }),
-  message: z.string().min(10, {
-    message: "Message must be at least 10 characters.",
+  phone: z.string().min(10, {
+    message: "Please enter a valid phone number.",
+  }),
+  query: z.string().min(10, {
+    message: "Query must be at least 10 characters.",
+  }),
+  callTime: z.string({
+    required_error: "Please select a preferred time to call.",
   }),
 });
 
@@ -39,7 +52,8 @@ export default function ContactPage() {
     defaultValues: {
       name: "",
       email: "",
-      message: "",
+      phone: "",
+      query: "",
     },
   });
 
@@ -54,7 +68,7 @@ export default function ContactPage() {
   return (
     <div className="container mx-auto px-4 py-12 md:py-16">
       <div className="mb-12 text-center">
-        <h1 className="font-headline text-4xl font-bold md:text-5xl">Get in Touch</h1>
+        <h1 className="font-headline text-4xl font-bold md:text-5xl">Contact Us</h1>
         <p className="mt-2 text-lg text-muted-foreground">
           We'd love to hear from you.
         </p>
@@ -96,13 +110,48 @@ export default function ContactPage() {
                 />
                 <FormField
                   control={form.control}
-                  name="message"
+                  name="phone"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Message</FormLabel>
+                      <FormLabel>Phone Number</FormLabel>
                       <FormControl>
-                        <Textarea placeholder="How can we help you?" rows={5} {...field} />
+                        <Input placeholder="Your Phone Number" {...field} />
                       </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="query"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Your Query</FormLabel>
+                      <FormControl>
+                        <Textarea placeholder="Please describe your query..." rows={5} {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="callTime"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Preferred time to call</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select a time slot" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="morning">Morning (9am - 12pm)</SelectItem>
+                          <SelectItem value="afternoon">Afternoon (12pm - 4pm)</SelectItem>
+                          <SelectItem value="evening">Evening (4pm - 7pm)</SelectItem>
+                        </SelectContent>
+                      </Select>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -120,7 +169,7 @@ export default function ContactPage() {
                 <Mail className="mt-1 h-6 w-6 text-primary" />
                 <div>
                   <h3 className="font-semibold">Email</h3>
-                  <a href="mailto:hello@glowbox.com" className="text-muted-foreground hover:text-primary">hello@glowbox.com</a>
+                  <a href="mailto:hello@artisanheritage.com" className="text-muted-foreground hover:text-primary">hello@artisanheritage.com</a>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -134,16 +183,8 @@ export default function ContactPage() {
                 <MapPin className="mt-1 h-6 w-6 text-primary" />
                 <div>
                   <h3 className="font-semibold">Address</h3>
-                  <p className="text-muted-foreground">123 Festive Lane, Celebration City, 45678</p>
+                  <p className="text-muted-foreground">123 Artisan Way, Craftsville, 45678</p>
                 </div>
-              </div>
-            </div>
-             <div className="mt-8">
-              <h3 className="font-headline text-xl font-bold mb-4">Follow Us</h3>
-              <div className="flex space-x-4">
-                <a href="#" aria-label="Facebook" className="text-muted-foreground hover:text-primary"><Facebook size={24} /></a>
-                <a href="#" aria-label="Instagram" className="text-muted-foreground hover:text-primary"><Instagram size={24} /></a>
-                <a href="#" aria-label="Twitter" className="text-muted-foreground hover:text-primary"><Twitter size={24} /></a>
               </div>
             </div>
         </div>

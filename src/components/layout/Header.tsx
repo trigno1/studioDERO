@@ -13,9 +13,9 @@ import { Badge } from "@/components/ui/badge";
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/collection", label: "Shop" },
-  { href: "/categories", label: "Categories" },
-  { href: "/about", label: "Our Story" },
+  { href: "/collection", label: "Collection" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Header() {
