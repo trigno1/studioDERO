@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from "next/image";
@@ -41,7 +42,7 @@ export default function CartSheet({ children }: { children: React.ReactNode }) {
                       </div>
                       <div className="flex-grow">
                         <h3 className="font-semibold">{item.product.name}</h3>
-                        <p className="text-sm text-muted-foreground">${item.product.price.toFixed(2)}</p>
+                        <p className="text-sm text-muted-foreground">₹{item.product.price.toFixed(2)}</p>
                         <div className="mt-2 flex items-center gap-2">
                           <Input
                             type="number"
@@ -56,7 +57,7 @@ export default function CartSheet({ children }: { children: React.ReactNode }) {
                           </Button>
                         </div>
                       </div>
-                      <p className="font-semibold">${(item.product.price * item.quantity).toFixed(2)}</p>
+                      <p className="font-semibold">₹{(item.product.price * item.quantity).toFixed(2)}</p>
                     </div>
                   );
                 })}
@@ -66,7 +67,7 @@ export default function CartSheet({ children }: { children: React.ReactNode }) {
               <div className="flex w-full flex-col gap-4">
                 <div className="flex items-center justify-between font-bold">
                   <span>Subtotal</span>
-                  <span>${cartTotal.toFixed(2)}</span>
+                  <span>₹{cartTotal.toFixed(2)}</span>
                 </div>
                 <Button size="lg" className="w-full">
                   Proceed to Checkout
