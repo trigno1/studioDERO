@@ -31,6 +31,18 @@
       "imageHint": "gift box"
     },
     {
+      "id": "product-1-alt1",
+      "description": "Alternative view of The Shubh Labh Box",
+      "imageUrl": "https://picsum.photos/seed/prod1alt1/500/500",
+      "imageHint": "diwali hamper"
+    },
+    {
+      "id": "product-1-alt2",
+      "description": "Close up of The Shubh Labh Box contents",
+      "imageUrl": "https://picsum.photos/seed/prod1alt2/500/500",
+      "imageHint": "festive treats"
+    },
+    {
       "id": "product-2",
       "description": "The Royal Diwali Hamper",
       "imageUrl": "https://picsum.photos/seed/prod2/500/500",
@@ -57,7 +69,7 @@
     {
       "id": "product-6",
       "description": "The Corporate Sparkler",
-      "imageUrl": "https://images.unsplash.com/photo-1625552185153-7a8d8f3794a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxjb3Jwb3JhdGUlMjBnaWZ0fGVufDB8fHx8MTc1OTcyMzE3Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1625552185153-7a8d8f3794a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxjb3Jwb3JhdGUlMjBnaWZ0fGVufDB8fHx8MTc1OTcyMzE3Nnww&ixlibrb-4.1.0&q=80&w=1080",
       "imageHint": "corporate gift"
     },
     {

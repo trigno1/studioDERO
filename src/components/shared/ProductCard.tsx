@@ -24,11 +24,11 @@ export default function ProductCard({ product }: ProductCardProps) {
       <Card className="flex flex-col overflow-hidden rounded-lg border shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
         <CardHeader className="p-0">
           <div className="relative aspect-square w-full">
-            {getPlaceholderImage(product.image) && (
+            {getPlaceholderImage(product.images[0]) && (
               <Image
-                src={getPlaceholderImage(product.image)!.imageUrl}
+                src={getPlaceholderImage(product.images[0])!.imageUrl}
                 alt={product.name}
-                data-ai-hint={getPlaceholderImage(product.image)!.imageHint}
+                data-ai-hint={getPlaceholderImage(product.images[0])!.imageHint}
                 fill
                 className="object-cover"
               />
@@ -42,7 +42,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           </p>
         </CardContent>
         <CardFooter className="p-4 pt-0">
-          <Button onClick={() => setIsDrawerOpen(true)} className="w-full" variant="outline">
+          <Button onClick={() => setIsDrawerOpen(true)} className="w-full" variant="secondary">
             <Eye className="mr-2 h-4 w-4" />
             View Details
           </Button>

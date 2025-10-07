@@ -38,7 +38,7 @@ const products: Product[] = [
     name: 'The Shubh Labh Box',
     description: 'An auspicious collection of handcrafted sweets, diyas, and traditional decor to welcome prosperity.',
     price: 49.99,
-    image: 'product-1',
+    images: ['product-1', 'product-1-alt1', 'product-1-alt2'],
     category: 'gourmet',
   },
   {
@@ -46,7 +46,7 @@ const products: Product[] = [
     name: 'The Sweet Indulgence Box',
     description: 'A delightful assortment of traditional Indian sweets and modern confections for the festive season.',
     price: 59.99,
-    image: 'product-5',
+    images: ['product-5'],
     category: 'gourmet',
   },
   // Dry Fruit
@@ -55,7 +55,7 @@ const products: Product[] = [
     name: 'Classic Dry Fruit Box',
     description: 'A classic assortment of almonds, cashews, pistachios, and raisins.',
     price: 35.99,
-    image: 'product-dry-fruit-1',
+    images: ['product-dry-fruit-1'],
     category: 'dry-fruit',
   },
   {
@@ -63,7 +63,7 @@ const products: Product[] = [
     name: 'Exotic Dry Fruit Hamper',
     description: 'An exotic mix including walnuts, apricots, and figs.',
     price: 45.99,
-    image: 'product-dry-fruit-2',
+    images: ['product-dry-fruit-2'],
     category: 'dry-fruit',
   },
    // Premium
@@ -72,7 +72,7 @@ const products: Product[] = [
     name: 'The Royal Diwali Hamper',
     description: 'Experience luxury with this premium hamper featuring gourmet treats, scented candles, and exquisite silver-plated items.',
     price: 99.99,
-    image: 'product-2',
+    images: ['product-2'],
     category: 'premium',
   },
   {
@@ -80,7 +80,7 @@ const products: Product[] = [
     name: 'Silver Plated Lakshmi Ganesh',
     description: 'A beautiful silver-plated idol set for worship and blessings.',
     price: 129.99,
-    image: 'product-premium-1',
+    images: ['product-premium-1'],
     category: 'premium',
   },
    // Decor
@@ -89,7 +89,7 @@ const products: Product[] = [
     name: 'The Aura of Lights Box',
     description: 'Illuminate your home with our curated box of handcrafted diyas, aromatic candles, and beautiful rangoli colors.',
     price: 39.99,
-    image: 'product-4',
+    images: ['product-4'],
     category: 'decor',
   },
    {
@@ -97,7 +97,7 @@ const products: Product[] = [
     name: 'Ceramic Diya Set',
     description: 'Set of 12 exquisitely handcrafted ceramic diyas.',
     price: 25.99,
-    image: 'product-decor-1',
+    images: ['product-decor-1'],
     category: 'decor',
   },
   {
@@ -105,7 +105,7 @@ const products: Product[] = [
     name: 'The Corporate Sparkler',
     description: 'A sophisticated gift for colleagues and clients, featuring premium dry fruits, a stylish pen, and a personalized diary.',
     price: 69.99,
-    image: 'product-6',
+    images: ['product-6'],
     category: 'dry-fruit',
   },
 ];

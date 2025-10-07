@@ -5,7 +5,7 @@ export type Product = {
   name: string;
   description: string;
   price: number;
-  image: string; // This will be the ID from placeholder-images.json
+  images: string[]; // This will be the ID from placeholder-images.json
   category: ProductCategory;
 };
 

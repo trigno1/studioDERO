@@ -27,7 +27,7 @@ export default function CartSheet({ children }: { children: React.ReactNode }) {
             <ScrollArea className="flex-grow pr-6">
               <div className="mt-4 flex flex-col gap-6">
                 {cartItems.map(item => {
-                  const productImage = getPlaceholderImage(item.product.image);
+                  const productImage = getPlaceholderImage(item.product.images[0]);
                   return (
                     <div key={item.product.id} className="flex items-start gap-4">
                       <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md">

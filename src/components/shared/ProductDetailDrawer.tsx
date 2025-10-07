@@ -8,7 +8,8 @@ import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
 import type { Product } from "@/lib/types";
 import { getPlaceholderImage } from "@/lib/placeholder-images";
-import { ShoppingCart, PackageCheck } from "lucide-react";
+import { ShoppingCart, PackageCheck, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect } from "react";
 
 interface ProductDetailDrawerProps {
   product: Product;
@@ -19,7 +20,12 @@ interface ProductDetailDrawerProps {
 export default function ProductDetailDrawer({ product, isOpen, onOpenChange }: ProductDetailDrawerProps) {
   const { addToCart } = useCart();
   const { toast } = useToast();
-  const productImage = getPlaceholderImage(product.image);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    // Reset to the first image whenever the drawer is opened or the product changes
+    setCurrentImageIndex(0);
+  }, [isOpen, product]);
 
   const handleAddToCart = () => {
     addToCart(product);
@@ -29,6 +35,17 @@ export default function ProductDetailDrawer({ product, isOpen, onOpenChange }: P
     });
     onOpenChange(false);
   };
+
+  const nextImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % product.images.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + product.images.length) % product.images.length);
+  };
+  
+  const currentImageId = product.images[currentImageIndex];
+  const productImage = getPlaceholderImage(currentImageId);
 
   return (
     <Sheet open={isOpen} onOpenChange={onOpenChange}>
@@ -41,8 +58,29 @@ export default function ProductDetailDrawer({ product, isOpen, onOpenChange }: P
                 alt={product.name}
                 data-ai-hint={productImage.imageHint}
                 fill
-                className="object-cover"
+                className="object-cover transition-all duration-300"
+                key={currentImageIndex}
               />
+            )}
+             {product.images.length > 1 && (
+              <>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-background/50 text-foreground hover:bg-background/80"
+                  onClick={prevImage}
+                >
+                  <ChevronLeft className="h-6 w-6" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-background/50 text-foreground hover:bg-background/80"
+                  onClick={nextImage}
+                >
+                  <ChevronRight className="h-6 w-6" />
+                </Button>
+              </>
             )}
           </div>
           <div className="flex flex-col">
