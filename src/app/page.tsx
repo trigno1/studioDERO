@@ -51,6 +51,9 @@ export default function Home() {
         className="relative flex h-[90vh] w-full flex-col items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat text-center text-primary-foreground"
         style={{
           backgroundImage: 'url(/hero.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
         }}
       >
         <div className="absolute inset-0 bg-black/10" />
@@ -66,7 +69,7 @@ export default function Home() {
         </div>
         <div className="relative z-10 mb-8 flex flex-col items-center">
           <a href="#about" aria-label="Scroll down">
-            <ChevronDown className="h-10 w-10 animate-bounce text-white" />
+            <ChevronDown className="h-10 w-10 animate-bounce text-primary" />
           </a>
         </div>
       </section>
