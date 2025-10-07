@@ -27,7 +27,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <Card className="flex flex-col overflow-hidden rounded-lg shadow-md transition-shadow duration-300 hover:shadow-xl">
+    <Card className="flex flex-col overflow-hidden rounded-lg border shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
       <CardHeader className="p-0">
         <div className="relative aspect-square w-full">
           {productImage && (
@@ -48,7 +48,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         </p>
       </CardContent>
       <CardFooter className="p-4 pt-0">
-        <Button onClick={handleAddToCart} className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
+        <Button onClick={handleAddToCart} className="w-full">
           <ShoppingCart className="mr-2 h-4 w-4" />
           Add to Cart
         </Button>

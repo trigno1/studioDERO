@@ -13,9 +13,9 @@ import { Badge } from "@/components/ui/badge";
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About Us" },
-  { href: "/collection", label: "Our Collection" },
-  { href: "/contact", label: "Contact Us" },
+  { href: "/about", label: "About" },
+  { href: "/collection", label: "Collection" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Header() {
@@ -27,7 +27,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" className="font-headline text-2xl font-bold text-primary">
-          DERO
+          DiwaliGlow
         </Link>
         <div className="flex items-center space-x-2">
             <nav className="hidden items-center space-x-6 md:flex">
@@ -49,8 +49,8 @@ export default function Header() {
                 <ShoppingCart className="h-5 w-5" />
                 {cartCount > 0 && (
                   <Badge
-                    variant="destructive"
-                    className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full p-0"
+                    variant="default"
+                    className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-primary p-2 text-xs"
                   >
                     {cartCount}
                   </Badge>
@@ -69,7 +69,7 @@ export default function Header() {
                 <SheetContent side="left">
                   <div className="flex flex-col space-y-6 pt-10">
                     <Link href="/" className="font-headline text-2xl font-bold text-primary">
-                      DERO
+                      DiwaliGlow
                     </Link>
                     <nav className="flex flex-col space-y-4">
                       {navLinks.map((link) => (

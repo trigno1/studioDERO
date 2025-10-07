@@ -2,9 +2,9 @@
   "placeholderImages": [
     {
       "id": "hero-1",
-      "description": "Woman with traditional ethnic jewelry",
+      "description": "Elegant Diwali gift box with festive lights",
       "imageUrl": "https://picsum.photos/seed/hero1/1080/720",
-      "imageHint": "ethnic model"
+      "imageHint": "diwali gift"
     },
     {
       "id": "hero-bg",
@@ -16,7 +16,7 @@
       "id": "about-1",
       "description": "Lifestyle image showing hands crafting a gift.",
       "imageUrl": "https://picsum.photos/seed/about1/600/800",
-      "imageHint": "crafting hands"
+      "imageHint": "crafting hands diwali"
     },
     {
       "id": "about-2",

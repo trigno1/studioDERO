@@ -24,7 +24,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Mail, Phone, MapPin, Instagram } from "lucide-react";
+import { Mail, Phone, MapPin, Instagram, Facebook } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -33,15 +33,11 @@ const formSchema = z.object({
   email: z.string().email({
     message: "Please enter a valid email address.",
   }),
-  phone: z.string().min(10, {
-    message: "Please enter a valid phone number.",
-  }),
+  phone: z.string().optional(),
   query: z.string().min(10, {
     message: "Query must be at least 10 characters.",
   }),
-  callTime: z.string({
-    required_error: "Please select a preferred time to call.",
-  }),
+  callTime: z.string().optional(),
 });
 
 export default function ContactPage() {
@@ -54,6 +50,7 @@ export default function ContactPage() {
       email: "",
       phone: "",
       query: "",
+      callTime: "",
     },
   });
 
@@ -66,134 +63,136 @@ export default function ContactPage() {
     form.reset();
   }
   return (
-    <div className="container mx-auto px-4 py-12 md:py-16">
-      <div className="mb-12 text-center">
-        <h1 className="font-headline text-4xl font-bold md:text-5xl">Contact Us</h1>
-        <p className="mt-2 text-lg text-muted-foreground">
-          We'd love to hear from you.
-        </p>
-      </div>
+    <div className="bg-background">
+      <div className="container mx-auto px-4 py-16 md:py-24">
+        <div className="mb-12 text-center">
+          <h1 className="font-headline text-4xl font-bold text-primary md:text-5xl">Contact Us</h1>
+          <p className="mt-2 text-lg text-muted-foreground">
+            We'd love to hear from you.
+          </p>
+        </div>
 
-      <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle className="font-headline text-2xl">Send us a message</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Name</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Your Name" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="email"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email</FormLabel>
-                      <FormControl>
-                        <Input placeholder="your.email@example.com" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="phone"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Phone Number</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Your Phone Number" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="query"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Your Query</FormLabel>
-                      <FormControl>
-                        <Textarea placeholder="Please describe your query..." rows={5} {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="callTime"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Preferred time to call</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-5">
+          <Card className="col-span-1 md:col-span-3">
+            <CardHeader>
+              <CardTitle className="font-headline text-2xl">Send us a message</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Name</FormLabel>
                         <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select a time slot" />
-                          </SelectTrigger>
+                          <Input placeholder="Your Name" {...field} />
                         </FormControl>
-                        <SelectContent>
-                          <SelectItem value="morning">Morning (9am - 12pm)</SelectItem>
-                          <SelectItem value="afternoon">Afternoon (12pm - 4pm)</SelectItem>
-                          <SelectItem value="evening">Evening (4pm - 7pm)</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <Button type="submit" size="lg" className="w-full">Send Message</Button>
-              </form>
-            </Form>
-          </CardContent>
-        </Card>
-        
-        <div className="space-y-8">
-            <h2 className="font-headline text-2xl font-bold">Contact Information</h2>
-            <div className="space-y-4">
-              <div className="flex items-start gap-4">
-                <Mail className="mt-1 h-6 w-6 text-primary" />
-                <div>
-                  <h3 className="font-semibold">Email</h3>
-                  <a href="mailto:xxxx@gmail.com" className="text-muted-foreground hover:text-primary">xxxx@gmail.com</a>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input placeholder="your.email@example.com" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="phone"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Phone Number (Optional)</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Your Phone Number" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                   <FormField
+                    control={form.control}
+                    name="callTime"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Preferred time to call (Optional)</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select a time slot" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="morning">Morning (9am - 12pm)</SelectItem>
+                            <SelectItem value="afternoon">Afternoon (12pm - 4pm)</SelectItem>
+                            <SelectItem value="evening">Evening (4pm - 7pm)</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="query"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Your Query</FormLabel>
+                        <FormControl>
+                          <Textarea placeholder="Please describe your query..." rows={5} {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button type="submit" size="lg" className="w-full">Send Message</Button>
+                </form>
+              </Form>
+            </CardContent>
+          </Card>
+          
+          <div className="space-y-8 md:col-span-2">
+              <h2 className="font-headline text-2xl font-bold">Contact Information</h2>
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <Mail className="mt-1 h-6 w-6 text-primary" />
+                  <div>
+                    <h3 className="font-semibold">Email</h3>
+                    <a href="mailto:xxxx@gmail.com" className="text-muted-foreground hover:text-primary">xxxx@gmail.com</a>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <Phone className="mt-1 h-6 w-6 text-primary" />
+                  <div>
+                    <h3 className="font-semibold">Phone</h3>
+                    <a href="tel:+91xxxxxxxxxx" className="text-muted-foreground hover:text-primary">+91 XXX-XXX-XXXX</a>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <MapPin className="mt-1 h-6 w-6 text-primary" />
+                  <div>
+                    <h3 className="font-semibold">Address</h3>
+                    <p className="text-muted-foreground">123 Artisan Way, Craftsville, 45678</p>
+                  </div>
                 </div>
               </div>
-              <div className="flex items-start gap-4">
-                <Phone className="mt-1 h-6 w-6 text-primary" />
-                <div>
-                  <h3 className="font-semibold">Phone</h3>
-                  <a href="tel:+91xxxxxxxxxx" className="text-muted-foreground hover:text-primary">+91 XXX-XXX-XXXX</a>
+              <div className="space-y-4">
+                <h2 className="font-headline text-2xl font-bold">Follow Us</h2>
+                <div className="flex space-x-4">
+                    <a href="#" aria-label="Instagram" className="text-muted-foreground hover:text-primary"><Instagram className="h-6 w-6" /></a>
+                    <a href="#" aria-label="Facebook" className="text-muted-foreground hover:text-primary"><Facebook className="h-6 w-6" /></a>
                 </div>
               </div>
-              <div className="flex items-start gap-4">
-                <MapPin className="mt-1 h-6 w-6 text-primary" />
-                <div>
-                  <h3 className="font-semibold">Address</h3>
-                  <p className="text-muted-foreground">123 Artisan Way, Craftsville, 45678</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <Instagram className="mt-1 h-6 w-6 text-primary" />
-                <div>
-                  <h3 className="font-semibold">Instagram</h3>
-                  <a href="#" className="text-muted-foreground hover:text-primary">@dero_official</a>
-                </div>
-              </div>
-            </div>
+          </div>
         </div>
       </div>
     </div>
