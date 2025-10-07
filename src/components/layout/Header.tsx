@@ -71,6 +71,15 @@ export default function Header() {
             >
               About
             </Link>
+             <Link
+              href="/contact"
+              className={cn(
+                "text-sm font-medium transition-colors hover:text-primary",
+                pathname === "/contact" ? "text-primary" : "text-muted-foreground"
+              )}
+            >
+              Contact
+            </Link>
              <DropdownMenu open={isCollectionDropdownOpen} onOpenChange={setCollectionDropdownOpen}>
               <DropdownMenuTrigger asChild>
                  <Button
@@ -90,15 +99,6 @@ export default function Header() {
                 ))}
               </DropdownMenuContent>
             </DropdownMenu>
-            <Link
-              href="/contact"
-              className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
-                pathname === "/contact" ? "text-primary" : "text-muted-foreground"
-              )}
-            >
-              Contact
-            </Link>
           </nav>
 
            <CartSheet>
