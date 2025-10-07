@@ -7,16 +7,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Gift, Sparkles, Sprout, Star, ChevronDown, Users, CheckCircle } from 'lucide-react';
 import { getPlaceholderImage } from '@/lib/placeholder-images';
 import { TestimonialCarousel } from '@/components/shared/TestimonialCarousel';
-import { getCategories } from '@/lib/cms';
+import { getCategories, getProducts } from '@/lib/cms';
 import { GraphQLClient, gql } from 'graphql-request';
 import ProductCard from '@/components/shared/ProductCard';
+import type { Product } from '@/lib/types';
 
-// This is a temporary setup. Ideally, you'd move this to a dedicated lib file.
-const graphcms = new GraphQLClient(process.env.GRAPHQL_API_URL!);
-
-// NOTE: The schema in lib/cms.ts and lib/types.ts is different from your GraphQL schema.
-// This query is aliased to match the 'Product' type in lib/types.ts as closely as possible.
-// 'title' is aliased as 'name'. 'image' is aliased as 'images'
 const PRODUCT_QUERY = gql`
   query GetProducts {
     products {
@@ -37,8 +32,32 @@ const PRODUCT_QUERY = gql`
 
 export default async function Home() {
   const categories = getCategories();
-  
-  const { products } = await graphcms.request(PRODUCT_QUERY);
+  let products: Product[] = [];
+
+  if (process.env.GRAPHQL_API_URL) {
+    try {
+      const graphcms = new GraphQLClient(process.env.GRAPHQL_API_URL);
+      const { products: cmsProducts } = await graphcms.request<{ products: any[] }>(PRODUCT_QUERY);
+      // Map CMS products to our Product type
+      products = cmsProducts.map(product => ({
+        ...product,
+        // The CMS returns an array of image objects, but our type expects strings.
+        // We're also aliasing 'title' to 'name'.
+        // For now, let's assume the first image is the one we want and our local placeholders have a matching ID.
+        // This mapping might need adjustment based on real data structure.
+        images: product.images.map((img: { id: string }) => img.id).filter(Boolean),
+        category: 'gourmet', // Default category, as it's not in the CMS schema
+      }));
+    } catch (error) {
+      console.error("Failed to fetch products from GraphCMS:", error);
+      console.log("Falling back to local product data.");
+      products = getProducts();
+    }
+  } else {
+    console.log("GRAPHQL_API_URL not set. Falling back to local product data.");
+    products = getProducts();
+  }
+
 
   const features = [
     {
@@ -177,20 +196,9 @@ export default async function Home() {
               Curated gifts for every taste and occasion.
             </p>
           </div>
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {products.map((product: any) => (
-              <div key={product.id} className="border p-4 rounded-lg">
-                <Image
-                  src={product.images[0].url}
-                  alt={product.name}
-                  width={product.images[0].width}
-                  height={product.images[0].height}
-                  className="w-full h-48 object-cover rounded"
-                />
-                <h2 className="mt-2 text-xl font-semibold">{product.name}</h2>
-                <p className="text-gray-600">{product.description}</p>
-                <p className="mt-2 text-lg font-bold">₹{product.price}</p>
-              </div>
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {products.map((product: Product) => (
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </div>

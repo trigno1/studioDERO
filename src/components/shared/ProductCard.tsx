@@ -19,16 +19,21 @@ interface ProductCardProps {
 export default function ProductCard({ product }: ProductCardProps) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   
+  // The product.images from CMS is now an array of objects, not strings.
+  // We need to get the first image ID, or use a default if it doesn't exist.
+  const imageId = product.images?.[0] || 'product-1';
+  const placeholderImage = getPlaceholderImage(imageId);
+
   return (
     <>
       <Card className="flex flex-col overflow-hidden rounded-lg border shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
         <CardHeader className="p-0">
           <div className="relative aspect-square w-full">
-            {getPlaceholderImage(product.images[0]) && (
+            {placeholderImage && (
               <Image
-                src={getPlaceholderImage(product.images[0])!.imageUrl}
+                src={placeholderImage.imageUrl}
                 alt={product.name}
-                data-ai-hint={getPlaceholderImage(product.images[0])!.imageHint}
+                data-ai-hint={placeholderImage.imageHint}
                 fill
                 className="object-cover"
               />
