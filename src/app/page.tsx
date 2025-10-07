@@ -58,7 +58,7 @@ export default function Home() {
         />
         <div className="absolute inset-0 bg-black/30" />
         <div className="relative z-10 flex flex-grow flex-col items-center justify-center space-y-6 px-4">
-          <h1 className="font-headline text-4xl font-bold leading-tight text-white md:text-6xl lg:text-7xl">
+          <h1 className="font-headline text-4xl font-bold leading-tight text-primary md:text-6xl lg:text-7xl">
             The Art of <br /> Festive Gifting
           </h1>
           <p className="max-w-xl text-lg text-primary-foreground/90 md:text-xl">
