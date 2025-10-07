@@ -49,7 +49,7 @@ export default function Home() {
     <div className="flex flex-col">
       <section className="relative flex h-[90vh] w-full flex-col items-center justify-center overflow-hidden text-center text-primary-foreground">
         <Image
-          src="https://images.unsplash.com/photo-1572095509496-02d1a33d4d4a?q=80&w=2070&auto=format&fit=crop"
+          src="/hero.png"
           alt="Festive gift boxes background"
           data-ai-hint="gift box background"
           fill
