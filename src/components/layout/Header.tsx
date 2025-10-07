@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Menu, ShoppingCart, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,16 +23,40 @@ import { useCart } from "@/context/CartContext";
 import { Badge } from "@/components/ui/badge";
 import { getCategories } from "@/lib/cms";
 
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-];
-
 export default function Header() {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isCollectionDropdownOpen, setCollectionDropdownOpen] = useState(false);
+  const collectionTriggerRef = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
   const { cartCount } = useCart();
   const categories = getCategories();
+
+  const handleCollectionHover = () => {
+    // On desktop, open dropdown on hover
+    if (window.innerWidth >= 768) {
+      setCollectionDropdownOpen(true);
+    }
+  };
+
+  const handleCollectionLeave = () => {
+    // On desktop, close dropdown on leave
+    if (window.innerWidth >= 768) {
+      setCollectionDropdownOpen(false);
+    }
+  };
+
+  const handleAboutClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (pathname === '/') {
+      e.preventDefault();
+      document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+
+  const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "/#about", label: "About", onClick: handleAboutClick },
+  ];
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -41,7 +65,7 @@ export default function Header() {
           DERO
         </Link>
         
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
           <nav className="hidden items-center gap-6 md:flex">
             <Link
               href="/"
@@ -53,24 +77,31 @@ export default function Header() {
               Home
             </Link>
             <Link
-              href="/about"
+              href="/#about"
+              onClick={handleAboutClick}
               className={cn(
                 "text-sm font-medium transition-colors hover:text-primary",
-                pathname === "/about" ? "text-primary" : "text-muted-foreground"
+                pathname.includes("/about") ? "text-primary" : "text-muted-foreground"
               )}
             >
               About
             </Link>
-             <DropdownMenu>
+             <DropdownMenu open={isCollectionDropdownOpen} onOpenChange={setCollectionDropdownOpen}>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className={cn(
-                  "flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary",
-                  pathname.startsWith('/collection') ? "text-primary" : "text-muted-foreground"
-                )}>
+                 <Button
+                  ref={collectionTriggerRef}
+                  variant="ghost"
+                  onClick={() => setCollectionDropdownOpen(prev => !prev)}
+                  onMouseEnter={handleCollectionHover}
+                  onMouseLeave={handleCollectionLeave}
+                  className={cn(
+                    "flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary",
+                    pathname.startsWith('/collection') ? "text-primary" : "text-muted-foreground"
+                  )}>
                   Collection <ChevronDown className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent>
+              <DropdownMenuContent onMouseLeave={handleCollectionLeave} align="start">
                 {categories.map((category) => (
                   <DropdownMenuItem key={category.id} asChild>
                     <Link href={`/collection/${category.slug}`}>{category.name}</Link>
@@ -118,7 +149,7 @@ export default function Header() {
                     DERO
                   </Link>
                   <nav className="flex flex-col space-y-4">
-                    {[...navLinks, { href: "/contact", label: "Contact" }].map((link) => (
+                    {navLinks.map((link) => (
                       <Link
                         key={link.href}
                         href={link.href}
@@ -128,11 +159,24 @@ export default function Header() {
                             ? "text-primary"
                             : "text-muted-foreground"
                         )}
-                        onClick={() => setMobileMenuOpen(false)}
+                        onClick={(e) => {
+                          setMobileMenuOpen(false);
+                          if(link.onClick) link.onClick(e as any);
+                        }}
                       >
                         {link.label}
                       </Link>
                     ))}
+                    <Link
+                      href="/contact"
+                      className={cn(
+                        "text-lg font-medium transition-colors hover:text-primary",
+                        pathname === "/contact" ? "text-primary" : "text-muted-foreground"
+                      )}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Contact
+                    </Link>
                      <p className="text-lg font-medium text-primary">Collection</p>
                       {categories.map((category) => (
                         <Link

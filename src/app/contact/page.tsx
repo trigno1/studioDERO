@@ -1,3 +1,4 @@
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Mail, Phone, MapPin, Instagram, Facebook } from "lucide-react";
 import ContactForm from "@/components/shared/ContactForm";
@@ -15,7 +16,7 @@ export default function ContactPage() {
         </div>
 
         <div className="grid grid-cols-1 gap-12 md:grid-cols-5">
-          <Card className="col-span-1 md:col-span-3">
+          <Card className="col-span-1 border-accent md:col-span-3">
             <CardHeader>
               <CardTitle className="font-headline text-2xl">Send us a message</CardTitle>
             </CardHeader>
@@ -24,8 +25,11 @@ export default function ContactPage() {
             </CardContent>
           </Card>
           
-          <div className="space-y-8 md:col-span-2">
-              <h2 className="font-headline text-2xl font-bold">Contact Information</h2>
+          <Card className="space-y-8 border-accent md:col-span-2">
+            <CardHeader>
+              <CardTitle className="font-headline text-2xl">Contact Information</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-8">
               <div className="space-y-4">
                 <div className="flex items-start gap-4">
                   <Mail className="mt-1 h-6 w-6 text-primary" />
@@ -56,7 +60,8 @@ export default function ContactPage() {
                     <a href="#" aria-label="Facebook" className="text-muted-foreground hover:text-primary"><Facebook className="h-6 w-6" /></a>
                 </div>
               </div>
-          </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>

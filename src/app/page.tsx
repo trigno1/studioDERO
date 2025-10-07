@@ -78,19 +78,30 @@ export default function Home() {
       </section>
 
       <section id="about" className="py-16 md:py-24">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="font-headline text-3xl font-bold md:text-4xl">
-            About Us
-          </h2>
-          <div className="mx-auto mt-4 max-w-3xl">
-            <p className="text-lg text-muted-foreground">
-              We believe that every gift deserves a beautiful story. We
-              specialize in luxury, handcrafted packaging solutions for
-              corporate gifting, festival hampers, and special occasions,
-              designed especially for the Diwali season. Our packaging is
-              eco-friendly, combining elegance with responsibility.
-            </p>
-          </div>
+        <div className="container mx-auto grid grid-cols-1 items-center gap-12 px-4 md:grid-cols-2">
+            <div className="space-y-6">
+                <h2 className="font-headline text-3xl font-bold text-primary md:text-4xl">
+                About Us
+                </h2>
+                <div className="relative rounded-lg border-2 border-accent p-6">
+                    <p className="text-lg text-muted-foreground">
+                    We believe that every gift deserves a beautiful story. We
+                    specialize in luxury, handcrafted packaging solutions for
+                    corporate gifting, festival hampers, and special occasions,
+                    designed especially for the Diwali season. Our packaging is
+                    eco-friendly, combining elegance with responsibility.
+                    </p>
+                </div>
+            </div>
+            <div className="relative h-80 w-full overflow-hidden rounded-lg shadow-lg md:h-96">
+                <Image
+                    src="https://picsum.photos/seed/about-home/800/600"
+                    alt="Artisans crafting gifts"
+                    data-ai-hint="artisans crafting"
+                    fill
+                    className="object-cover"
+                />
+            </div>
         </div>
       </section>
 
