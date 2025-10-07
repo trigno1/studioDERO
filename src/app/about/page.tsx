@@ -4,7 +4,6 @@ import { getPlaceholderImage } from '@/lib/placeholder-images';
 
 export default function AboutPage() {
   const aboutImage1 = getPlaceholderImage('about-1');
-  const aboutImage2 = getPlaceholderImage('about-2');
 
   return (
     <div className="bg-background">
@@ -18,7 +17,7 @@ export default function AboutPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2 lg:gap-16">
+        <div className="grid grid-cols-1 items-center gap-12">
           <div className="relative rounded-lg border-2 border-accent p-8">
             <div className="space-y-6">
               <h2 className="font-headline text-3xl font-bold text-primary">
@@ -32,32 +31,10 @@ export default function AboutPage() {
               </p>
             </div>
           </div>
-          <div className="relative h-96 w-full overflow-hidden rounded-lg shadow-lg md:h-[500px]">
-            {aboutImage1 && (
-              <Image
-                src={aboutImage1.imageUrl}
-                alt={aboutImage1.description}
-                data-ai-hint={aboutImage1.imageHint}
-                fill
-                className="object-cover transition-transform duration-500 hover:scale-105"
-              />
-            )}
-          </div>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 items-center gap-12 pt-12 md:grid-cols-2 lg:gap-16">
-          <div className="relative h-96 w-full overflow-hidden rounded-lg shadow-lg md:order-2 md:h-[500px]">
-            {aboutImage2 && (
-              <Image
-                src={aboutImage2.imageUrl}
-                alt={aboutImage2.description}
-                data-ai-hint={aboutImage2.imageHint}
-                fill
-                className="object-cover transition-transform duration-500 hover:scale-105"
-              />
-            )}
-          </div>
-          <div className="relative rounded-lg border-2 border-accent p-8 md:order-1">
+        <div className="mt-16 grid grid-cols-1 items-center gap-12 pt-12">
+          <div className="relative rounded-lg border-2 border-accent p-8">
             <div className="space-y-6">
               <h2 className="font-headline text-3xl font-bold text-primary">
                 Craftsmanship & Community
