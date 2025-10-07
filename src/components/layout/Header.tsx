@@ -41,8 +41,8 @@ export default function Header() {
           DERO
         </Link>
         
-        <div className="flex items-center gap-2">
-          <nav className="hidden items-center gap-4 md:flex lg:gap-6">
+        <div className="flex items-center gap-4">
+          <nav className="hidden items-center gap-6 md:flex">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -58,7 +58,7 @@ export default function Header() {
              <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className={cn(
-                  "flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary",
+                  "flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary -ml-2",
                   pathname.startsWith('/collection') ? "text-primary" : "text-muted-foreground"
                 )}>
                   Collection <ChevronDown className="h-4 w-4" />

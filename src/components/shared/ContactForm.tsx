@@ -29,9 +29,9 @@ import { useState } from 'react';
 const formSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
   email: z.string().email({ message: 'Please enter a valid email address.' }),
-  phone: z.string().optional(),
+  phone: z.string().min(1, { message: 'Phone number is required.' }),
   query: z.string().min(10, { message: 'Query must be at least 10 characters.' }),
-  callTime: z.string().optional(),
+  callTime: z.string().min(1, { message: 'Please select a preferred call time.' }),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -100,7 +100,7 @@ export default function ContactForm() {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Name</FormLabel>
+                <FormLabel>Name*</FormLabel>
                 <FormControl>
                   <Input placeholder="Your Name" {...field} />
                 </FormControl>
@@ -114,7 +114,7 @@ export default function ContactForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>Email*</FormLabel>
               <FormControl>
                 <Input placeholder="your.email@example.com" {...field} />
               </FormControl>
@@ -128,7 +128,7 @@ export default function ContactForm() {
           name="phone"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Phone Number (Optional)</FormLabel>
+              <FormLabel>Phone Number*</FormLabel>
               <FormControl>
                 <Input placeholder="Your Phone Number" {...field} />
               </FormControl>
@@ -142,7 +142,7 @@ export default function ContactForm() {
           name="callTime"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Preferred time to call (Optional)</FormLabel>
+              <FormLabel>Preferred time to call*</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
@@ -165,7 +165,7 @@ export default function ContactForm() {
           name="query"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Your Query</FormLabel>
+              <FormLabel>Your Query*</FormLabel>
               <FormControl>
                 <Textarea placeholder="Please describe your query..." rows={5} {...field} />
               </FormControl>
