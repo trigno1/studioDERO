@@ -4,12 +4,13 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
-import { useCart } from "@/context/CartContext";
-import { useToast } from "@/hooks/use-toast";
 import type { Product } from "@/lib/types";
 import { getPlaceholderImage } from "@/lib/placeholder-images";
-import { ShoppingCart, PackageCheck, ChevronLeft, ChevronRight } from "lucide-react";
+import { ShoppingCart, PackageCheck, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 interface ProductDetailDrawerProps {
   product: Product;
@@ -18,22 +19,43 @@ interface ProductDetailDrawerProps {
 }
 
 export default function ProductDetailDrawer({ product, isOpen, onOpenChange }: ProductDetailDrawerProps) {
-  const { addToCart } = useCart();
-  const { toast } = useToast();
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
-    // Reset to the first image whenever the drawer is opened or the product changes
     setCurrentImageIndex(0);
   }, [isOpen, product]);
 
-  const handleAddToCart = () => {
-    addToCart(product);
-    toast({
-      title: "Added to cart",
-      description: `${product.name} has been added to your cart.`,
-    });
-    onOpenChange(false);
+  const handleCheckout = async () => {
+    setIsCheckingOut(true);
+    try {
+      const stripe = await stripePromise;
+      if (!stripe) {
+        throw new Error('Stripe.js has not loaded yet.');
+      }
+
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ product }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create checkout session.');
+      }
+
+      const session = await response.json();
+      const { error } = await stripe.redirectToCheckout({ sessionId: session.id });
+
+      if (error) {
+        throw new Error(error.message);
+      }
+    } catch (error) {
+      console.error("Checkout error:", error);
+      // You could show a toast message here
+    } finally {
+      setIsCheckingOut(false);
+    }
   };
 
   const nextImage = () => {
@@ -96,7 +118,6 @@ export default function ProductDetailDrawer({ product, isOpen, onOpenChange }: P
                     <PackageCheck className="h-6 w-6 text-accent" />
                     <h3 className="font-headline text-xl font-semibold">What's in the box?</h3>
                 </div>
-              {/* This is a placeholder for box contents. You can make this dynamic later */}
               <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
                 <li>Premium Handcrafted Item 1</li>
                 <li>Artisanal Chocolate Bar</li>
@@ -109,9 +130,18 @@ export default function ProductDetailDrawer({ product, isOpen, onOpenChange }: P
                <p className="font-body text-4xl font-bold text-primary">
                 ₹{product.price.toFixed(2)}
               </p>
-              <Button onClick={handleAddToCart} size="lg" className="w-full">
-                <ShoppingCart className="mr-2 h-5 w-5" />
-                Add to Cart
+              <Button onClick={handleCheckout} size="lg" className="w-full" disabled={isCheckingOut}>
+                {isCheckingOut ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    Redirecting...
+                  </>
+                ) : (
+                  <>
+                    <ShoppingCart className="mr-2 h-5 w-5" />
+                    Buy Now
+                  </>
+                )}
               </Button>
             </div>
           </div>

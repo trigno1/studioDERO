@@ -8,10 +8,52 @@ import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter, SheetTrigger } from "@/components/ui/sheet";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { getPlaceholderImage } from "@/lib/placeholder-images";
-import { Trash2 } from "lucide-react";
+import { Trash2, Loader2 } from "lucide-react";
+import { useState } from "react";
+import { loadStripe } from '@stripe/stripe-js';
+import type { CartItem } from "@/lib/types";
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 export default function CartSheet({ children }: { children: React.ReactNode }) {
   const { cartItems, cartTotal, updateQuantity, removeFromCart, cartCount } = useCart();
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
+
+  const handleCheckout = async () => {
+    setIsCheckingOut(true);
+    try {
+      const stripe = await stripePromise;
+      if (!stripe) {
+        throw new Error('Stripe.js has not loaded yet.');
+      }
+
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        // We need to transform cart items to a format Stripe understands
+        // For now, let's just handle a single item for simplicity.
+        // A real implementation would loop through cartItems
+        body: JSON.stringify({ cartItems }),
+      });
+
+      if (!response.ok) {
+        const errorBody = await response.json();
+        throw new Error(errorBody.error || 'Failed to create checkout session.');
+      }
+
+      const session = await response.json();
+      const { error } = await stripe.redirectToCheckout({ sessionId: session.id });
+
+      if (error) {
+        throw new Error(error.message);
+      }
+    } catch (error) {
+      console.error("Checkout error:", error);
+      // You could show a toast message here
+    } finally {
+      setIsCheckingOut(false);
+    }
+  };
 
   return (
     <Sheet>
@@ -69,8 +111,15 @@ export default function CartSheet({ children }: { children: React.ReactNode }) {
                   <span>Subtotal</span>
                   <span>₹{cartTotal.toFixed(2)}</span>
                 </div>
-                <Button size="lg" className="w-full">
-                  Proceed to Checkout
+                <Button size="lg" className="w-full" onClick={handleCheckout} disabled={isCheckingOut}>
+                   {isCheckingOut ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Redirecting...
+                    </>
+                  ) : (
+                    'Proceed to Checkout'
+                  )}
                 </Button>
               </div>
             </SheetFooter>
