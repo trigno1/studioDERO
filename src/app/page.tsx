@@ -10,7 +10,7 @@ import { TestimonialCarousel } from '@/components/shared/TestimonialCarousel';
 import { getCategories } from '@/lib/cms';
 
 export default function Home() {
-  const heroBgImage = getPlaceholderImage('hero-bg');
+  const heroBgImage = getPlaceholderImage('hero.pg');
   const categories = getCategories();
 
   const features = [
