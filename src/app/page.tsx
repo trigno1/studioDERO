@@ -6,40 +6,9 @@ import { Gem, Hand, Settings, Truck } from "lucide-react";
 import ProductCard from "@/components/shared/ProductCard";
 import { getProducts } from "@/lib/cms";
 import { getPlaceholderImage } from "@/lib/placeholder-images";
+import { TestimonialCarousel } from "@/components/shared/TestimonialCarousel";
 
-const LeafTopLeft = () => (
-    <svg
-      width="200"
-      height="150"
-      viewBox="0 0 200 150"
-      className="absolute top-0 left-0 -z-10"
-      xmlns="http://www.w3.org/2000/svg"
-      style={{ transform: "scaleX(-1)" }}
-    >
-      <path
-        d="M 50 50 C 70 20, 100 20, 120 50 S 150 80, 120 100 C 100 120, 70 120, 50 100 S 30 80, 50 50"
-        fill="#a3b18a"
-        opacity="0.6"
-      />
-      <path
-        d="M 60 30 C 80 0, 110 0, 130 30 S 160 60, 130 80 C 110 100, 80 100, 60 80 S 40 60, 60 30"
-        fill="#dda15e"
-        opacity="0.5"
-      />
-      <path
-        d="M 80 40 C 100 10, 130 10, 150 40 S 180 70, 150 90 C 130 110, 100 110, 80 90 S 60 70, 80 40"
-        fill="#a3b18a"
-        opacity="0.6"
-      />
-      <path
-        d="M 100 20 C 120 -10, 150 -10, 170 20 S 200 50, 170 70 C 150 90, 120 90, 100 70 S 80 50, 100 20"
-        fill="#dda15e"
-        opacity="0.5"
-      />
-    </svg>
-  );
-
-  const LeafTopRight = () => (
+const LeafTopRight = () => (
     <svg
       width="200"
       height="150"
@@ -122,43 +91,39 @@ export default function Home() {
 
   return (
     <div className="flex flex-col">
-      <section className="relative h-[60vh] w-full text-white md:h-[80vh] overflow-hidden">
-        {heroImage && (
-          <Image
-            src={heroImage.imageUrl}
-            alt={heroImage.description}
-            data-ai-hint={heroImage.imageHint}
-            fill
-            className="object-cover"
-            priority
-          />
-        )}
-        <div className="absolute inset-0 bg-black/30" />
-        <LeafTopLeft />
-        <LeafTopRight />
-        <Lantern top={50} right={80} />
-        <Lantern top={200} right={50} size={80} />
-        <div className="relative z-10 flex h-full flex-col items-center justify-center space-y-6 px-4 text-center">
-          <p className="font-body text-sm font-bold uppercase tracking-widest text-gray-200">
-            Handcrafted with love
-          </p>
-          <h1 className="font-headline text-4xl font-bold leading-tight text-white md:text-6xl lg:text-7xl">
-            Discover <span className="text-primary">Authentic</span><br />
-            Ethnic Treasures
-          </h1>
-          <p className="max-w-2xl text-lg text-gray-200 md:text-xl">
-            Explore our curated collection of handcrafted artisan products,
-            traditional textiles, and cultural artifacts from around the world.
-            Each piece tells a unique story.
-          </p>
-          <div className="flex flex-col gap-4 sm:flex-row">
-            <Button asChild size="lg">
-              <Link href="/collection">Shop Collection</Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black">
-              <Link href="/about">Learn Our Story</Link>
-            </Button>
-          </div>
+       <section className="relative w-full overflow-hidden bg-background">
+        <div className="container mx-auto grid h-[60vh] grid-cols-1 items-center gap-8 px-4 md:h-[80vh] md:grid-cols-2">
+            <div className="relative z-10 flex flex-col items-start justify-center space-y-6 text-left">
+              <p className="font-body text-sm font-bold uppercase tracking-widest text-muted-foreground">
+                Handcrafted with love
+              </p>
+              <h1 className="font-headline text-4xl font-bold leading-tight md:text-6xl lg:text-7xl">
+                Discover <span className="text-primary">Authentic</span><br />
+                Ethnic Treasures
+              </h1>
+              <p className="max-w-xl text-lg text-muted-foreground md:text-xl">
+                Explore our curated collection of handcrafted artisan products,
+                traditional textiles, and cultural artifacts from around the world.
+                Each piece tells a unique story.
+              </p>
+            </div>
+            <div className="relative h-full w-full">
+                {heroImage && (
+                  <Image
+                    src={heroImage.imageUrl}
+                    alt={heroImage.description}
+                    data-ai-hint={heroImage.imageHint}
+                    fill
+                    className="object-contain"
+                    priority
+                  />
+                )}
+                <div className="absolute inset-0">
+                    <LeafTopRight />
+                    <Lantern top={50} right={80} />
+                    <Lantern top={200} right={50} size={80} />
+                </div>
+            </div>
         </div>
       </section>
 
@@ -169,7 +134,7 @@ export default function Home() {
           </h2>
           <div className="mx-auto mt-4 max-w-3xl">
             <p className="text-lg text-muted-foreground">
-              At Artisan Heritage, we are passionate about connecting you with authentic, handcrafted treasures. We travel the globe to bring you unique pieces that tell a story of culture, tradition, and artistry.
+              At DERO, we are passionate about connecting you with authentic, handcrafted treasures. We travel the globe to bring you unique pieces that tell a story of culture, tradition, and artistry.
             </p>
           </div>
         </div>
@@ -179,7 +144,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="mb-12 text-center">
             <h2 className="font-headline text-3xl font-bold md:text-4xl">Why Choose Us?</h2>
-            <p className="mt-2 text-lg text-muted-foreground">The Artisan Heritage Promise</p>
+            <p className="mt-2 text-lg text-muted-foreground">The DERO Promise</p>
           </div>
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {features.map((feature) => (
@@ -215,6 +180,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+      
+      <TestimonialCarousel />
     </div>
   );
 }

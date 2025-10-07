@@ -18,7 +18,7 @@ export default function AboutPage() {
         <div className="space-y-6">
           <h2 className="font-headline text-3xl font-bold text-primary">From Our Heart to Your Home</h2>
           <p className="text-lg leading-relaxed text-muted-foreground">
-            Artisan Heritage was born from a passion for preserving and sharing the rich tapestry of global craftsmanship. We believe that every handmade object tells a story, carrying the legacy of its maker and the culture it comes from. Our journey began with a simple desire to connect discerning individuals with authentic, handcrafted treasures from around the world.
+            DERO was born from a passion for preserving and sharing the rich tapestry of global craftsmanship. We believe that every handmade object tells a story, carrying the legacy of its maker and the culture it comes from. Our journey began with a simple desire to connect discerning individuals with authentic, handcrafted treasures from around the world.
           </p>
           <p className="text-lg leading-relaxed text-muted-foreground">
             Each piece in our collection is a testament to this philosophy. We travel far and wide to build relationships with artisans, ensuring that every product is not just beautiful, but also ethically sourced and made with traditional techniques.

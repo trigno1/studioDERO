@@ -8,7 +8,7 @@ import { CartProvider } from "@/context/CartContext";
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: "Artisan Heritage - Discover Authentic Ethnic Treasures",
+  title: "DERO - Discover Authentic Ethnic Treasures",
   description: "Explore our curated collection of handcrafted artisan products, traditional textiles, and cultural artifacts from around the world.",
 };
 

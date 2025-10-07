@@ -24,7 +24,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, Instagram } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -169,14 +169,14 @@ export default function ContactPage() {
                 <Mail className="mt-1 h-6 w-6 text-primary" />
                 <div>
                   <h3 className="font-semibold">Email</h3>
-                  <a href="mailto:hello@artisanheritage.com" className="text-muted-foreground hover:text-primary">hello@artisanheritage.com</a>
+                  <a href="mailto:xxxx@gmail.com" className="text-muted-foreground hover:text-primary">xxxx@gmail.com</a>
                 </div>
               </div>
               <div className="flex items-start gap-4">
                 <Phone className="mt-1 h-6 w-6 text-primary" />
                 <div>
                   <h3 className="font-semibold">Phone</h3>
-                  <a href="tel:+1234567890" className="text-muted-foreground hover:text-primary">+1 (234) 567-890</a>
+                  <a href="tel:+91xxxxxxxxxx" className="text-muted-foreground hover:text-primary">+91 XXX-XXX-XXXX</a>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -184,6 +184,13 @@ export default function ContactPage() {
                 <div>
                   <h3 className="font-semibold">Address</h3>
                   <p className="text-muted-foreground">123 Artisan Way, Craftsville, 45678</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <Instagram className="mt-1 h-6 w-6 text-primary" />
+                <div>
+                  <h3 className="font-semibold">Instagram</h3>
+                  <a href="#" className="text-muted-foreground hover:text-primary">@dero_official</a>
                 </div>
               </div>
             </div>
