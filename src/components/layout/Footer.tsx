@@ -21,16 +21,8 @@ export default function Footer() {
           </ul>
         </div>
         <div>
-          <h3 className="font-headline text-lg font-semibold">Legal</h3>
-          <ul className="mt-4 space-y-2">
-            <li><Link href="#" className="text-sm text-primary-foreground/80 hover:text-white">Terms & Conditions</Link></li>
-            <li><Link href="#" className="text-sm text-primary-foreground/80 hover:text-white">Privacy Policy</Link></li>
-            <li><Link href="#" className="text-sm text-primary-foreground/80 hover:text-white">Cookie Settings</Link></li>
-          </ul>
-        </div>
-        <div>
-          <h3 className="font-headline text-lg font-semibold">Contact & Social</h3>
-          <div className="mt-4 space-y-2">
+          <h3 className="font-headline text-lg font-semibold">Contact</h3>
+           <div className="mt-4 space-y-2">
              <div className="flex items-center gap-2">
                 <Mail className="h-4 w-4" />
                 <a href="mailto:xxxx@gmail.com" className="text-sm text-primary-foreground/80 hover:text-white">xxxx@gmail.com</a>
@@ -40,15 +32,25 @@ export default function Footer() {
                 <a href="tel:+91xxxxxxxxxx" className="text-sm text-primary-foreground/80 hover:text-white">+91 XXX-XXX-XXXX</a>
               </div>
           </div>
+        </div>
+        <div>
+          <h3 className="font-headline text-lg font-semibold">Social</h3>
           <div className="mt-4 flex space-x-4">
             <a href="#" aria-label="Instagram" className="text-primary-foreground/80 hover:text-white"><Instagram /></a>
           </div>
         </div>
       </div>
       <div className="border-t border-primary-foreground/10 py-4">
-        <p className="container mx-auto px-4 text-center text-sm text-primary-foreground/60">
-          © 2025 DERO. All rights reserved.
-        </p>
+        <div className="container mx-auto flex flex-col-reverse items-center justify-between gap-4 px-4 text-sm text-primary-foreground/60 md:flex-row">
+            <div className="flex gap-4">
+                <Link href="#" className="hover:text-white">Terms & Conditions</Link>
+                <Link href="#" className="hover:text-white">Privacy Policy</Link>
+                <Link href="#" className="hover:text-white">Cookie Settings</Link>
+            </div>
+            <p className="text-center md:text-right">
+                © 2025 DERO. All rights reserved.
+            </p>
+        </div>
       </div>
     </footer>
   );

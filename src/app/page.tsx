@@ -65,25 +65,26 @@ const LeafTopRight = () => (
 export default function Home() {
   const featuredProducts = getProducts().slice(0, 4);
   const heroImage = getPlaceholderImage("hero-1");
+  const heroBgImage = getPlaceholderImage("hero-bg");
 
   const features = [
     {
-      icon: <Hand className="h-10 w-10 text-accent" />,
+      icon: <Hand className="h-10 w-10 text-background" />,
       title: "Handcrafted",
       description: "Each piece is made with love and traditional techniques.",
     },
     {
-      icon: <Gem className="h-10 w-10 text-accent" />,
+      icon: <Gem className="h-10 w-10 text-background" />,
       title: "Authentic Quality",
       description: "We source the finest materials for a genuine experience.",
     },
     {
-      icon: <Truck className="h-10 w-10 text-accent" />,
+      icon: <Truck className="h-10 w-10 text-background" />,
       title: "Worldwide Shipping",
       description: "Get your treasures delivered to your doorstep, anywhere.",
     },
     {
-      icon: <Settings className="h-10 w-10 text-accent" />,
+      icon: <Settings className="h-10 w-10 text-background" />,
       title: "Ethically Sourced",
       description: "Supporting artisans and their communities directly.",
     },
@@ -92,11 +93,17 @@ export default function Home() {
   return (
     <div className="flex flex-col">
        <section className="relative w-full overflow-hidden bg-background">
-        <div className="container mx-auto grid h-[60vh] grid-cols-1 items-center gap-8 px-4 md:h-[80vh] md:grid-cols-2">
+        {heroBgImage && (
+          <Image
+            src={heroBgImage.imageUrl}
+            alt={heroBgImage.description}
+            data-ai-hint={heroBgImage.imageHint}
+            fill
+            className="object-cover opacity-10"
+          />
+        )}
+        <div className="container relative mx-auto grid h-[60vh] grid-cols-1 items-center gap-8 px-4 md:h-[80vh] md:grid-cols-2">
             <div className="relative z-10 flex flex-col items-start justify-center space-y-6 text-left">
-              <p className="font-body text-sm font-bold uppercase tracking-widest text-muted-foreground">
-                Handcrafted with love
-              </p>
               <h1 className="font-headline text-4xl font-bold leading-tight md:text-6xl lg:text-7xl">
                 Discover <span className="text-primary">Authentic</span><br />
                 Ethnic Treasures
@@ -130,31 +137,31 @@ export default function Home() {
       <section id="about" className="py-16 md:py-24">
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-headline text-3xl font-bold md:text-4xl">
-            Curated with Care and Craftsmanship
+            What We Do
           </h2>
           <div className="mx-auto mt-4 max-w-3xl">
             <p className="text-lg text-muted-foreground">
-              At DERO, we are passionate about connecting you with authentic, handcrafted treasures. We travel the globe to bring you unique pieces that tell a story of culture, tradition, and artistry.
+              At DERO, we are passionate about connecting you with authentic, handcrafted treasures. We travel the globe to bring you unique pieces that tell a story of culture, tradition, and artistry. Our mission is to preserve artisanal heritage and empower communities by providing a platform for their craft to shine.
             </p>
           </div>
         </div>
       </section>
       
-      <section className="bg-primary/5 py-16 md:py-24">
+      <section className="bg-primary py-16 text-primary-foreground md:py-24">
         <div className="container mx-auto px-4">
           <div className="mb-12 text-center">
             <h2 className="font-headline text-3xl font-bold md:text-4xl">Why Choose Us?</h2>
-            <p className="mt-2 text-lg text-muted-foreground">The DERO Promise</p>
+            <p className="mt-2 text-lg text-primary-foreground/80">The DERO Promise</p>
           </div>
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {features.map((feature) => (
-              <Card key={feature.title} className="transform border-0 bg-transparent text-center shadow-none transition-transform duration-300 hover:-translate-y-2">
+              <Card key={feature.title} className="transform border-0 bg-primary/80 text-center shadow-lg transition-transform duration-300 hover:-translate-y-2">
                 <CardHeader className="items-center">
                   {feature.icon}
-                  <CardTitle className="mt-4 font-headline text-2xl">{feature.title}</CardTitle>
+                  <CardTitle className="mt-4 font-headline text-2xl text-background">{feature.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground">{feature.description}</p>
+                  <p className="text-primary-foreground/90">{feature.description}</p>
                 </CardContent>
               </Card>
             ))}

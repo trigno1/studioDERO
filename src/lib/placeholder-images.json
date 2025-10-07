@@ -7,6 +7,12 @@
       "imageHint": "ethnic model"
     },
     {
+      "id": "hero-bg",
+      "description": "Fading background of gift boxes",
+      "imageUrl": "https://images.unsplash.com/photo-1594125800494-8551659a5843?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxnaWZ0JTIwYm94JTIwYmFja2dyb3VuZHxlbnwwfHx8fDE3NTk5ODU5OTV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "gift box background"
+    },
+    {
       "id": "about-1",
       "description": "Lifestyle image showing hands crafting a gift.",
       "imageUrl": "https://picsum.photos/seed/about1/600/800",
