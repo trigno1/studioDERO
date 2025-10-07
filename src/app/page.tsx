@@ -8,9 +8,37 @@ import { Gift, Sparkles, Sprout, Star, ChevronDown, Users, CheckCircle } from 'l
 import { getPlaceholderImage } from '@/lib/placeholder-images';
 import { TestimonialCarousel } from '@/components/shared/TestimonialCarousel';
 import { getCategories } from '@/lib/cms';
+import { GraphQLClient, gql } from 'graphql-request';
+import ProductCard from '@/components/shared/ProductCard';
 
-export default function Home() {
+// This is a temporary setup. Ideally, you'd move this to a dedicated lib file.
+const graphcms = new GraphQLClient(process.env.GRAPHQL_API_URL!);
+
+// NOTE: The schema in lib/cms.ts and lib/types.ts is different from your GraphQL schema.
+// This query is aliased to match the 'Product' type in lib/types.ts as closely as possible.
+// 'title' is aliased as 'name'. 'image' is aliased as 'images'
+const PRODUCT_QUERY = gql`
+  query GetProducts {
+    products {
+      id
+      name: title
+      description
+      price
+      slug
+      images: image {
+        id
+        url
+        width
+        height
+      }
+    }
+  }
+`;
+
+export default async function Home() {
   const categories = getCategories();
+  
+  const { products } = await graphcms.request(PRODUCT_QUERY);
 
   const features = [
     {
@@ -150,42 +178,20 @@ export default function Home() {
             </p>
           </div>
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {categories.map(category => {
-              const categoryImage = getPlaceholderImage(category.image);
-              return (
-                <Card
-                  key={category.id}
-                  className="group flex flex-col overflow-hidden rounded-lg border shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-                >
-                  <CardHeader className="p-0">
-                    <div className="relative aspect-square w-full">
-                      {categoryImage && (
-                        <Image
-                          src={categoryImage.imageUrl}
-                          alt={category.name}
-                          data-ai-hint={categoryImage.imageHint}
-                          fill
-                          className="object-cover transition-transform duration-300 group-hover:scale-105"
-                        />
-                      )}
-                    </div>
-                  </CardHeader>
-                  <CardContent className="flex-grow p-4">
-                    <CardTitle className="font-headline text-xl">
-                      {category.name}
-                    </CardTitle>
-                    <p className="mt-2 text-sm text-muted-foreground">
-                      {category.description}
-                    </p>
-                  </CardContent>
-                  <div className="p-4 pt-0">
-                    <Button asChild className="w-full">
-                      <Link href={`/collection/${category.slug}`}>Explore</Link>
-                    </Button>
-                  </div>
-                </Card>
-              );
-            })}
+            {products.map((product: any) => (
+              <div key={product.id} className="border p-4 rounded-lg">
+                <Image
+                  src={product.images[0].url}
+                  alt={product.name}
+                  width={product.images[0].width}
+                  height={product.images[0].height}
+                  className="w-full h-48 object-cover rounded"
+                />
+                <h2 className="mt-2 text-xl font-semibold">{product.name}</h2>
+                <p className="text-gray-600">{product.description}</p>
+                <p className="mt-2 text-lg font-bold">₹{product.price}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
