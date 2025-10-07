@@ -38,38 +38,26 @@ export default function Home() {
 
   return (
     <div className="flex flex-col">
-       <section className="relative w-full overflow-hidden bg-background">
+      <section className="relative flex h-[80vh] w-full items-center justify-center overflow-hidden text-center text-white">
         {heroBgImage && (
           <Image
             src={heroBgImage.imageUrl}
             alt={heroBgImage.description}
             data-ai-hint={heroBgImage.imageHint}
             fill
-            className="object-cover opacity-10"
+            className="object-cover"
+            priority
           />
         )}
-        <div className="container relative mx-auto grid min-h-[80vh] grid-cols-1 items-center gap-8 px-4 md:grid-cols-2">
-            <div className="relative z-10 flex flex-col items-start justify-center space-y-6 text-left">
-              <h1 className="font-headline text-4xl font-bold leading-tight text-primary md:text-6xl lg:text-7xl">
-                The Art of <br /> Festive Gifting
-              </h1>
-              <p className="max-w-xl text-lg text-muted-foreground md:text-xl">
-                Discover our curated collection of handcrafted Diwali gift boxes, 
-                blending tradition with modern elegance. Each piece tells a story of craftsmanship and celebration.
-              </p>
-            </div>
-            <div className="relative h-full w-full min-h-[40vh]">
-                {heroImage && (
-                  <Image
-                    src={heroImage.imageUrl}
-                    alt={heroImage.description}
-                    data-ai-hint={heroImage.imageHint}
-                    fill
-                    className="object-contain"
-                    priority
-                  />
-                )}
-            </div>
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="relative z-10 flex flex-col items-center justify-center space-y-6 px-4">
+          <h1 className="font-headline text-4xl font-bold leading-tight md:text-6xl lg:text-7xl">
+            The Art of <br /> Festive Gifting
+          </h1>
+          <p className="max-w-xl text-lg text-white/90 md:text-xl">
+            Discover our curated collection of handcrafted Diwali gift boxes,
+            blending tradition with modern elegance. Each piece tells a story of craftsmanship and celebration.
+          </p>
         </div>
       </section>
 
