@@ -2,17 +2,15 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from 'next/navigation';
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import type { Product } from "@/lib/types";
 import { getPlaceholderImage } from "@/lib/placeholder-images";
 import { ShoppingCart, PackageCheck, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
-import { loadStripe } from '@stripe/stripe-js';
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/hooks/use-toast";
-
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 interface ProductDetailDrawerProps {
   product: Product;
@@ -25,6 +23,7 @@ export default function ProductDetailDrawer({ product, isOpen, onOpenChange }: P
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { addToCart } = useCart();
   const { toast } = useToast();
+  const router = useRouter();
 
   useEffect(() => {
     setCurrentImageIndex(0);
@@ -33,12 +32,6 @@ export default function ProductDetailDrawer({ product, isOpen, onOpenChange }: P
   const handleBuyNow = async () => {
     setIsCheckingOut(true);
     try {
-      const stripe = await stripePromise;
-      if (!stripe) {
-        throw new Error('Stripe.js has not loaded yet.');
-      }
-
-      // We need to wrap the single product in the CartItem structure the API now expects
       const cartItem = { product, quantity: 1 };
 
       const response = await fetch('/api/create-checkout-session', {
@@ -52,12 +45,9 @@ export default function ProductDetailDrawer({ product, isOpen, onOpenChange }: P
         throw new Error(errorBody.error || 'Failed to create checkout session.');
       }
 
-      const session = await response.json();
-      const { error } = await stripe.redirectToCheckout({ sessionId: session.id });
+      const { clientSecret } = await response.json();
+      router.push(`/checkout?client_secret=${clientSecret}`);
 
-      if (error) {
-        throw new Error(error.message);
-      }
     } catch (error) {
       console.error("Checkout error:", error);
       toast({
@@ -65,7 +55,6 @@ export default function ProductDetailDrawer({ product, isOpen, onOpenChange }: P
         title: "Checkout Error",
         description: error instanceof Error ? error.message : "An unknown error occurred.",
       });
-    } finally {
       setIsCheckingOut(false);
     }
   };

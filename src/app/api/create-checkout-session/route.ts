@@ -3,7 +3,6 @@ import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import type { CartItem } from '@/lib/types';
 
-// Ensure the secret key is defined
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2024-06-20',
 });
@@ -17,7 +16,7 @@ export async function POST(req: Request) {
     const { cartItems } = (await req.json()) as { cartItems: CartItem[] };
 
     if (!cartItems || cartItems.length === 0) {
-        return NextResponse.json({ error: 'Cart items not provided' }, { status: 400 });
+      return NextResponse.json({ error: 'Cart items not provided' }, { status: 400 });
     }
 
     const line_items = cartItems.map((item) => ({
@@ -25,27 +24,23 @@ export async function POST(req: Request) {
         currency: 'inr',
         product_data: {
           name: item.product.name,
-          // You can add more details like images here
-          // images: [item.product.images[0]],
         },
         unit_amount: item.product.price * 100, // Amount in paisa
       },
       quantity: item.quantity,
     }));
 
-
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items,
       mode: 'payment',
-      success_url: `${req.headers.get('origin')}/success`,
-      cancel_url: `${req.headers.get('origin')}/cancel`,
+      ui_mode: 'embedded',
+      return_url: `${req.headers.get('origin')}/success?session_id={CHECKOUT_SESSION_ID}`,
     });
 
-    return NextResponse.json({ id: session.id });
+    return NextResponse.json({ clientSecret: session.client_secret });
   } catch (err) {
     const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred';
     return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
-

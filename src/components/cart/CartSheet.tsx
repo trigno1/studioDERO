@@ -2,6 +2,7 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from 'next/navigation';
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,22 +11,17 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { getPlaceholderImage } from "@/lib/placeholder-images";
 import { Trash2, Loader2 } from "lucide-react";
 import { useState } from "react";
-import { loadStripe } from '@stripe/stripe-js';
-
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+import { useToast } from "@/hooks/use-toast";
 
 export default function CartSheet({ children }: { children: React.ReactNode }) {
   const { cartItems, cartTotal, updateQuantity, removeFromCart, cartCount } = useCart();
   const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const router = useRouter();
+  const { toast } = useToast();
 
   const handleCheckout = async () => {
     setIsCheckingOut(true);
     try {
-      const stripe = await stripePromise;
-      if (!stripe) {
-        throw new Error('Stripe.js has not loaded yet.');
-      }
-
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -37,16 +33,16 @@ export default function CartSheet({ children }: { children: React.ReactNode }) {
         throw new Error(errorBody.error || 'Failed to create checkout session.');
       }
 
-      const session = await response.json();
-      const { error } = await stripe.redirectToCheckout({ sessionId: session.id });
+      const { clientSecret } = await response.json();
+      router.push(`/checkout?client_secret=${clientSecret}`);
 
-      if (error) {
-        throw new Error(error.message);
-      }
     } catch (error) {
       console.error("Checkout error:", error);
-      // You could show a toast message here
-    } finally {
+      toast({
+        variant: "destructive",
+        title: "Checkout Error",
+        description: error instanceof Error ? error.message : "An unknown error occurred.",
+      });
       setIsCheckingOut(false);
     }
   };

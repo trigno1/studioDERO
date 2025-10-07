@@ -1,9 +1,19 @@
 
+"use client";
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { CheckCircle } from 'lucide-react';
+import { useCart } from '@/context/CartContext';
+import { useEffect } from 'react';
 
 export default function SuccessPage() {
+  const { clearCart } = useCart();
+
+  useEffect(() => {
+    clearCart();
+  }, [clearCart]);
+
   return (
     <div className="flex min-h-[60vh] flex-col items-center justify-center bg-background text-center">
       <CheckCircle className="h-24 w-24 text-green-500" />
