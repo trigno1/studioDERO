@@ -87,23 +87,23 @@ export default function Home() {
         </div>
       </section>
       
-      <section className="bg-primary py-16 text-primary-foreground md:py-24">
+      <section className="bg-secondary py-16 text-secondary-foreground md:py-24">
         <div className="container mx-auto px-4">
-          <div className="mb-12 text-center">
+          <div className="mb-12 text-left">
             <h2 className="font-headline text-3xl font-bold md:text-4xl">Why Choose DiwaliGlow?</h2>
-            <p className="mt-2 text-lg text-primary-foreground/80">Our Commitment to Excellence</p>
+            <p className="mt-2 text-lg text-secondary-foreground/80">Our Commitment to Excellence</p>
           </div>
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((feature) => (
-              <Card key={feature.title} className="transform border-0 bg-transparent text-center shadow-none transition-transform duration-300 hover:-translate-y-2">
-                <CardHeader className="items-center">
-                  <div className="rounded-full bg-background/10 p-4 backdrop-blur-sm">
+               <Card key={feature.title} className="transform border-0 bg-background/5 text-center shadow-lg transition-all duration-300 hover:bg-background/10 hover:shadow-2xl hover:-translate-y-2">
+                <CardHeader className="items-center p-6">
+                   <div className="rounded-lg bg-background/10 p-4">
                     {React.cloneElement(feature.icon, { className: 'h-10 w-10 text-accent' })}
                   </div>
-                  <CardTitle className="mt-4 font-headline text-2xl text-white">{feature.title}</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <p className="text-primary-foreground/90">{feature.description}</p>
+                <CardContent className="p-6 pt-0">
+                  <CardTitle className="font-headline text-2xl text-white">{feature.title}</CardTitle>
+                  <p className="mt-4 text-secondary-foreground/90">{feature.description}</p>
                 </CardContent>
               </Card>
             ))}
