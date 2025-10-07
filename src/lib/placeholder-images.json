@@ -59,6 +59,54 @@
       "description": "The Corporate Sparkler",
       "imageUrl": "https://images.unsplash.com/photo-1625552185153-7a8d8f3794a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxjb3Jwb3JhdGUlMjBnaWZ0fGVufDB8fHx8MTc1OTcyMzE3Nnww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "corporate gift"
+    },
+    {
+      "id": "category-gourmet",
+      "description": "Gourmet food gifts",
+      "imageUrl": "https://picsum.photos/seed/catgourmet/500/500",
+      "imageHint": "gourmet food"
+    },
+    {
+      "id": "category-dry-fruit",
+      "description": "Dry fruit gift boxes",
+      "imageUrl": "https://picsum.photos/seed/catdryfruit/500/500",
+      "imageHint": "dry fruits"
+    },
+    {
+      "id": "category-premium",
+      "description": "Premium silver gifts",
+      "imageUrl": "https://picsum.photos/seed/catpremium/500/500",
+      "imageHint": "silver idol"
+    },
+    {
+      "id": "category-decor",
+      "description": "Decorative items and diyas",
+      "imageUrl": "https://picsum.photos/seed/catdecor/500/500",
+      "imageHint": "diwali decor"
+    },
+    {
+      "id": "product-dry-fruit-1",
+      "description": "A box of assorted dry fruits",
+      "imageUrl": "https://picsum.photos/seed/proddf1/500/500",
+      "imageHint": "assorted nuts"
+    },
+    {
+      "id": "product-dry-fruit-2",
+      "description": "A hamper of exotic dry fruits",
+      "imageUrl": "https://picsum.photos/seed/proddf2/500/500",
+      "imageHint": "exotic nuts"
+    },
+    {
+      "id": "product-premium-1",
+      "description": "Silver plated idols of Lakshmi and Ganesh",
+      "imageUrl": "https://picsum.photos/seed/prodprem1/500/500",
+      "imageHint": "silver ganesh"
+    },
+    {
+      "id": "product-decor-1",
+      "description": "A set of colorful ceramic diyas",
+      "imageUrl": "https://picsum.photos/seed/proddecor1/500/500",
+      "imageHint": "ceramic diyas"
     }
   ]
 }

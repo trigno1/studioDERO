@@ -4,15 +4,14 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Gift, Sparkles, Sprout, Star } from "lucide-react";
-import ProductCard from "@/components/shared/ProductCard";
-import { getProducts } from "@/lib/cms";
 import { getPlaceholderImage } from "@/lib/placeholder-images";
 import { TestimonialCarousel } from "@/components/shared/TestimonialCarousel";
+import { getCategories } from "@/lib/cms";
 
 export default function Home() {
-  const featuredProducts = getProducts().slice(0, 4);
   const heroImage = getPlaceholderImage("hero-1");
   const heroBgImage = getPlaceholderImage("hero-bg");
+  const categories = getCategories();
 
   const features = [
     {
@@ -77,7 +76,7 @@ export default function Home() {
       <section id="about" className="py-16 md:py-24">
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-headline text-3xl font-bold md:text-4xl">
-            Celebrating Tradition, Crafted with Love
+            Discover Aesthetic & Ethic Treasures
           </h2>
           <div className="mx-auto mt-4 max-w-3xl">
             <p className="text-lg text-muted-foreground">
@@ -93,7 +92,7 @@ export default function Home() {
             <h2 className="font-headline text-3xl font-bold md:text-4xl">Why Choose DiwaliGlow?</h2>
             <p className="mt-2 text-lg text-secondary-foreground/80">Our Commitment to Excellence</p>
           </div>
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {features.map((feature) => (
                <Card key={feature.title} className="transform border-0 bg-background/5 text-center shadow-lg transition-all duration-300 hover:bg-background/10 hover:shadow-2xl hover:-translate-y-2">
                 <CardHeader className="items-center p-6">
@@ -114,18 +113,38 @@ export default function Home() {
       <section id="collection" className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="mb-12 text-center">
-            <h2 className="font-headline text-3xl font-bold md:text-4xl">Featured Collection</h2>
-            <p className="mt-2 text-lg text-muted-foreground">Handpicked for the Perfect Celebration</p>
+            <h2 className="font-headline text-3xl font-bold md:text-4xl">Our Collections</h2>
+            <p className="mt-2 text-lg text-muted-foreground">Curated gifts for every taste and occasion.</p>
           </div>
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-          <div className="mt-12 text-center">
-            <Button asChild size="lg">
-              <Link href="/collection">View All Gifts</Link>
-            </Button>
+            {categories.map((category) => {
+              const categoryImage = getPlaceholderImage(category.image);
+              return (
+              <Card key={category.id} className="group flex flex-col overflow-hidden rounded-lg border shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                 <CardHeader className="p-0">
+                    <div className="relative aspect-square w-full">
+                      {categoryImage && (
+                        <Image
+                          src={categoryImage.imageUrl}
+                          alt={category.name}
+                          data-ai-hint={categoryImage.imageHint}
+                          fill
+                          className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                      )}
+                    </div>
+                  </CardHeader>
+                  <CardContent className="flex-grow p-4">
+                    <CardTitle className="font-headline text-xl">{category.name}</CardTitle>
+                    <p className="mt-2 text-sm text-muted-foreground">{category.description}</p>
+                  </CardContent>
+                  <div className="p-4 pt-0">
+                    <Button asChild className="w-full">
+                      <Link href={`/collection/${category.slug}`}>Explore</Link>
+                    </Button>
+                  </div>
+              </Card>
+            )})}
           </div>
         </div>
       </section>
