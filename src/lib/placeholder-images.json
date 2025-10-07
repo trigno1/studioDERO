@@ -1,3 +1,58 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-1",
+      "description": "Hero image showcasing festive Diwali gift boxes.",
+      "imageUrl": "https://picsum.photos/seed/hero1/1920/1080",
+      "imageHint": "diwali gifts"
+    },
+    {
+      "id": "about-1",
+      "description": "Lifestyle image showing hands crafting a gift.",
+      "imageUrl": "https://picsum.photos/seed/about1/600/800",
+      "imageHint": "crafting hands"
+    },
+    {
+      "id": "about-2",
+      "description": "Lifestyle image showing a family celebrating Diwali.",
+      "imageUrl": "https://picsum.photos/seed/about2/600/800",
+      "imageHint": "diwali celebration"
+    },
+    {
+      "id": "product-1",
+      "description": "The Shubh Labh Box",
+      "imageUrl": "https://images.unsplash.com/photo-1647221598272-9aa015392c81?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxnaWZ0JTIwYm94fGVufDB8fHx8MTc1OTcyNjc5M3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "gift box"
+    },
+    {
+      "id": "product-2",
+      "description": "The Royal Diwali Hamper",
+      "imageUrl": "https://picsum.photos/seed/prod2/500/500",
+      "imageHint": "luxury gift"
+    },
+    {
+      "id": "product-3",
+      "description": "The Family Celebration Box",
+      "imageUrl": "https://picsum.photos/seed/prod3/500/500",
+      "imageHint": "festive hamper"
+    },
+    {
+      "id": "product-4",
+      "description": "The Aura of Lights Box",
+      "imageUrl": "https://images.unsplash.com/photo-1666244454829-7f0889ec5783?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxkaXdhbGklMjBsaWdodHN8ZW58MHx8fHwxNzU5NzU2Njg1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "diwali lights"
+    },
+    {
+      "id": "product-5",
+      "description": "The Sweet Indulgence Box",
+      "imageUrl": "https://picsum.photos/seed/prod5/500/500",
+      "imageHint": "indian sweets"
+    },
+    {
+      "id": "product-6",
+      "description": "The Corporate Sparkler",
+      "imageUrl": "https://images.unsplash.com/photo-1625552185153-7a8d8f3794a3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxjb3Jwb3JhdGUlMjBnaWZ0fGVufDB8fHx8MTc1OTcyMzE3Nnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "corporate gift"
+    }
+  ]
 }
