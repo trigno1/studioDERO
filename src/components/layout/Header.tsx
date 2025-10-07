@@ -43,22 +43,28 @@ export default function Header() {
         
         <div className="flex items-center gap-4">
           <nav className="hidden items-center gap-6 md:flex">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary",
-                  pathname === link.href ? "text-primary" : "text-muted-foreground"
-                )}
-              >
-                {link.label}
-              </Link>
-            ))}
+            <Link
+              href="/"
+              className={cn(
+                "text-sm font-medium transition-colors hover:text-primary",
+                pathname === "/" ? "text-primary" : "text-muted-foreground"
+              )}
+            >
+              Home
+            </Link>
+            <Link
+              href="/about"
+              className={cn(
+                "text-sm font-medium transition-colors hover:text-primary",
+                pathname === "/about" ? "text-primary" : "text-muted-foreground"
+              )}
+            >
+              About
+            </Link>
              <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className={cn(
-                  "flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary -ml-2",
+                  "flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary",
                   pathname.startsWith('/collection') ? "text-primary" : "text-muted-foreground"
                 )}>
                   Collection <ChevronDown className="h-4 w-4" />
