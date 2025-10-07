@@ -1,7 +1,7 @@
 
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import type { Product } from '@/lib/types';
+import type { CartItem } from '@/lib/types';
 
 // Ensure the secret key is defined
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -14,28 +14,29 @@ export async function POST(req: Request) {
   }
 
   try {
-    const { product } = (await req.json()) as { product: Product };
+    const { cartItems } = (await req.json()) as { cartItems: CartItem[] };
 
-    if (!product) {
-        return NextResponse.json({ error: 'Product not provided' }, { status: 400 });
+    if (!cartItems || cartItems.length === 0) {
+        return NextResponse.json({ error: 'Cart items not provided' }, { status: 400 });
     }
+
+    const line_items = cartItems.map((item) => ({
+      price_data: {
+        currency: 'inr',
+        product_data: {
+          name: item.product.name,
+          // You can add more details like images here
+          // images: [item.product.images[0]],
+        },
+        unit_amount: item.product.price * 100, // Amount in paisa
+      },
+      quantity: item.quantity,
+    }));
+
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
-      line_items: [
-        {
-          price_data: {
-            currency: 'inr',
-            product_data: {
-              name: product.name,
-              // You can add more details like images here
-              // images: [product.images[0]],
-            },
-            unit_amount: product.price * 100, // Amount in paisa
-          },
-          quantity: 1,
-        },
-      ],
+      line_items,
       mode: 'payment',
       success_url: `${req.headers.get('origin')}/success`,
       cancel_url: `${req.headers.get('origin')}/cancel`,
@@ -47,3 +48,4 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
+

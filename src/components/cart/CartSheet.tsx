@@ -11,7 +11,6 @@ import { getPlaceholderImage } from "@/lib/placeholder-images";
 import { Trash2, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { loadStripe } from '@stripe/stripe-js';
-import type { CartItem } from "@/lib/types";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
@@ -30,9 +29,6 @@ export default function CartSheet({ children }: { children: React.ReactNode }) {
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        // We need to transform cart items to a format Stripe understands
-        // For now, let's just handle a single item for simplicity.
-        // A real implementation would loop through cartItems
         body: JSON.stringify({ cartItems }),
       });
 
