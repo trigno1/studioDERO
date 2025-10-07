@@ -8,8 +8,8 @@ import { CartProvider } from "@/context/CartContext";
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: "GlowBox - Celebrate Diwali with Handcrafted Gift Boxes",
-  description: "At GlowBox, we craft memories through thoughtfully curated Diwali gift boxes that bring joy and warmth.",
+  title: "Artisan Heritage - Discover Authentic Ethnic Treasures",
+  description: "Explore our curated collection of handcrafted artisan products, traditional textiles, and cultural artifacts from around the world.",
 };
 
 export default function RootLayout({
@@ -23,7 +23,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500;700&display=swap"
           rel="stylesheet"
         />
       </head>

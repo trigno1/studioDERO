@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, ShoppingCart } from "lucide-react";
+import { Menu, ShoppingCart, Search, Heart, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
@@ -13,9 +13,9 @@ import { Badge } from "@/components/ui/badge";
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/collection", label: "Collection" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { href: "/collection", label: "Shop" },
+  { href: "/categories", label: "Categories" },
+  { href: "/about", label: "Our Story" },
 ];
 
 export default function Header() {
@@ -27,7 +27,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" className="font-headline text-2xl font-bold text-primary">
-          GlowBox
+          Artisan Heritage
         </Link>
         <nav className="hidden items-center space-x-6 md:flex">
           {navLinks.map((link) => (
@@ -43,7 +43,19 @@ export default function Header() {
             </Link>
           ))}
         </nav>
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2">
+           <Button variant="ghost" size="icon">
+              <Search className="h-5 w-5" />
+              <span className="sr-only">Search</span>
+            </Button>
+            <Button variant="ghost" size="icon">
+              <Heart className="h-5 w-5" />
+              <span className="sr-only">Wishlist</span>
+            </Button>
+            <Button variant="ghost" size="icon">
+              <User className="h-5 w-5" />
+              <span className="sr-only">Account</span>
+            </Button>
           <CartSheet>
             <Button variant="ghost" size="icon" className="relative">
               <ShoppingCart className="h-5 w-5" />
@@ -69,7 +81,7 @@ export default function Header() {
               <SheetContent side="left">
                 <div className="flex flex-col space-y-6 pt-10">
                   <Link href="/" className="font-headline text-2xl font-bold text-primary">
-                    GlowBox
+                    Artisan Heritage
                   </Link>
                   <nav className="flex flex-col space-y-4">
                     {navLinks.map((link) => (

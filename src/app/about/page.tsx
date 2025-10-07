@@ -10,7 +10,7 @@ export default function AboutPage() {
       <div className="mb-12 text-center">
         <h1 className="font-headline text-4xl font-bold md:text-5xl">Our Story</h1>
         <p className="mt-2 text-lg text-muted-foreground">
-          Crafting memories, one gift at a time.
+          Weaving tales of tradition and artistry.
         </p>
       </div>
 
@@ -18,10 +18,10 @@ export default function AboutPage() {
         <div className="space-y-6">
           <h2 className="font-headline text-3xl font-bold text-primary">From Our Heart to Your Home</h2>
           <p className="text-lg leading-relaxed text-muted-foreground">
-            GlowBox was born from a desire to share the joy and warmth of Diwali. We believe that a gift is more than just an object—it's a gesture of love, a shared memory, and a symbol of celebration. Our journey began in a small workshop, with a passion for creating beautiful, meaningful gifts that capture the essence of the festival of lights.
+            Artisan Heritage was born from a passion for preserving and sharing the rich tapestry of global craftsmanship. We believe that every handmade object tells a story, carrying the legacy of its maker and the culture it comes from. Our journey began with a simple desire to connect discerning individuals with authentic, handcrafted treasures from around the world.
           </p>
           <p className="text-lg leading-relaxed text-muted-foreground">
-            Each GlowBox is a testament to this philosophy. We pour our hearts into every detail, from selecting the finest artisanal products to designing our elegant, eco-friendly packaging.
+            Each piece in our collection is a testament to this philosophy. We travel far and wide to build relationships with artisans, ensuring that every product is not just beautiful, but also ethically sourced and made with traditional techniques.
           </p>
         </div>
         <div className="relative h-96 w-full overflow-hidden rounded-lg shadow-lg md:h-[500px]">
@@ -50,12 +50,12 @@ export default function AboutPage() {
             )}
         </div>
         <div className="space-y-6 md:order-1">
-          <h2 className="font-headline text-3xl font-bold text-primary">Craftsmanship & Sustainability</h2>
+          <h2 className="font-headline text-3xl font-bold text-primary">Craftsmanship & Community</h2>
           <p className="text-lg leading-relaxed text-muted-foreground">
-            We are committed to supporting local artisans and preserving traditional crafts. Many of the items in our boxes are handcrafted by skilled makers from across the country, ensuring that each gift is unique and supports local communities.
+            We are committed to supporting artisan communities and helping them sustain their craft. By bringing their products to a global audience, we empower them to continue their traditions and build a brighter future. We work directly with makers, ensuring fair wages and respectful partnerships.
           </p>
           <p className="text-lg leading-relaxed text-muted-foreground">
-            Sustainability is at the core of our values. We use recyclable materials for our packaging and strive to partner with brands that share our commitment to the planet. We believe that a beautiful gift shouldn't come at the expense of the environment.
+            Sustainability is at the core of our values. We champion natural materials, eco-friendly processes, and timeless designs. We believe that a beautiful product shouldn't come at the expense of our planet or its people.
           </p>
         </div>
       </div>

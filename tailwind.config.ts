@@ -10,7 +10,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ['Poppins', 'sans-serif'],
+        body: ['Roboto', 'sans-serif'],
         headline: ['Playfair Display', 'serif'],
         code: ['monospace'],
       },

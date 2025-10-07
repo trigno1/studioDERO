@@ -15,22 +15,22 @@ export default function Home() {
     {
       icon: <Hand className="h-10 w-10 text-accent" />,
       title: "Handcrafted",
-      description: "Each box is curated with love and attention to detail.",
+      description: "Each piece is made with love and traditional techniques.",
     },
     {
       icon: <Gem className="h-10 w-10 text-accent" />,
-      title: "Premium Quality",
-      description: "We source the finest products to ensure a luxury experience.",
+      title: "Authentic Quality",
+      description: "We source the finest materials for a genuine experience.",
     },
     {
       icon: <Truck className="h-10 w-10 text-accent" />,
-      title: "Fast Delivery",
-      description: "Get your gifts delivered to your doorstep, on time, every time.",
+      title: "Worldwide Shipping",
+      description: "Get your treasures delivered to your doorstep, anywhere.",
     },
     {
       icon: <Settings className="h-10 w-10 text-accent" />,
-      title: "Customizable",
-      description: "Personalize your gift boxes to make them truly special.",
+      title: "Ethically Sourced",
+      description: "Supporting artisans and their communities directly.",
     },
   ];
 
@@ -47,28 +47,39 @@ export default function Home() {
             priority
           />
         )}
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-black/30" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center space-y-6 px-4 text-center">
-          <h1 className="font-headline text-4xl font-bold md:text-6xl lg:text-7xl">
-            Celebrate Diwali with Handcrafted Gift Boxes
+          <p className="font-body text-sm font-bold uppercase tracking-widest text-gray-200">
+            Handcrafted with love
+          </p>
+          <h1 className="font-headline text-4xl font-bold leading-tight text-white md:text-6xl lg:text-7xl">
+            Discover <span className="text-primary">Authentic</span><br />
+            Ethnic Treasures
           </h1>
           <p className="max-w-2xl text-lg text-gray-200 md:text-xl">
-            Discover our exclusive collection of festive gifts, curated to bring joy and light to your celebrations.
+            Explore our curated collection of handcrafted artisan products,
+            traditional textiles, and cultural artifacts from around the world.
+            Each piece tells a unique story.
           </p>
-          <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-            <Link href="/collection">Shop Now</Link>
-          </Button>
+          <div className="flex flex-col gap-4 sm:flex-row">
+            <Button asChild size="lg">
+              <Link href="/collection">Shop Collection</Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black">
+              <Link href="/about">Learn Our Story</Link>
+            </Button>
+          </div>
         </div>
       </section>
 
       <section id="about" className="py-16 md:py-24">
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-headline text-3xl font-bold md:text-4xl">
-            Thoughtfully Curated Gift Boxes
+            Curated with Care and Craftsmanship
           </h2>
           <div className="mx-auto mt-4 max-w-3xl">
             <p className="text-lg text-muted-foreground">
-              At GlowBox, we craft memories through thoughtfully curated Diwali gift boxes that bring joy and warmth. Our passion is to create beautiful, high-quality gifts that honor the spirit of the festival of lights.
+              At Artisan Heritage, we are passionate about connecting you with authentic, handcrafted treasures. We travel the globe to bring you unique pieces that tell a story of culture, tradition, and artistry.
             </p>
           </div>
         </div>
@@ -78,7 +89,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="mb-12 text-center">
             <h2 className="font-headline text-3xl font-bold md:text-4xl">Why Choose Us?</h2>
-            <p className="mt-2 text-lg text-muted-foreground">The GlowBox Promise</p>
+            <p className="mt-2 text-lg text-muted-foreground">The Artisan Heritage Promise</p>
           </div>
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {features.map((feature) => (
@@ -99,8 +110,8 @@ export default function Home() {
       <section id="collection" className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="mb-12 text-center">
-            <h2 className="font-headline text-3xl font-bold md:text-4xl">Our Diwali Collection</h2>
-            <p className="mt-2 text-lg text-muted-foreground">Explore our featured gift boxes</p>
+            <h2 className="font-headline text-3xl font-bold md:text-4xl">Our Featured Collection</h2>
+            <p className="mt-2 text-lg text-muted-foreground">Handpicked just for you</p>
           </div>
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {featuredProducts.map((product) => (
