@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import { getPlaceholderImage } from '@/lib/placeholder-images';
 
@@ -8,7 +9,7 @@ export default function AboutPage() {
   return (
     <div className="bg-background">
       <div className="container mx-auto px-4 py-16 md:py-24">
-        <div className="mb-12 text-center">
+        <div className="mb-12 text-left">
           <h1 className="font-headline text-4xl font-bold text-primary md:text-5xl">
             Our Story
           </h1>
