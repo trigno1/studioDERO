@@ -73,13 +73,13 @@ export default function Header() {
               </DropdownMenuContent>
             </DropdownMenu>
           </nav>
-          <CartSheet>
-            <Button variant="ghost" size="icon" className="relative">
+           <CartSheet>
+            <Button variant="ghost" size="icon" className="relative h-10 w-10 rounded-full bg-primary text-primary-foreground hover:bg-primary/90">
               <ShoppingCart className="h-5 w-5" />
               {cartCount > 0 && (
                 <Badge
-                  variant="default"
-                  className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-primary p-2 text-xs"
+                  variant="secondary"
+                  className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full p-2 text-xs"
                 >
                   {cartCount}
                 </Badge>
