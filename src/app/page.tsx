@@ -7,18 +7,19 @@ import ProductCard from '@/components/shared/ProductCard';
 import type { Product } from '@/lib/types';
 import { TestimonialCarousel } from '@/components/shared/TestimonialCarousel';
 
+
 type ApiData = {
-  gourmetGifts: Product[];
-  decorDiyaGifts: Product[];
-  dryFruitGifts: Product[];
-  premiumDiwaliGifts: Product[];
+  gourmet_Gifts: Product[];
+  decorDiya_Gifts: Product[];
+  dryFruit_Gifts: Product[];
+  premiumDiwali_Gifts: Product[];
 };
 
 const mockData: ApiData = {
-  gourmetGifts: [],
-  decorDiyaGifts: [],
-  dryFruitGifts: [],
-  premiumDiwaliGifts: [],
+  gourmet_Gifts: [],
+  decorDiya_Gifts: [],
+  dryFruit_Gifts: [],
+  premiumDiwali_Gifts: [],
 };
 
 export default function Home() {
@@ -36,11 +37,16 @@ export default function Home() {
       })
       .then(apiData => {
         // Adapt the data to match the Product type (title -> name)
+        const adapt = (arr: any[] = []) => arr.map((p: any) => ({
+          ...p,
+          name: p.title,
+          images: Array.isArray(p.image) ? p.image.map((img: any) => img.url) : p.image?.url ? [p.image.url] : [],
+        }));
         const adaptedData: ApiData = {
-          gourmetGifts: (apiData.gourmetGifts || []).map((p: any) => ({ ...p, name: p.title })),
-          decorDiyaGifts: (apiData.decorDiyaGifts || []).map((p: any) => ({ ...p, name: p.title })),
-          dryFruitGifts: (apiData.dryFruitGifts || []).map((p: any) => ({ ...p, name: p.title })),
-          premiumDiwaliGifts: (apiData.premiumDiwaliGifts || []).map((p: any) => ({ ...p, name: p.title })),
+          gourmet_Gifts: adapt(apiData.gourmet_Gifts),
+          decorDiya_Gifts: adapt(apiData.decorDiya_Gifts),
+          dryFruit_Gifts: adapt(apiData.dryFruit_Gifts),
+          premiumDiwali_Gifts: adapt(apiData.premiumDiwali_Gifts),
         };
         setData(adaptedData);
         setLoading(false);
@@ -52,34 +58,37 @@ export default function Home() {
       });
   }, []);
 
-  const renderProductSection = (title: string, products: Product[], slug: string) => (
-    <section className="my-8 md:my-16">
-      <div className="container mx-auto px-4">
-        <div className="mb-8 text-center md:text-left">
-          <h2 className="font-headline text-3xl font-bold md:text-4xl">{title}</h2>
+  const renderProductSection = (title: string, products: Product[] | undefined, slug: string) => {
+    const safeProducts = products ?? [];
+    return (
+      <section className="my-8 md:my-16">
+        <div className="container mx-auto px-4">
+          <div className="mb-8 text-center md:text-left">
+            <h2 className="font-headline text-3xl font-bold md:text-4xl">{title}</h2>
+          </div>
+          {error && <p className="text-center text-destructive">{error}</p>}
+          {loading ? (
+              <p className="text-center text-muted-foreground">Loading products...</p>
+          ) : (
+              safeProducts.length > 0 ? (
+                  <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+                      {safeProducts.slice(0, 4).map((item) => <ProductCard key={item.id} product={item} />)}
+                  </div>
+              ) : (
+                  <p className="text-center text-muted-foreground">No products found in this collection.</p>
+              )
+          )}
+           {safeProducts.length > 4 && (
+              <div className="mt-8 text-center">
+                  <Link href={`/collection/${slug}`}>
+                      <Button variant="secondary">View All {title}</Button>
+                  </Link>
+              </div>
+          )}
         </div>
-        {error && <p className="text-center text-destructive">{error}</p>}
-        {loading ? (
-            <p className="text-center text-muted-foreground">Loading products...</p>
-        ) : (
-            products.length > 0 ? (
-                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-                    {products.slice(0, 4).map((item) => <ProductCard key={item.id} product={item} />)}
-                </div>
-            ) : (
-                <p className="text-center text-muted-foreground">No products found in this collection.</p>
-            )
-        )}
-         {products.length > 4 && (
-            <div className="mt-8 text-center">
-                <Link href={`/collection/${slug}`}>
-                    <Button variant="secondary">View All {title}</Button>
-                </Link>
-            </div>
-        )}
-      </div>
-    </section>
-  );
+      </section>
+    );
+  };
 
   return (
     <div className="flex flex-col">
@@ -111,10 +120,10 @@ export default function Home() {
       </section>
 
       <div id="collection" className="py-8">
-        {renderProductSection("Gourmet Gifts", data.gourmetGifts, "gourmet")}
-        {renderProductSection("Decor & Diya Gifts", data.decorDiyaGifts, "decor")}
-        {renderProductSection("Dry Fruit Gifts", data.dryFruitGifts, "dry-fruit")}
-        {renderProductSection("Premium Diwali Gifts", data.premiumDiwaliGifts, "premium")}
+        {renderProductSection("Gourmet Gifts", data.gourmet_Gifts, "gourmet")}
+        {renderProductSection("Decor & Diya Gifts", data.decorDiya_Gifts, "decor")}
+        {renderProductSection("Dry Fruit Gifts", data.dryFruit_Gifts, "dry-fruit")}
+        {renderProductSection("Premium Diwali Gifts", data.premiumDiwali_Gifts, "premium")}
       </div>
       
       <TestimonialCarousel />

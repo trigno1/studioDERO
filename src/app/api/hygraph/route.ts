@@ -7,10 +7,10 @@ export async function GET() {
   try {
     const query = `
       query GetAllCollections {
-        gourmetGifts: gourmet_Gifts(stage: PUBLISHED) { id title description price image { url } }
-        decorDiyaGifts(stage: PUBLISHED) { id title description price image { url } }
-        dryFruitGifts: dryFruit_Gifts(stage: PUBLISHED) { id title description price image { url } }
-        premiumDiwaliGifts(stage: PUBLISHED) { id title description price image { url } }
+        gourmet_Gifts(stage: PUBLISHED) { id title description price image { url } }
+        decorDiya_Gifts(stage: PUBLISHED) { id title description price image { url } }
+        dryFruit_Gifts(stage: PUBLISHED) { id title description price image { url } }
+        premiumDiwali_Gifts(stage: PUBLISHED) { id title description price image { url } }
       }
     `;
 

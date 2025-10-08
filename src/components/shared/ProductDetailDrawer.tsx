@@ -66,15 +66,25 @@ export default function ProductDetailDrawer({ product, isOpen, onOpenChange }: P
     });
   };
 
+  // Hygraph: product.image is an object or array of objects with url
+  let imageUrls: string[] = [];
+  if (Array.isArray(product.image) && product.image.length > 0) {
+    imageUrls = product.image.map((img: any) => img.url);
+  } else if (product.image?.url) {
+    imageUrls = [product.image.url];
+  } else if (Array.isArray(product.images) && product.images.length > 0) {
+    imageUrls = product.images;
+  }
+
   const nextImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % product.images.length);
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imageUrls.length);
   };
 
   const prevImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + product.images.length) % product.images.length);
+    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + imageUrls.length) % imageUrls.length);
   };
-  
-  const currentImageUrl = product.images[currentImageIndex] || 'https://picsum.photos/seed/placeholder/800/800';
+
+  const currentImageUrl = imageUrls[currentImageIndex] || 'https://picsum.photos/seed/placeholder/800/800';
 
   return (
     <Sheet open={isOpen} onOpenChange={onOpenChange}>

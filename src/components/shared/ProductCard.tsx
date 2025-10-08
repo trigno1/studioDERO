@@ -16,7 +16,10 @@ export default function ProductCard({ product }: ProductCardProps) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   
   // The API now provides a full URL, so we use it directly.
-  const imageUrl = product.images?.[0] || 'https://picsum.photos/seed/placeholder/500/500';
+  // Always use product.images (array of URLs)
+  const imageUrl = Array.isArray(product.images) && product.images.length > 0
+    ? product.images[0]
+    : 'https://picsum.photos/seed/placeholder/500/500';
 
   return (
     <>

@@ -28,6 +28,12 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'ap-south-1.graphassets.com',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 };
