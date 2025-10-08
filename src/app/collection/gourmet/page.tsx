@@ -20,13 +20,13 @@ type CmsProduct = {
 
 async function getGourmetProducts(): Promise<Product[]> {
   try {
-    const { gourmet_Gifts } = (await fetchHygraphQuery(GET_GOURMET_GIFTS)) as { gourmet_Gifts: CmsProduct[] };
+    const { gourmetGifts } = (await fetchHygraphQuery(GET_GOURMET_GIFTS)) as { gourmetGifts: CmsProduct[] };
     
-    if (!gourmet_Gifts) {
+    if (!gourmetGifts) {
       return [];
     }
 
-    return gourmet_Gifts.map(p => ({
+    return gourmetGifts.map(p => ({
       id: p.id,
       name: p.title,
       description: p.description,

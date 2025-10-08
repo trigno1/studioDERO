@@ -2,7 +2,7 @@
 // 1️⃣ Gourmet Gifts
 export const GET_GOURMET_GIFTS = `
   query GetAllGourmetGifts {
-    gourmet_Gifts(stage: PUBLISHED) {
+    gourmetGifts: gourmet_Gifts(stage: PUBLISHED) {
       id
       title
       description
@@ -20,7 +20,7 @@ export const GET_GOURMET_GIFTS = `
 // 2️⃣ Dry Fruit Gifts
 export const GET_DRY_FRUIT_GIFTS = `
   query GetAllDryFruitGifts {
-    dryFruit_Gifts(stage: PUBLISHED) {
+    dryFruitGifts: dryFruit_Gifts(stage: PUBLISHED) {
       id
       title
       description
