@@ -1,13 +1,47 @@
 import ProductCard from "@/components/shared/ProductCard";
-import { getProductsByCategory, getCategoryBySlug } from "@/lib/cms";
+import { getCategoryBySlug } from "@/lib/cms";
 import { notFound } from "next/navigation";
+import { hygraphClient } from "@/lib/hygraphClient";
+import { GET_GOURMET_GIFTS } from "@/lib/queries";
+import type { Product } from "@/lib/types";
 
-export default function GourmetCollectionPage() {
+type CmsProduct = {
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  image: {
+    id: string;
+    url: string;
+    width: number;
+    height: number;
+  }[];
+};
+
+async function getGourmetProducts() {
+  try {
+    const { gourmetGifts } = await hygraphClient.request<{ gourmetGifts: CmsProduct[] }>(GET_GOURMET_GIFTS);
+    
+    return gourmetGifts.map(p => ({
+      id: p.id,
+      name: p.title,
+      description: p.description,
+      price: p.price,
+      images: p.image.map(img => img.id || `product-${p.id}`),
+      category: 'gourmet',
+    } as Product));
+  } catch (error) {
+    console.error("Failed to fetch gourmet products from Hygraph:", error);
+    return []; // Return empty array on error
+  }
+}
+
+export default async function GourmetCollectionPage() {
   const category = getCategoryBySlug('gourmet');
   if (!category) {
     notFound();
   }
-  const products = getProductsByCategory('gourmet');
+  const products = await getGourmetProducts();
 
   return (
     <div className="bg-background">
@@ -18,11 +52,17 @@ export default function GourmetCollectionPage() {
             {category.description}
           </p>
         </div>
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        {products.length > 0 ? (
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center text-muted-foreground">
+            <p>Could not load products. Please ensure your HYGRAPH_CONTENT_API_KEY is correct.</p>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,13 +1,47 @@
 import ProductCard from "@/components/shared/ProductCard";
-import { getProductsByCategory, getCategoryBySlug } from "@/lib/cms";
+import { getCategoryBySlug } from "@/lib/cms";
 import { notFound } from "next/navigation";
+import { hygraphClient } from "@/lib/hygraphClient";
+import { GET_DRY_FRUIT_GIFTS } from "@/lib/queries";
+import type { Product } from "@/lib/types";
 
-export default function DryFruitCollectionPage() {
+type CmsProduct = {
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  image: {
+    id: string;
+    url: string;
+    width: number;
+    height: number;
+  }[];
+};
+
+async function getDryFruitProducts() {
+  try {
+    const { dryFruitGifts } = await hygraphClient.request<{ dryFruitGifts: CmsProduct[] }>(GET_DRY_FRUIT_GIFTS);
+    
+    return dryFruitGifts.map(p => ({
+      id: p.id,
+      name: p.title,
+      description: p.description,
+      price: p.price,
+      images: p.image.map(img => img.id || `product-${p.id}`),
+      category: 'dry-fruit',
+    } as Product));
+  } catch (error) {
+    console.error("Failed to fetch dry fruit products from Hygraph:", error);
+    return []; // Return empty array on error
+  }
+}
+
+export default async function DryFruitCollectionPage() {
   const category = getCategoryBySlug('dry-fruit');
   if (!category) {
     notFound();
   }
-  const products = getProductsByCategory('dry-fruit');
+  const products = await getDryFruitProducts();
 
   return (
     <div className="bg-background">
@@ -18,11 +52,17 @@ export default function DryFruitCollectionPage() {
             {category.description}
           </p>
         </div>
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        {products.length > 0 ? (
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center text-muted-foreground">
+            <p>Could not load products. Please ensure your HYGRAPH_CONTENT_API_KEY is correct.</p>
+          </div>
+        )}
       </div>
     </div>
   );

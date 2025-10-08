@@ -1,13 +1,47 @@
 import ProductCard from "@/components/shared/ProductCard";
-import { getProductsByCategory, getCategoryBySlug } from "@/lib/cms";
+import { getCategoryBySlug } from "@/lib/cms";
 import { notFound } from "next/navigation";
+import { hygraphClient } from "@/lib/hygraphClient";
+import { GET_DECOR_DIYA_GIFTS } from "@/lib/queries";
+import type { Product } from "@/lib/types";
 
-export default function DecorCollectionPage() {
+type CmsProduct = {
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  image: {
+    id: string;
+    url: string;
+    width: number;
+    height: number;
+  }[];
+};
+
+async function getDecorProducts() {
+  try {
+    const { decorDiyaGifts } = await hygraphClient.request<{ decorDiyaGifts: CmsProduct[] }>(GET_DECOR_DIYA_GIFTS);
+    
+    return decorDiyaGifts.map(p => ({
+      id: p.id,
+      name: p.title,
+      description: p.description,
+      price: p.price,
+      images: p.image.map(img => img.id || `product-${p.id}`),
+      category: 'decor',
+    } as Product));
+  } catch (error) {
+    console.error("Failed to fetch decor products from Hygraph:", error);
+    return []; // Return empty array on error
+  }
+}
+
+export default async function DecorCollectionPage() {
   const category = getCategoryBySlug('decor');
   if (!category) {
     notFound();
   }
-  const products = getProductsByCategory('decor');
+  const products = await getDecorProducts();
 
   return (
     <div className="bg-background">
@@ -18,11 +52,17 @@ export default function DecorCollectionPage() {
             {category.description}
           </p>
         </div>
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        {products.length > 0 ? (
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center text-muted-foreground">
+            <p>Could not load products. Please ensure your HYGRAPH_CONTENT_API_KEY is correct.</p>
+          </div>
+        )}
       </div>
     </div>
   );
