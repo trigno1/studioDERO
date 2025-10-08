@@ -95,7 +95,7 @@ export default function ProductDetailDrawer({ product, isOpen, onOpenChange }: P
               src={currentImageUrl}
               alt={product.name}
               fill
-              className="object-cover transition-all duration-300"
+              className="object-contain transition-all duration-300"
               key={currentImageIndex}
             />
              {product.images.length > 1 && (
@@ -127,20 +127,7 @@ export default function ProductDetailDrawer({ product, isOpen, onOpenChange }: P
               </SheetDescription>
             </SheetHeader>
 
-            <div className="my-6">
-                <div className="flex items-center gap-2">
-                    <PackageCheck className="h-6 w-6 text-accent" />
-                    <h3 className="font-headline text-xl font-semibold">What's in the box?</h3>
-                </div>
-              <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground">
-                <li>Premium Handcrafted Item 1</li>
-                <li>Artisanal Chocolate Bar</li>
-                <li>Scented Candle</li>
-                <li>Personalized Greeting Card</li>
-              </ul>
-            </div>
-
-            <div className="mt-auto flex flex-col items-start gap-4">
+            <div className="mt-auto flex flex-col items-start gap-4 pt-6">
                <p className="font-body text-4xl font-bold text-primary">
                 ₹{product.price.toFixed(2)}
               </p>
