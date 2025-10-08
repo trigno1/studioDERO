@@ -20,14 +20,18 @@ type CmsProduct = {
 
 async function getDecorProducts(): Promise<Product[]> {
   try {
-    const { decorDiyaGifts } = await fetchHygraphQuery(GET_DECOR_DIYA_GIFTS) as { decorDiyaGifts: CmsProduct[] };
+    const { decorDiyaGifts } = (await fetchHygraphQuery(GET_DECOR_DIYA_GIFTS)) as { decorDiyaGifts: CmsProduct[] };
+    
+    if (!decorDiyaGifts) {
+        return [];
+    }
     
     return decorDiyaGifts.map(p => ({
       id: p.id,
       name: p.title,
       description: p.description,
       price: p.price,
-      images: p.image.map(img => img.id || `product-${p.id}`),
+      images: p.image.map(img => img.url),
       category: 'decor',
     }));
   } catch (error) {

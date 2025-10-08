@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter, SheetTrigger } from "@/components/ui/sheet";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { getPlaceholderImage } from "@/lib/placeholder-images";
 import { Trash2, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
@@ -61,18 +60,16 @@ export default function CartSheet({ children }: { children: React.ReactNode }) {
             <ScrollArea className="flex-grow pr-6">
               <div className="mt-4 flex flex-col gap-6">
                 {cartItems.map(item => {
-                  const productImage = getPlaceholderImage(item.product.images[0]);
+                  const productImageUrl = item.product.images[0] || 'https://picsum.photos/seed/placeholder/200/200';
                   return (
                     <div key={item.product.id} className="flex items-start gap-4">
                       <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md">
-                         {productImage && (
-                          <Image
-                            src={productImage.imageUrl}
-                            alt={item.product.name}
-                            fill
-                            className="object-cover"
-                          />
-                        )}
+                        <Image
+                          src={productImageUrl}
+                          alt={item.product.name}
+                          fill
+                          className="object-cover"
+                        />
                       </div>
                       <div className="flex-grow">
                         <h3 className="font-semibold">{item.product.name}</h3>

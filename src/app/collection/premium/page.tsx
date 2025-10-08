@@ -20,14 +20,18 @@ type CmsProduct = {
 
 async function getPremiumProducts(): Promise<Product[]> {
   try {
-    const { premiumDiwaliGifts } = await fetchHygraphQuery(GET_PREMIUM_DIWALI_GIFTS) as { premiumDiwaliGifts: CmsProduct[] };
+    const { premiumDiwaliGifts } = (await fetchHygraphQuery(GET_PREMIUM_DIWALI_GIFTS)) as { premiumDiwaliGifts: CmsProduct[] };
     
+    if (!premiumDiwaliGifts) {
+        return [];
+    }
+
     return premiumDiwaliGifts.map(p => ({
       id: p.id,
       name: p.title,
       description: p.description,
       price: p.price,
-      images: p.image.map(img => img.id || `product-${p.id}`),
+      images: p.image.map(img => img.url),
       category: 'premium',
     }));
   } catch (error) {

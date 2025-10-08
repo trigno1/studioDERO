@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation';
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import type { Product } from "@/lib/types";
-import { getPlaceholderImage } from "@/lib/placeholder-images";
 import { ShoppingCart, PackageCheck, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useCart } from "@/context/CartContext";
@@ -75,24 +74,20 @@ export default function ProductDetailDrawer({ product, isOpen, onOpenChange }: P
     setCurrentImageIndex((prevIndex) => (prevIndex - 1 + product.images.length) % product.images.length);
   };
   
-  const currentImageId = product.images[currentImageIndex];
-  const productImage = getPlaceholderImage(currentImageId);
+  const currentImageUrl = product.images[currentImageIndex] || 'https://picsum.photos/seed/placeholder/800/800';
 
   return (
     <Sheet open={isOpen} onOpenChange={onOpenChange}>
       <SheetContent side="bottom" className="h-4/5 w-full rounded-t-lg p-6 md:h-3/4 lg:h-2/3">
         <div className="grid h-full grid-cols-1 gap-8 md:grid-cols-2">
           <div className="relative h-full w-full overflow-hidden rounded-lg">
-            {productImage && (
-              <Image
-                src={productImage.imageUrl}
-                alt={product.name}
-                data-ai-hint={productImage.imageHint}
-                fill
-                className="object-cover transition-all duration-300"
-                key={currentImageIndex}
-              />
-            )}
+            <Image
+              src={currentImageUrl}
+              alt={product.name}
+              fill
+              className="object-cover transition-all duration-300"
+              key={currentImageIndex}
+            />
              {product.images.length > 1 && (
               <>
                 <Button

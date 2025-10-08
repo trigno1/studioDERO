@@ -5,16 +5,12 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Gift, Sparkles, Sprout, Star, ChevronDown, Users, CheckCircle } from 'lucide-react';
-import { getPlaceholderImage } from '@/lib/placeholder-images';
 import { TestimonialCarousel } from '@/components/shared/TestimonialCarousel';
-import { getCategories, getProducts } from '@/lib/cms';
-import type { Product } from '@/lib/types';
+import { getCategories } from '@/lib/cms';
 
 
 export default function Home() {
   const categories = getCategories();
-  
-  const products: Product[] = getProducts();
 
   const features = [
     {
@@ -155,20 +151,17 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {categories.map((category) => {
-              const categoryImage = getPlaceholderImage(category.image);
+              const categoryImageUrl = `https://picsum.photos/seed/${category.slug}/500/500`;
               return (
               <Link key={category.id} href={`/collection/${category.slug}`}>
                 <Card className="group flex h-full flex-col overflow-hidden rounded-lg border shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                   <div className="relative aspect-square w-full">
-                    {categoryImage && (
                       <Image
-                        src={categoryImage.imageUrl}
+                        src={categoryImageUrl}
                         alt={category.name}
-                        data-ai-hint={categoryImage.imageHint}
                         fill
                         className="object-cover transition-transform duration-300 group-hover:scale-105"
                       />
-                    )}
                   </div>
                   <div className="flex-grow p-4">
                     <h3 className="font-headline text-xl font-bold text-primary">{category.name}</h3>

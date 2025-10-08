@@ -20,14 +20,18 @@ type CmsProduct = {
 
 async function getDryFruitProducts(): Promise<Product[]> {
   try {
-    const { dryFruitGifts } = await fetchHygraphQuery(GET_DRY_FRUIT_GIFTS) as { dryFruitGifts: CmsProduct[] };
+    const { dryFruitGifts } = (await fetchHygraphQuery(GET_DRY_FRUIT_GIFTS)) as { dryFruitGifts: CmsProduct[] };
     
+    if (!dryFruitGifts) {
+        return [];
+    }
+
     return dryFruitGifts.map(p => ({
       id: p.id,
       name: p.title,
       description: p.description,
       price: p.price,
-      images: p.image.map(img => img.id || `product-${p.id}`),
+      images: p.image.map(img => img.url),
       category: 'dry-fruit',
     }));
   } catch (error) {

@@ -20,19 +20,22 @@ type CmsProduct = {
 
 async function getGourmetProducts(): Promise<Product[]> {
   try {
-    const { gourmetGifts } = await fetchHygraphQuery(GET_GOURMET_GIFTS) as { gourmetGifts: CmsProduct[] };
+    const { gourmetGifts } = (await fetchHygraphQuery(GET_GOURMET_GIFTS)) as { gourmetGifts: CmsProduct[] };
     
+    if (!gourmetGifts) {
+      return [];
+    }
+
     return gourmetGifts.map(p => ({
       id: p.id,
       name: p.title,
       description: p.description,
       price: p.price,
-      images: p.image.map(img => img.id || `product-${p.id}`),
+      images: p.image.map(img => img.url), // Using URL directly for now
       category: 'gourmet',
     }));
   } catch (error) {
     console.error("Failed to fetch gourmet products:", error);
-    // Return an empty array or handle error as needed
     return [];
   }
 }
