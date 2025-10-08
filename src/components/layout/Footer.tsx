@@ -58,8 +58,16 @@ export default function Footer() {
       </div>
       <div className="bg-primary/80 py-2">
         <div className="container mx-auto text-center text-xs text-primary-foreground/50">
-          <p className="flex items-center justify-center gap-1">
-            Made with <Heart className="h-3 w-3 fill-current" /> by YourName
+           <p className="flex items-center justify-center gap-1">
+            Made with <Heart className="h-3 w-3 fill-current" /> by 
+            <a 
+              href="https://www.linkedin.com/in/tanish-sunita-pareek" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="underline hover:text-white"
+            >
+              Tanish S Pareek
+            </a>
           </p>
         </div>
       </div>
