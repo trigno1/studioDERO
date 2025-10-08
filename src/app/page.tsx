@@ -11,50 +11,19 @@ import { getCategories, getProducts } from '@/lib/cms';
 import { GraphQLClient, gql } from 'graphql-request';
 import ProductCard from '@/components/shared/ProductCard';
 import type { Product } from '@/lib/types';
-
-const PRODUCT_QUERY = gql`
-  query GetProducts {
-    products {
-      id
-      name: title
-      description
-      price
-      slug
-      images: image {
-        id
-        url
-        width
-        height
-      }
-    }
-  }
-`;
+import { getProductsFromCMS } from '@/lib/graphcms';
 
 export default async function Home() {
   const categories = getCategories();
   let products: Product[] = [];
 
-  if (process.env.GRAPHQL_API_URL) {
-    try {
-      const graphcms = new GraphQLClient(process.env.GRAPHQL_API_URL);
-      const { products: cmsProducts } = await graphcms.request<{ products: any[] }>(PRODUCT_QUERY);
-      // Map CMS products to our Product type
-      products = cmsProducts.map(product => ({
-        ...product,
-        // The CMS returns an array of image objects, but our type expects strings.
-        // We're also aliasing 'title' to 'name'.
-        // For now, let's assume the first image is the one we want and our local placeholders have a matching ID.
-        // This mapping might need adjustment based on real data structure.
-        images: product.images.map((img: { id: string }) => img.id).filter(Boolean),
-        category: 'gourmet', // Default category, as it's not in the CMS schema
-      }));
-    } catch (error) {
-      console.error("Failed to fetch products from GraphCMS:", error);
-      console.log("Falling back to local product data.");
-      products = getProducts();
-    }
-  } else {
-    console.log("GRAPHQL_API_URL not set. Falling back to local product data.");
+  try {
+    // This will now use the authenticated client
+    const cmsProducts = await getProductsFromCMS();
+    products = cmsProducts;
+  } catch (error) {
+    console.error("Failed to fetch products from GraphCMS:", error);
+    console.log("Falling back to local product data.");
     products = getProducts();
   }
 
