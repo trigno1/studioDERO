@@ -1,9 +1,16 @@
+
 import { NextResponse } from 'next/server';
 
 const API_URL = process.env.NEXT_PUBLIC_GRAPHQL_API_URL;
 const TOKEN = process.env.HYGRAPH_CONTENT_API_KEY;
 
 export async function GET() {
+  // Check if environment variables are available
+  if (!API_URL || !TOKEN) {
+    console.error('Hygraph environment variables are not set.');
+    return NextResponse.json({ error: 'Server configuration error.' }, { status: 500 });
+  }
+
   try {
     const query = `
       query GetAllCollections {
@@ -14,20 +21,21 @@ export async function GET() {
       }
     `;
 
-    const res = await fetch(API_URL!, {
+    const res = await fetch(API_URL, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${TOKEN}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ query }),
+      // Use cache revalidation for production
       next: { revalidate: 60 },
     });
 
     if (!res.ok) {
         const errorBody = await res.text();
         console.error('Hygraph API request failed with status:', res.status, 'and body:', errorBody);
-        throw new Error(`Hygraph API request failed with status ${res.status}`);
+        throw new Error(`Hygraph API request failed. Status: ${res.status}`);
     }
 
     const data = await res.json();
@@ -39,7 +47,8 @@ export async function GET() {
 
     return NextResponse.json(data.data);
   } catch (err) {
-    console.error('API Route Error:', err);
+    const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred';
+    console.error('API Route Error:', errorMessage);
     return NextResponse.json({ error: 'Failed to fetch data from Hygraph' }, { status: 500 });
   }
 }
