@@ -9,6 +9,13 @@ const categories: Category[] = [
     image: 'category-gourmet'
   },
   {
+    id: 'cat-4',
+    name: 'Decor and Diya Gifts',
+    slug: 'decor',
+    description: 'Illuminate homes with beautiful diyas, candles, and decor.',
+    image: 'category-decor'
+  },
+  {
     id: 'cat-2',
     name: 'Dry Fruit Gifts',
     slug: 'dry-fruit',
@@ -21,13 +28,6 @@ const categories: Category[] = [
     slug: 'premium',
     description: 'Exquisite silver items and divine idols for a blessed celebration.',
     image: 'category-premium'
-  },
-  {
-    id: 'cat-4',
-    name: 'Decor and Diya Gifts',
-    slug: 'decor',
-    description: 'Illuminate homes with beautiful diyas, candles, and decor.',
-    image: 'category-decor'
   }
 ];
 

@@ -212,13 +212,13 @@ export default function Home() {
 
        <section className="bg-secondary py-16 md:py-24">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="font-headline text-3xl font-bold text-secondary-foreground md:text-4xl">Why Choose DERO?</h2>
+          <h2 className="font-headline text-3xl font-bold text-accent md:text-4xl">Why Choose DERO?</h2>
           <p className="mx-auto mt-2 max-w-2xl text-lg text-secondary-foreground/80">
             We are dedicated to delivering excellence and preserving tradition in every gift.
           </p>
           <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {whyChooseUs.map((feature) => (
-              <div key={feature.title} className="rounded-lg border border-accent/20 bg-background/5 p-6 text-left shadow-sm">
+              <div key={feature.title} className="rounded-lg border border-accent/20 bg-background/5 p-6 text-left shadow-sm transition-all duration-300 ease-in-out hover:bg-accent/10 hover:shadow-accent/40 hover:shadow-lg">
                 <feature.icon className="mb-4 h-10 w-10 text-accent" />
                 <h3 className="mb-2 text-xl font-bold text-secondary-foreground">{feature.title}</h3>
                 <p className="text-secondary-foreground/70">{feature.description}</p>
