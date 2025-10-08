@@ -1,4 +1,7 @@
 import { GraphQLClient } from 'graphql-request';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const endpoint = 'https://ap-south-1.cdn.hygraph.com/content/cmggglcpv00n807uvfqrgvmz7/master';
 
