@@ -20,13 +20,13 @@ type CmsProduct = {
 
 async function getGourmetProducts(): Promise<Product[]> {
   try {
-    const { gourmetGifts } = (await fetchHygraphQuery(GET_GOURMET_GIFTS)) as { gourmetGifts: CmsProduct[] };
+    const { gourmet_Gifts } = (await fetchHygraphQuery(GET_GOURMET_GIFTS)) as { gourmet_Gifts: CmsProduct[] };
     
-    if (!gourmetGifts) {
+    if (!gourmet_Gifts) {
       return [];
     }
 
-    return gourmetGifts.map(p => ({
+    return gourmet_Gifts.map(p => ({
       id: p.id,
       name: p.title,
       description: p.description,
@@ -36,9 +36,6 @@ async function getGourmetProducts(): Promise<Product[]> {
     }));
   } catch (error) {
     console.error("Failed to fetch gourmet products:", error);
-    // In a real-world app, you might want to throw the error
-    // or return a specific error state to the UI.
-    // For now, returning an empty array to prevent crashing.
     return [];
   }
 }
