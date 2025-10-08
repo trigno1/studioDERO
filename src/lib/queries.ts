@@ -2,7 +2,7 @@
 // 1️⃣ Gourmet Gifts
 export const GET_GOURMET_GIFTS = `
   query GetAllGourmetGifts {
-    gourmetGifts {
+    gourmetGifts: gourmet_Gifts(stage: PUBLISHED) {
       id
       title
       description
@@ -20,7 +20,7 @@ export const GET_GOURMET_GIFTS = `
 // 2️⃣ Dry Fruit Gifts
 export const GET_DRY_FRUIT_GIFTS = `
   query GetAllDryFruitGifts {
-    dryFruitGifts {
+    dryFruitGifts: dryFruit_Gifts(stage: PUBLISHED) {
       id
       title
       description
@@ -38,7 +38,7 @@ export const GET_DRY_FRUIT_GIFTS = `
 // 3️⃣ Premium Diwali Gifts
 export const GET_PREMIUM_DIWALI_GIFTS = `
   query GetAllPremiumDiwaliGifts {
-    premiumDiwaliGifts {
+    premiumDiwaliGifts(stage: PUBLISHED) {
       id
       title
       description
@@ -56,7 +56,7 @@ export const GET_PREMIUM_DIWALI_GIFTS = `
 // 4️⃣ Decor Diya Gifts
 export const GET_DECOR_DIYA_GIFTS = `
   query GetAllDecorDiyaGifts {
-    decorDiyaGifts {
+    decorDiyaGifts(stage: PUBLISHED) {
       id
       title
       description

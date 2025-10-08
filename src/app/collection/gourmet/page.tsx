@@ -31,11 +31,14 @@ async function getGourmetProducts(): Promise<Product[]> {
       name: p.title,
       description: p.description,
       price: p.price,
-      images: p.image.map(img => img.url), // Using URL directly for now
+      images: p.image.map(img => img.url),
       category: 'gourmet',
     }));
   } catch (error) {
     console.error("Failed to fetch gourmet products:", error);
+    // In a real-world app, you might want to throw the error
+    // or return a specific error state to the UI.
+    // For now, returning an empty array to prevent crashing.
     return [];
   }
 }
