@@ -48,7 +48,8 @@ type CmsProduct = {
 
 export async function getProductsFromCMS(): Promise<Product[]> {
   if (!endpoint || !token || token === 'your_content_api_key_here') {
-    throw new Error('Hygraph endpoint or token is not configured. Please check your .env.local file.');
+    console.error('Hygraph endpoint or token is not configured. Please check your .env.local file.');
+    return []; // Return empty array if not configured
   }
 
   const { products: cmsProducts } = await graphcms.request<{ products: CmsProduct[] }>(PRODUCT_QUERY);
@@ -59,7 +60,7 @@ export async function getProductsFromCMS(): Promise<Product[]> {
     name: p.title, // Aliasing title to name
     description: p.description,
     price: p.price,
-    images: p.image.map(img => img.id), // Using the Hygraph asset ID for placeholder mapping
+    images: p.image.map(img => img.id || `product-${p.id}`), // Use image id or fallback
     // The category is missing from your GraphQL schema, so we assign a default.
     // You might want to add this to your Hygraph Product model.
     category: 'gourmet', 
@@ -67,3 +68,5 @@ export async function getProductsFromCMS(): Promise<Product[]> {
   
   return products;
 }
+
+    

@@ -7,26 +7,18 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Gift, Sparkles, Sprout, Star, ChevronDown, Users, CheckCircle } from 'lucide-react';
 import { getPlaceholderImage } from '@/lib/placeholder-images';
 import { TestimonialCarousel } from '@/components/shared/TestimonialCarousel';
-import { getCategories, getProducts } from '@/lib/cms';
-import { GraphQLClient, gql } from 'graphql-request';
-import ProductCard from '@/components/shared/ProductCard';
-import type { Product } from '@/lib/types';
+import { getCategories } from '@/lib/cms';
 import { getProductsFromCMS } from '@/lib/graphcms';
+import type { Product } from '@/lib/types';
+
 
 export default async function Home() {
   const categories = getCategories();
-  let products: Product[] = [];
-
-  try {
-    // This will now use the authenticated client
-    const cmsProducts = await getProductsFromCMS();
-    products = cmsProducts;
-  } catch (error) {
-    console.error("Failed to fetch products from GraphCMS:", error);
-    console.log("Falling back to local product data.");
-    products = getProducts();
-  }
-
+  
+  // This will now directly test the Hygraph connection.
+  // If your API key is correct, it will fetch products.
+  // If not, this will result in an error, confirming a connection issue.
+  const products: Product[] = await getProductsFromCMS();
 
   const features = [
     {
@@ -197,3 +189,5 @@ export default async function Home() {
     </div>
   );
 }
+
+    
