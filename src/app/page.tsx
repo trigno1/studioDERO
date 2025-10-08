@@ -1,49 +1,85 @@
-
-import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
+'use client';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Gift, Sparkles, Sprout, Star, ChevronDown, Users, CheckCircle } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
+import Link from 'next/link';
+import ProductCard from '@/components/shared/ProductCard';
+import type { Product } from '@/lib/types';
 import { TestimonialCarousel } from '@/components/shared/TestimonialCarousel';
-import { getCategories } from '@/lib/cms';
 
+type ApiData = {
+  gourmetGifts: Product[];
+  decorDiyaGifts: Product[];
+  dryFruitGifts: Product[];
+  premiumDiwaliGifts: Product[];
+};
+
+const mockData: ApiData = {
+  gourmetGifts: [],
+  decorDiyaGifts: [],
+  dryFruitGifts: [],
+  premiumDiwaliGifts: [],
+};
 
 export default function Home() {
-  const categories = getCategories();
+  const [data, setData] = useState<ApiData>(mockData);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const features = [
-    {
-      icon: <Sprout className="h-10 w-10 text-accent" />,
-      title: 'Sustainable & Eco-Friendly',
-      description: 'Responsibly sourced materials that are kind to our planet.',
-    },
-    {
-      icon: <Gift className="h-10 w-10 text-accent" />,
-      title: 'Handcrafted for Diwali',
-      description: 'Artisanal designs that capture the essence of the festival.',
-    },
-    {
-      icon: <Sparkles className="h-10 w-10 text-accent" />,
-      title: 'Customizable Options',
-      description: 'Personalized solutions to make your gifts truly unique.',
-    },
-    {
-      icon: <Star className="h-10 w-10 text-accent" />,
-      title: 'Luxury Finishes',
-      description: 'Exquisite details and premium materials for a lasting impression.',
-    },
-    {
-      icon: <Users className="h-10 w-10 text-accent" />,
-      title: 'Corporate & Personal Orders',
-      description: 'Perfect for both business clients and individual celebrations.',
-    },
-    {
-      icon: <CheckCircle className="h-10 w-10 text-accent" />,
-      title: 'End-to-End Service',
-      description: 'Custom orders, concepts, designs, and deliveries handled with care.',
-    }
-  ];
+  useEffect(() => {
+    fetch('/api/hygraph')
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Failed to fetch from API route');
+        }
+        return res.json();
+      })
+      .then(apiData => {
+        // Adapt the data to match the Product type (title -> name)
+        const adaptedData: ApiData = {
+          gourmetGifts: (apiData.gourmetGifts || []).map((p: any) => ({ ...p, name: p.title })),
+          decorDiyaGifts: (apiData.decorDiyaGifts || []).map((p: any) => ({ ...p, name: p.title })),
+          dryFruitGifts: (apiData.dryFruitGifts || []).map((p: any) => ({ ...p, name: p.title })),
+          premiumDiwaliGifts: (apiData.premiumDiwaliGifts || []).map((p: any) => ({ ...p, name: p.title })),
+        };
+        setData(adaptedData);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Failed to fetch Hygraph data:', err);
+        setError('Could not load products. Please check the API connection.');
+        setLoading(false);
+      });
+  }, []);
+
+  const renderProductSection = (title: string, products: Product[], slug: string) => (
+    <section className="my-8 md:my-16">
+      <div className="container mx-auto px-4">
+        <div className="mb-8 text-center md:text-left">
+          <h2 className="font-headline text-3xl font-bold md:text-4xl">{title}</h2>
+        </div>
+        {error && <p className="text-center text-destructive">{error}</p>}
+        {loading ? (
+            <p className="text-center text-muted-foreground">Loading products...</p>
+        ) : (
+            products.length > 0 ? (
+                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+                    {products.slice(0, 4).map((item) => <ProductCard key={item.id} product={item} />)}
+                </div>
+            ) : (
+                <p className="text-center text-muted-foreground">No products found in this collection.</p>
+            )
+        )}
+         {products.length > 4 && (
+            <div className="mt-8 text-center">
+                <Link href={`/collection/${slug}`}>
+                    <Button variant="secondary">View All {title}</Button>
+                </Link>
+            </div>
+        )}
+      </div>
+    </section>
+  );
 
   return (
     <div className="flex flex-col">
@@ -68,112 +104,19 @@ export default function Home() {
           </p>
         </div>
         <div className="relative z-10 mb-8 flex flex-col items-center">
-          <a href="#about" aria-label="Scroll down">
+          <a href="#collection" aria-label="Scroll down">
             <ChevronDown className="h-10 w-10 animate-bounce text-primary" />
           </a>
         </div>
       </section>
 
-      <section id="about" className="py-16 md:py-24">
-        <div className="container mx-auto grid grid-cols-1 items-center gap-12 px-4 md:grid-cols-2">
-            <div className="space-y-6">
-                <h2 className="font-headline text-3xl font-bold text-primary md:text-4xl">
-                About Us
-                </h2>
-                <div className="relative rounded-lg border-2 border-accent p-6">
-                    <p className="text-lg text-muted-foreground">
-                    We believe that every gift deserves a beautiful story. We
-                    specialize in luxury, handcrafted packaging solutions for
-                    corporate gifting, festival hampers, and special occasions,
-                    designed especially for the Diwali season. Our packaging is
-                    eco-friendly, combining elegance with responsibility.
-                    </p>
-                </div>
-            </div>
-            <div className="relative h-80 w-full overflow-hidden rounded-lg shadow-lg md:h-96">
-                <Image
-                    src="https://picsum.photos/seed/about-home/800/600"
-                    alt="Artisans crafting gifts"
-                    data-ai-hint="artisans crafting"
-                    fill
-                    className="object-cover"
-                />
-            </div>
-        </div>
-      </section>
-
-      <section className="bg-secondary py-16 text-secondary-foreground md:py-24">
-        <div className="container mx-auto px-4">
-          <div className="mb-12 text-left">
-            <h2 className="font-headline text-3xl font-bold md:text-4xl">
-              Why Choose DERO?
-            </h2>
-            <p className="mt-2 text-lg text-secondary-foreground/80">
-              Celebrate every occasion in style, where luxury meets sustainability.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map(feature => (
-              <Card
-                key={feature.title}
-                className="transform border-0 bg-background/5 text-center shadow-lg transition-all duration-300 hover:bg-background/10 hover:shadow-2xl hover:-translate-y-2"
-              >
-                <CardHeader className="items-center p-6">
-                  <div className="rounded-lg bg-background/10 p-4">
-                    {React.cloneElement(feature.icon, {
-                      className: 'h-10 w-10 text-accent',
-                    })}
-                  </div>
-                </CardHeader>
-                <CardContent className="p-6 pt-0">
-                  <CardTitle className="font-headline text-2xl text-white">
-                    {feature.title}
-                  </CardTitle>
-                  <p className="mt-4 text-secondary-foreground/90">
-                    {feature.description}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="collection" className="py-16 md:py-24">
-        <div className="container mx-auto px-4">
-          <div className="mb-12 text-center">
-            <h2 className="font-headline text-3xl font-bold md:text-4xl">
-              Our Collections
-            </h2>
-            <p className="mt-2 text-lg text-muted-foreground">
-              Curated gifts for every taste and occasion.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {categories.map((category) => {
-              const categoryImageUrl = `https://picsum.photos/seed/${category.slug}/500/500`;
-              return (
-              <Link key={category.id} href={`/collection/${category.slug}`}>
-                <Card className="group flex h-full flex-col overflow-hidden rounded-lg border shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-                  <div className="relative aspect-square w-full">
-                      <Image
-                        src={categoryImageUrl}
-                        alt={category.name}
-                        fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
-                      />
-                  </div>
-                  <div className="flex-grow p-4">
-                    <h3 className="font-headline text-xl font-bold text-primary">{category.name}</h3>
-                    <p className="mt-1 text-sm text-muted-foreground">{category.description}</p>
-                  </div>
-                </Card>
-              </Link>
-            )})}
-          </div>
-        </div>
-      </section>
-
+      <div id="collection" className="py-8">
+        {renderProductSection("Gourmet Gifts", data.gourmetGifts, "gourmet")}
+        {renderProductSection("Decor & Diya Gifts", data.decorDiyaGifts, "decor")}
+        {renderProductSection("Dry Fruit Gifts", data.dryFruitGifts, "dry-fruit")}
+        {renderProductSection("Premium Diwali Gifts", data.premiumDiwaliGifts, "premium")}
+      </div>
+      
       <TestimonialCarousel />
     </div>
   );
