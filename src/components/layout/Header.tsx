@@ -31,17 +31,21 @@ export default function Header() {
   const { cartCount } = useCart();
   const categories = getCategories();
 
-  const handleAboutClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleScrollLink = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     if (pathname === '/') {
       e.preventDefault();
-      document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+      document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      // If on another page, navigate to home and then scroll
+      // The scroll part would need to be handled on the homepage itself
     }
+    setMobileMenuOpen(false); // Close mobile menu on click
   };
 
 
   const navLinks = [
     { href: "/", label: "Home" },
-    { href: "/#about", label: "About", onClick: handleAboutClick },
+    { href: "/#about", label: "About" },
   ];
 
   return (
@@ -62,16 +66,15 @@ export default function Header() {
             >
               Home
             </Link>
-            <Link
+            <a
               href="/#about"
-              onClick={handleAboutClick}
+              onClick={(e) => handleScrollLink(e, 'about')}
               className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
-                pathname.includes("/#about") ? "text-primary" : "text-muted-foreground"
+                "cursor-pointer text-sm font-medium transition-colors hover:text-primary text-muted-foreground"
               )}
             >
               About
-            </Link>
+            </a>
              <Link
               href="/contact"
               className={cn(
@@ -95,7 +98,7 @@ export default function Header() {
               <DropdownMenuContent align="start">
                 {categories.map((category) => (
                   <DropdownMenuItem key={category.id} asChild>
-                    <Link href={`/collection/${category.slug}`}>{category.name}</Link>
+                    <a href={`/#collection-${category.slug}`} onClick={(e) => handleScrollLink(e, `collection-${category.slug}`)}>{category.name}</a>
                   </DropdownMenuItem>
                 ))}
               </DropdownMenuContent>
@@ -132,22 +135,21 @@ export default function Header() {
                   </Link>
                   <nav className="flex flex-col space-y-4">
                     {navLinks.map((link) => (
-                      <Link
+                      <a
                         key={link.href}
                         href={link.href}
                         className={cn(
-                          "text-lg font-medium transition-colors hover:text-primary",
+                          "cursor-pointer text-lg font-medium transition-colors hover:text-primary",
                           pathname === link.href
                             ? "text-primary"
                             : "text-muted-foreground"
                         )}
                         onClick={(e) => {
-                          setMobileMenuOpen(false);
-                          if(link.onClick) link.onClick(e as any);
+                          handleScrollLink(e, link.href.substring(2));
                         }}
                       >
                         {link.label}
-                      </Link>
+                      </a>
                     ))}
                     <Link
                       href="/contact"
@@ -161,14 +163,14 @@ export default function Header() {
                     </Link>
                      <p className="text-lg font-medium text-primary">Collection</p>
                       {categories.map((category) => (
-                        <Link
+                        <a
                           key={category.id}
-                          href={`/collection/${category.slug}`}
+                          href={`/#collection-${category.slug}`}
                           className="pl-4 text-muted-foreground hover:text-primary"
-                           onClick={() => setMobileMenuOpen(false)}
+                           onClick={(e) => handleScrollLink(e, `collection-${category.slug}`)}
                         >
                           {category.name}
-                        </Link>
+                        </a>
                       ))}
                   </nav>
                 </div>

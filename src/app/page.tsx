@@ -107,7 +107,7 @@ export default function Home() {
     const safeProducts = products ?? [];
     if (loading || error || safeProducts.length === 0) {
       return (
-        <section className="my-8 md:my-16">
+        <section id={`collection-${slug}`} className="my-8 md:my-16">
           <div className="container mx-auto px-4">
             <div className="mb-8 text-center md:text-left">
               <h2 className="font-headline text-3xl font-bold md:text-4xl">{title}</h2>
@@ -121,17 +121,12 @@ export default function Home() {
     }
 
     return (
-      <section className="my-8 md:my-16">
+      <section id={`collection-${slug}`} className="my-8 md:my-16">
         <div className="container mx-auto px-4">
             <div className="flex flex-col items-center justify-between gap-4 text-center md:flex-row md:text-left">
               <div>
                 <h2 className="font-headline text-3xl font-bold md:text-4xl">{title}</h2>
               </div>
-              {safeProducts.length > 4 && (
-                <Link href={`/collection/${slug}`}>
-                    <Button variant="secondary">View All {title}</Button>
-                </Link>
-              )}
             </div>
            <Carousel
             opts={{
@@ -170,7 +165,7 @@ export default function Home() {
       >
         <div className="absolute inset-0 bg-black/10" />
         <div className="relative z-10 flex flex-grow flex-col items-center justify-center space-y-6 px-4">
-          <h1 className="font-headline text-5xl font-bold leading-tight text-primary md:text-7xl lg:text-8xl">
+          <h1 className="font-headline text-6xl font-bold leading-tight text-primary md:text-8xl lg:text-9xl">
             The Art of <br /> Festive Gifting
           </h1>
           <p className="max-w-xl text-lg text-primary md:text-xl">
@@ -180,7 +175,7 @@ export default function Home() {
           </p>
         </div>
         <div className="relative z-10 mb-8 flex flex-col items-center">
-          <a href="#collection" aria-label="Scroll down">
+          <a href="#about" aria-label="Scroll down">
             <ChevronDown className="h-10 w-10 animate-bounce text-primary" />
           </a>
         </div>
@@ -215,18 +210,18 @@ export default function Home() {
         </div>
       </section>
 
-       <section className="bg-muted/50 py-16 md:py-24">
+       <section className="bg-secondary py-16 md:py-24">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="font-headline text-3xl font-bold text-primary md:text-4xl">Why Choose DERO?</h2>
-          <p className="mx-auto mt-2 max-w-2xl text-lg text-muted-foreground">
+          <h2 className="font-headline text-3xl font-bold text-secondary-foreground md:text-4xl">Why Choose DERO?</h2>
+          <p className="mx-auto mt-2 max-w-2xl text-lg text-secondary-foreground/80">
             We are dedicated to delivering excellence and preserving tradition in every gift.
           </p>
           <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {whyChooseUs.map((feature) => (
-              <div key={feature.title} className="rounded-lg border bg-background p-6 text-left shadow-sm">
+              <div key={feature.title} className="rounded-lg border border-accent/20 bg-background/5 p-6 text-left shadow-sm">
                 <feature.icon className="mb-4 h-10 w-10 text-accent" />
-                <h3 className="mb-2 text-xl font-bold">{feature.title}</h3>
-                <p className="text-muted-foreground">{feature.description}</p>
+                <h3 className="mb-2 text-xl font-bold text-secondary-foreground">{feature.title}</h3>
+                <p className="text-secondary-foreground/70">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -244,5 +239,3 @@ export default function Home() {
     </div>
   );
 }
-
-    
