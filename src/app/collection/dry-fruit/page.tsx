@@ -1,7 +1,7 @@
 import ProductCard from "@/components/shared/ProductCard";
 import { getCategoryBySlug } from "@/lib/cms";
 import { notFound } from "next/navigation";
-import { hygraphClient } from "@/lib/hygraphClient";
+import { fetchHygraphQuery } from "@/lib/hygraphClient";
 import { GET_DRY_FRUIT_GIFTS } from "@/lib/queries";
 import type { Product } from "@/lib/types";
 
@@ -18,9 +18,9 @@ type CmsProduct = {
   }[];
 };
 
-async function getDryFruitProducts() {
+async function getDryFruitProducts(): Promise<Product[]> {
   try {
-    const { dryFruitGifts } = await hygraphClient.request<{ dryFruitGifts: CmsProduct[] }>(GET_DRY_FRUIT_GIFTS);
+    const { dryFruitGifts } = await fetchHygraphQuery(GET_DRY_FRUIT_GIFTS) as { dryFruitGifts: CmsProduct[] };
     
     return dryFruitGifts.map(p => ({
       id: p.id,
@@ -29,10 +29,10 @@ async function getDryFruitProducts() {
       price: p.price,
       images: p.image.map(img => img.id || `product-${p.id}`),
       category: 'dry-fruit',
-    } as Product));
+    }));
   } catch (error) {
-    console.error("Failed to fetch dry fruit products from Hygraph:", error);
-    return []; // Return empty array on error
+    console.error("Failed to fetch dry fruit products:", error);
+    return [];
   }
 }
 
@@ -60,7 +60,7 @@ export default async function DryFruitCollectionPage() {
           </div>
         ) : (
           <div className="text-center text-muted-foreground">
-            <p>Could not load products. Please ensure your HYGRAPH_CONTENT_API_KEY is correct.</p>
+            <p>Could not load products. Please ensure your HYGRAPH_CONTENT_API_KEY is correct and that products exist in your CMS.</p>
           </div>
         )}
       </div>

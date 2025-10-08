@@ -1,7 +1,7 @@
 import ProductCard from "@/components/shared/ProductCard";
 import { getCategoryBySlug } from "@/lib/cms";
 import { notFound } from "next/navigation";
-import { hygraphClient } from "@/lib/hygraphClient";
+import { fetchHygraphQuery } from "@/lib/hygraphClient";
 import { GET_DECOR_DIYA_GIFTS } from "@/lib/queries";
 import type { Product } from "@/lib/types";
 
@@ -18,9 +18,9 @@ type CmsProduct = {
   }[];
 };
 
-async function getDecorProducts() {
+async function getDecorProducts(): Promise<Product[]> {
   try {
-    const { decorDiyaGifts } = await hygraphClient.request<{ decorDiyaGifts: CmsProduct[] }>(GET_DECOR_DIYA_GIFTS);
+    const { decorDiyaGifts } = await fetchHygraphQuery(GET_DECOR_DIYA_GIFTS) as { decorDiyaGifts: CmsProduct[] };
     
     return decorDiyaGifts.map(p => ({
       id: p.id,
@@ -29,10 +29,10 @@ async function getDecorProducts() {
       price: p.price,
       images: p.image.map(img => img.id || `product-${p.id}`),
       category: 'decor',
-    } as Product));
+    }));
   } catch (error) {
-    console.error("Failed to fetch decor products from Hygraph:", error);
-    return []; // Return empty array on error
+    console.error("Failed to fetch decor products:", error);
+    return [];
   }
 }
 
@@ -60,7 +60,7 @@ export default async function DecorCollectionPage() {
           </div>
         ) : (
           <div className="text-center text-muted-foreground">
-            <p>Could not load products. Please ensure your HYGRAPH_CONTENT_API_KEY is correct.</p>
+            <p>Could not load products. Please ensure your HYGRAPH_CONTENT_API_KEY is correct and that products exist in your CMS.</p>
           </div>
         )}
       </div>

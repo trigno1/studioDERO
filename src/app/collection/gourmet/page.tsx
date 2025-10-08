@@ -1,7 +1,7 @@
 import ProductCard from "@/components/shared/ProductCard";
 import { getCategoryBySlug } from "@/lib/cms";
 import { notFound } from "next/navigation";
-import { hygraphClient } from "@/lib/hygraphClient";
+import { fetchHygraphQuery } from "@/lib/hygraphClient";
 import { GET_GOURMET_GIFTS } from "@/lib/queries";
 import type { Product } from "@/lib/types";
 
@@ -18,9 +18,9 @@ type CmsProduct = {
   }[];
 };
 
-async function getGourmetProducts() {
+async function getGourmetProducts(): Promise<Product[]> {
   try {
-    const { gourmetGifts } = await hygraphClient.request<{ gourmetGifts: CmsProduct[] }>(GET_GOURMET_GIFTS);
+    const { gourmetGifts } = await fetchHygraphQuery(GET_GOURMET_GIFTS) as { gourmetGifts: CmsProduct[] };
     
     return gourmetGifts.map(p => ({
       id: p.id,
@@ -29,10 +29,11 @@ async function getGourmetProducts() {
       price: p.price,
       images: p.image.map(img => img.id || `product-${p.id}`),
       category: 'gourmet',
-    } as Product));
+    }));
   } catch (error) {
-    console.error("Failed to fetch gourmet products from Hygraph:", error);
-    return []; // Return empty array on error
+    console.error("Failed to fetch gourmet products:", error);
+    // Return an empty array or handle error as needed
+    return [];
   }
 }
 
@@ -59,8 +60,8 @@ export default async function GourmetCollectionPage() {
             ))}
           </div>
         ) : (
-          <div className="text-center text-muted-foreground">
-            <p>Could not load products. Please ensure your HYGRAPH_CONTENT_API_KEY is correct.</p>
+           <div className="text-center text-muted-foreground">
+            <p>Could not load products. Please ensure your HYGRAPH_CONTENT_API_KEY is correct and that products exist in your CMS.</p>
           </div>
         )}
       </div>

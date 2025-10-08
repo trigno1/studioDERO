@@ -1,7 +1,7 @@
 import ProductCard from "@/components/shared/ProductCard";
 import { getCategoryBySlug } from "@/lib/cms";
 import { notFound } from "next/navigation";
-import { hygraphClient } from "@/lib/hygraphClient";
+import { fetchHygraphQuery } from "@/lib/hygraphClient";
 import { GET_PREMIUM_DIWALI_GIFTS } from "@/lib/queries";
 import type { Product } from "@/lib/types";
 
@@ -18,9 +18,9 @@ type CmsProduct = {
   }[];
 };
 
-async function getPremiumProducts() {
+async function getPremiumProducts(): Promise<Product[]> {
   try {
-    const { premiumDiwaliGifts } = await hygraphClient.request<{ premiumDiwaliGifts: CmsProduct[] }>(GET_PREMIUM_DIWALI_GIFTS);
+    const { premiumDiwaliGifts } = await fetchHygraphQuery(GET_PREMIUM_DIWALI_GIFTS) as { premiumDiwaliGifts: CmsProduct[] };
     
     return premiumDiwaliGifts.map(p => ({
       id: p.id,
@@ -29,10 +29,10 @@ async function getPremiumProducts() {
       price: p.price,
       images: p.image.map(img => img.id || `product-${p.id}`),
       category: 'premium',
-    } as Product));
+    }));
   } catch (error) {
-    console.error("Failed to fetch premium products from Hygraph:", error);
-    return []; // Return empty array on error
+    console.error("Failed to fetch premium products:", error);
+    return [];
   }
 }
 
@@ -60,7 +60,7 @@ export default async function PremiumCollectionPage() {
           </div>
         ) : (
           <div className="text-center text-muted-foreground">
-            <p>Could not load products. Please ensure your HYGRAPH_CONTENT_API_KEY is correct.</p>
+            <p>Could not load products. Please ensure your HYGRAPH_CONTENT_API_KEY is correct and that products exist in your CMS.</p>
           </div>
         )}
       </div>
