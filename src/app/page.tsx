@@ -145,7 +145,7 @@ export default function Home() {
             <CarouselContent className="-ml-4">
               {safeProducts.map((item) => (
                 <CarouselItem key={item.id} className="pl-4 md:basis-1/2 lg:basis-1/4">
-                  <div className="p-1">
+                  <div className="p-1 h-full">
                     <ProductCard product={item} />
                   </div>
                 </CarouselItem>
