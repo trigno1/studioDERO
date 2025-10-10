@@ -6,7 +6,6 @@ import { ChevronDown, Gift, ShieldCheck, Sparkles, Leaf, Users, Truck, Mail, Pho
 import Link from 'next/link';
 import ProductCard from '@/components/shared/ProductCard';
 import type { Product } from '@/lib/types';
-import { TestimonialCarousel } from '@/components/shared/TestimonialCarousel';
 import {
   Carousel,
   CarouselContent,
@@ -42,8 +41,8 @@ const whyChooseUs = [
     },
     {
       icon: Sparkles,
-      title: "Artisanal Quality",
-      description: "We prioritize exceptional craftsmanship, giving every package a touch of handcrafted elegance.",
+      title: "Fully Customizable",
+      description: "We offer fully customizable packaging solutions, tailored to your brand's unique needs and vision.",
       gradient: "from-yellow-100 to-amber-100"
     },
     {
@@ -241,8 +240,6 @@ export default function Home() {
         {renderProductSection("Premium Diwali Gifts", data.premiumDiwali_Gifts, "premium")}
       </div>
       
-      <TestimonialCarousel />
-
       <section id="contact" className="bg-background py-16 md:py-24">
         <div className="container mx-auto px-4">
             <div className="mb-12 text-center">
@@ -305,3 +302,4 @@ export default function Home() {
     </div>
   );
 }
+
