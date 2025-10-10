@@ -10,10 +10,10 @@ export default function AboutPage() {
       <div className="container mx-auto px-4 py-16 md:py-24">
         <div className="mb-12 text-left">
           <h1 className="font-headline text-4xl font-bold text-primary md:text-5xl">
-            About Us
+            About DERO
           </h1>
           <p className="mt-2 text-lg text-muted-foreground">
-            Weaving tales of tradition, artistry, and light.
+            Weaving tales of tradition, artistry, and exceptional packaging.
           </p>
         </div>
 
@@ -21,13 +21,13 @@ export default function AboutPage() {
           <div className="relative rounded-lg border-2 border-accent p-8">
             <div className="space-y-6">
               <h2 className="font-headline text-3xl font-bold text-primary">
-                From Our Heart to Your Home
+                From Our Heart to Your Brand
               </h2>
               <p className="text-lg leading-relaxed text-left">
-                We believe that every gift deserves a beautiful story. We specialize in luxury, handcrafted, and packaging solution for corporate gifting, festival hampers, and special occasion design, especially for the Diwali season. 
+                We believe that packaging is more than just a box—it's an integral part of the brand story and customer experience. We specialize in luxury, handcrafted packaging solutions for premium products, corporate gifting, and special occasions.
               </p>
               <p className="text-lg leading-relaxed text-muted-foreground text-left">
-                 Our packaging is eco-friendly, sustainable, and combines elegance with responsibility towards the planet, from premium trays to custom boxes. We partner with artisans across India, ensuring each product is not just beautiful, but also ethically sourced and made with time-honored techniques.
+                 Our packaging is eco-friendly and sustainable, combining elegance with responsibility towards the planet. We partner with artisans across India, ensuring each product is not just beautiful, but also ethically sourced and made with time-honored techniques.
               </p>
             </div>
           </div>

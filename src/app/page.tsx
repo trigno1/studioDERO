@@ -34,33 +34,39 @@ const mockData: ApiData = {
 const whyChooseUs = [
     {
       icon: Gift,
-      title: "Exquisite Curation",
-      description: "Each gift is thoughtfully selected to ensure a unique and memorable experience.",
+      title: "Exquisite Designs",
+      description: "Our packaging is thoughtfully designed to create a unique and memorable unboxing experience.",
+      gradient: "from-red-100 to-rose-100"
     },
     {
       icon: Sparkles,
-      title: "Handcrafted Elegance",
-      description: "We prioritize artisanal quality and exceptional craftsmanship in every product.",
+      title: "Artisanal Quality",
+      description: "We prioritize exceptional craftsmanship, giving every package a touch of handcrafted elegance.",
+      gradient: "from-yellow-100 to-amber-100"
     },
     {
       icon: Leaf,
-      title: "Sustainable Packaging",
-      description: "Our beautiful packaging is eco-friendly, reflecting our commitment to the planet.",
+      title: "Sustainable Materials",
+      description: "Our beautiful packaging is eco-friendly, reflecting a commitment to the planet.",
+      gradient: "from-green-100 to-emerald-100"
     },
     {
       icon: Users,
       title: "Support for Artisans",
-      description: "Your purchase helps support and sustain traditional craft communities across India.",
+      description: "Your partnership helps support and sustain traditional craft communities across India.",
+      gradient: "from-blue-100 to-sky-100"
     },
     {
       icon: ShieldCheck,
       title: "Quality Guaranteed",
       description: "We stand behind the quality of our products, ensuring your complete satisfaction.",
+      gradient: "from-indigo-100 to-purple-100"
     },
     {
       icon: Truck,
       title: "Timely Delivery",
-      description: "Reliable and prompt delivery to ensure your gifts arrive when you need them.",
+      description: "Reliable and prompt delivery to ensure your packaging arrives right when you need it.",
+      gradient: "from-pink-100 to-fuchsia-100"
     },
 ];
 
@@ -166,12 +172,10 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/10" />
         <div className="relative z-10 flex flex-grow flex-col items-center justify-center space-y-6 px-4">
           <h1 className="font-headline text-6xl font-bold leading-tight text-primary md:text-8xl lg:text-9xl">
-            The Art of <br /> Festive Gifting
+            The Art of <br /> Premium Packaging
           </h1>
           <p className="max-w-xl text-lg text-primary md:text-xl">
-            Discover our curated collection of handcrafted gift boxes, blending
-            tradition with modern elegance. Each piece tells a story of
-            craftsmanship and celebration.
+            Elevate your brand with our curated collection of handcrafted packaging solutions, blending tradition with modern elegance.
           </p>
         </div>
         <div className="relative z-10 mb-8 flex flex-col items-center">
@@ -187,13 +191,13 @@ export default function Home() {
             <div className="relative rounded-lg border-2 border-accent p-8">
               <div className="space-y-6">
                 <h2 className="font-headline text-3xl font-bold text-primary">
-                  From Our Heart to Your Home
+                  From Our Heart to Your Brand
                 </h2>
                 <p className="text-lg leading-relaxed text-left">
-                  We believe that every gift deserves a beautiful story. We specialize in luxury, handcrafted, and packaging solution for corporate gifting, festival hampers, and special occasion design, especially for the Diwali season. 
+                  We believe that packaging is more than just a box; it's an experience. We specialize in luxury, handcrafted packaging solutions for corporate gifting, premium products, and special occasions.
                 </p>
                 <p className="text-lg leading-relaxed text-muted-foreground text-left">
-                   Our packaging is eco-friendly, sustainable, and combines elegance with responsibility towards the planet, from premium trays to custom boxes. We partner with artisans across India, ensuring each product is not just beautiful, but also ethically sourced and made with time-honored techniques.
+                   Our packaging is eco-friendly and sustainable, combining elegance with responsibility. We partner with artisans across India, ensuring each piece is not just beautiful, but also ethically sourced and made with time-honored techniques.
                 </p>
               </div>
             </div>
@@ -210,18 +214,18 @@ export default function Home() {
         </div>
       </section>
 
-       <section className="bg-secondary py-16 md:py-24">
+       <section className="bg-background py-16 md:py-24">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="font-headline text-3xl font-bold text-accent md:text-4xl">Why Choose DERO?</h2>
-          <p className="mx-auto mt-2 max-w-2xl text-lg text-secondary-foreground/80">
-            We are dedicated to delivering excellence and preserving tradition in every gift.
+          <h2 className="font-headline text-3xl font-bold text-primary md:text-4xl">Why Choose DERO?</h2>
+          <p className="mx-auto mt-2 max-w-2xl text-lg text-muted-foreground">
+            We are dedicated to delivering excellence and preserving tradition in every package.
           </p>
           <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {whyChooseUs.map((feature) => (
-              <div key={feature.title} className="rounded-lg border border-accent/20 bg-background/5 p-6 text-left shadow-sm transition-all duration-300 ease-in-out hover:bg-accent/10 hover:shadow-accent/40 hover:shadow-lg">
-                <feature.icon className="mb-4 h-10 w-10 text-accent" />
-                <h3 className="mb-2 text-xl font-bold text-secondary-foreground">{feature.title}</h3>
-                <p className="text-secondary-foreground/70">{feature.description}</p>
+              <div key={feature.title} className={`rounded-lg border border-transparent bg-gradient-to-br ${feature.gradient} p-6 text-left shadow-sm transition-all duration-300 ease-in-out hover:shadow-lg hover:scale-105`}>
+                <feature.icon className="mb-4 h-10 w-10 text-primary" />
+                <h3 className="mb-2 text-xl font-bold text-primary">{feature.title}</h3>
+                <p className="text-primary/80">{feature.description}</p>
               </div>
             ))}
           </div>

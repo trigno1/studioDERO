@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import { Poppins, Playfair_Display } from "next/font/google";
 import "./globals.css";
@@ -20,8 +21,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "DERO - The Art of Festive Gifting",
-  description: "Discover our curated collection of handcrafted gift boxes, blending tradition with modern elegance.",
+  title: "DERO - Premium Packaging Solutions",
+  description: "Exquisite, handcrafted packaging solutions to elevate your brand and unboxing experience.",
 };
 
 export default function RootLayout({

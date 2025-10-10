@@ -12,7 +12,7 @@ export default function Footer() {
             <Image src="/logo.png" alt="DERO logo" width={120} height={48} />
           </Link>
           <p className="mt-2 text-sm text-primary-foreground/80">
-            The Art of Festive Gifting.
+            The Art of Premium Packaging.
           </p>
         </div>
         <div>
