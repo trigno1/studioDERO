@@ -51,6 +51,17 @@ export default function Header() {
     { href: "/#about", label: "About" },
   ];
 
+  const MarqueeText = () => (
+    <>
+      <span className="mx-4 text-sm font-medium">Fully Customizable Orders</span>
+      <span className="mx-4 text-sm font-medium text-accent">•</span>
+      <span className="mx-4 text-sm font-medium">Handcrafted with Precision</span>
+      <span className="mx-4 text-sm font-medium text-accent">•</span>
+      <span className="mx-4 text-sm font-medium">Luxury Packaging Solutions</span>
+      <span className="mx-4 text-sm font-medium text-accent">•</span>
+    </>
+  );
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
@@ -182,6 +193,12 @@ export default function Header() {
               </SheetContent>
             </Sheet>
           </div>
+        </div>
+      </div>
+      <div className="overflow-hidden whitespace-nowrap bg-secondary text-secondary-foreground">
+        <div className="inline-block animate-marquee py-2">
+          <MarqueeText />
+          <MarqueeText />
         </div>
       </div>
     </header>

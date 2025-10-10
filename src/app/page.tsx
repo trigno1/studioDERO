@@ -240,9 +240,9 @@ export default function Home() {
         {renderProductSection("Premium Diwali Gifts", data.premiumDiwali_Gifts, "premium")}
       </div>
       
-      <section id="contact" className="bg-background py-8 md:py-16">
+      <section id="contact" className="bg-background">
         <div className="container mx-auto px-4">
-            <div className="mb-12 text-center">
+            <div className="mb-8 text-center">
               <h1 className="font-headline text-4xl font-bold text-primary md:text-5xl">Contact Us</h1>
               <p className="mt-2 text-lg text-muted-foreground">
                 We'd love to hear from you. Everything is custom-made, so on-request orders are welcome!
