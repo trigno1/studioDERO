@@ -2,7 +2,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { ChevronDown, Gift, ShieldCheck, Sparkles, Leaf, Users, Truck, Mail, Phone, MapPin, Instagram, Facebook } from 'lucide-react';
+import { ChevronDown, Gift, ShieldCheck, Sparkles, Leaf, Users, Truck, Mail, Phone, MapPin, Instagram, Facebook, Clock } from 'lucide-react';
 import Link from 'next/link';
 import ProductCard from '@/components/shared/ProductCard';
 import type { Product } from '@/lib/types';
@@ -250,7 +250,7 @@ export default function Home() {
             </div>
 
             <div className="grid grid-cols-1 gap-12 md:grid-cols-5">
-              <Card className="col-span-1 border-accent md:col-span-3">
+              <Card className="col-span-1 border-accent md:col-span-3 h-full">
                 <CardHeader>
                   <CardTitle className="font-headline text-2xl">Send us a message</CardTitle>
                 </CardHeader>
@@ -260,7 +260,7 @@ export default function Home() {
               </Card>
               
               <div className="md:col-span-2">
-                <Card className="space-y-8 border-accent">
+                <Card className="space-y-8 border-accent h-full">
                   <CardHeader>
                     <CardTitle className="font-headline text-2xl">Contact Information</CardTitle>
                   </CardHeader>
@@ -285,6 +285,14 @@ export default function Home() {
                         <div>
                           <h3 className="font-semibold">Address</h3>
                           <p className="text-muted-foreground">Sushant Lok, Gurgaon</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-4">
+                        <Clock className="mt-1 h-6 w-6 text-primary" />
+                        <div>
+                          <h3 className="font-semibold">Business Hours</h3>
+                          <p className="text-muted-foreground">Monday - Saturday: 10:00 AM - 8:00 PM</p>
+                          <p className="text-muted-foreground">Sunday: Closed</p>
                         </div>
                       </div>
                     </div>
