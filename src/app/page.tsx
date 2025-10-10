@@ -245,7 +245,7 @@ export default function Home() {
             <div className="mb-12 text-center">
               <h1 className="font-headline text-4xl font-bold text-primary md:text-5xl">Contact Us</h1>
               <p className="mt-2 text-lg text-muted-foreground">
-                We'd love to hear from you.
+                We'd love to hear from you. Everything is custom-made, so on-request orders are welcome!
               </p>
             </div>
 
@@ -259,47 +259,59 @@ export default function Home() {
                 </CardContent>
               </Card>
               
-              <Card className="space-y-8 border-accent md:col-span-2">
-                <CardHeader>
-                  <CardTitle className="font-headline text-2xl">Contact Information</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-8">
-                  <div className="space-y-4">
-                    <div className="flex items-start gap-4">
-                      <Mail className="mt-1 h-6 w-6 text-primary" />
-                      <div>
-                        <h3 className="font-semibold">Email</h3>
-                        <a href="mailto:adornatelier1@gmail.com" className="text-muted-foreground hover:text-primary">adornatelier1@gmail.com</a>
+              <div className="md:col-span-2">
+                <Card className="space-y-8 border-accent">
+                  <CardHeader>
+                    <CardTitle className="font-headline text-2xl">Contact Information</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-8">
+                    <div className="space-y-4">
+                      <div className="flex items-start gap-4">
+                        <Mail className="mt-1 h-6 w-6 text-primary" />
+                        <div>
+                          <h3 className="font-semibold">Email</h3>
+                          <a href="mailto:adornatelier1@gmail.com" className="text-muted-foreground hover:text-primary">adornatelier1@gmail.com</a>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-4">
+                        <Phone className="mt-1 h-6 w-6 text-primary" />
+                        <div>
+                          <h3 className="font-semibold">Phone</h3>
+                          <a href="tel:+919758500022" className="text-muted-foreground hover:text-primary">+91 9758500022</a>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-4">
+                        <MapPin className="mt-1 h-6 w-6 text-primary" />
+                        <div>
+                          <h3 className="font-semibold">Address</h3>
+                          <p className="text-muted-foreground">Sushant Lok, Gurgaon</p>
+                        </div>
                       </div>
                     </div>
-                    <div className="flex items-start gap-4">
-                      <Phone className="mt-1 h-6 w-6 text-primary" />
-                      <div>
-                        <h3 className="font-semibold">Phone</h3>
-                        <a href="tel:+919758500022" className="text-muted-foreground hover:text-primary">+91 9758500022</a>
+                     <div className="aspect-video w-full overflow-hidden rounded-lg">
+                      <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d112392.35921021484!2d76.96025114335937!3d28.397860400000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d238442732953%3A0xc33894411132d01!2sSushant%20Lok%2C%20Sector%2043%2C%20Gurugram%2C%20Haryana%2C%20India!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+                        width="100%"
+                        height="100%"
+                        style={{ border: 0 }}
+                        allowFullScreen={true}
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                      ></iframe>
+                    </div>
+                    <div className="space-y-4">
+                      <h2 className="font-headline text-2xl font-bold">Follow Us</h2>
+                      <div className="flex space-x-4">
+                          <a href="#" aria-label="Instagram" className="text-muted-foreground hover:text-primary"><Instagram className="h-6 w-6" /></a>
+                          <a href="#" aria-label="Facebook" className="text-muted-foreground hover:text-primary"><Facebook className="h-6 w-6" /></a>
                       </div>
                     </div>
-                    <div className="flex items-start gap-4">
-                      <MapPin className="mt-1 h-6 w-6 text-primary" />
-                      <div>
-                        <h3 className="font-semibold">Address</h3>
-                        <p className="text-muted-foreground">Sushant Lok, Gurgaon</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="space-y-4">
-                    <h2 className="font-headline text-2xl font-bold">Follow Us</h2>
-                    <div className="flex space-x-4">
-                        <a href="#" aria-label="Instagram" className="text-muted-foreground hover:text-primary"><Instagram className="h-6 w-6" /></a>
-                        <a href="#" aria-label="Facebook" className="text-muted-foreground hover:text-primary"><Facebook className="h-6 w-6" /></a>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </div>
       </section>
     </div>
   );
 }
-
