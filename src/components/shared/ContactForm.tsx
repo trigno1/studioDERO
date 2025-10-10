@@ -57,7 +57,7 @@ export default function ContactForm() {
     try {
       // NOTE: Using a service like FormSubmit.co for demonstration.
       // Replace with your own backend API endpoint.
-      const response = await fetch('https://formsubmit.co/ajax/tanishpareek2005@gmail.com', {
+      const response = await fetch('https://formsubmit.co/ajax/adornatelier1@gmail.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

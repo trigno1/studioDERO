@@ -10,7 +10,7 @@ export default function AboutPage() {
       <div className="container mx-auto px-4 py-16 md:py-24">
         <div className="mb-12 text-left">
           <h1 className="font-headline text-4xl font-bold text-primary md:text-5xl">
-            About DERO
+            About Adorn atelier
           </h1>
           <p className="mt-2 text-lg text-muted-foreground">
             Weaving tales of tradition, artistry, and exceptional packaging.

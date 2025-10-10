@@ -21,7 +21,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "DERO - Premium Packaging Solutions",
+  title: "Adorn atelier - Premium Packaging Solutions",
   description: "Exquisite, handcrafted packaging solutions to elevate your brand and unboxing experience.",
 };
 

@@ -34,10 +34,13 @@ export default function Header() {
   const handleScrollLink = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     if (pathname === '/') {
       e.preventDefault();
-      document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     } else {
       // If on another page, navigate to home and then scroll
-      // The scroll part would need to be handled on the homepage itself
+      window.location.href = `/#${targetId}`;
     }
     setMobileMenuOpen(false); // Close mobile menu on click
   };
@@ -52,7 +55,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
-          <Image src="/logo.png" alt="DERO logo" width={100} height={40} className="h-10 w-auto" />
+          <Image src="/logo.png" alt="Adorn atelier logo" width={100} height={40} className="h-10 w-auto" />
         </Link>
         
         <div className="flex items-center gap-2">
@@ -75,15 +78,16 @@ export default function Header() {
             >
               About
             </a>
-             <Link
-              href="/contact"
+             <a
+              href="/#contact"
+              onClick={(e) => handleScrollLink(e, 'contact')}
               className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
-                pathname === "/contact" ? "text-primary" : "text-muted-foreground"
+                "cursor-pointer text-sm font-medium transition-colors hover:text-primary",
+                 "text-muted-foreground"
               )}
             >
               Contact
-            </Link>
+            </a>
              <DropdownMenu open={isCollectionDropdownOpen} onOpenChange={setCollectionDropdownOpen}>
               <DropdownMenuTrigger asChild>
                  <Button
@@ -131,7 +135,7 @@ export default function Header() {
               <SheetContent side="left">
                 <div className="flex flex-col space-y-6 pt-10">
                   <Link href="/">
-                    <Image src="/logo.png" alt="DERO logo" width={120} height={48} />
+                    <Image src="/logo.png" alt="Adorn atelier logo" width={120} height={48} />
                   </Link>
                   <nav className="flex flex-col space-y-4">
                     {navLinks.map((link) => (
@@ -145,22 +149,23 @@ export default function Header() {
                             : "text-muted-foreground"
                         )}
                         onClick={(e) => {
-                          handleScrollLink(e, link.href.substring(2));
+                          const targetId = link.href.startsWith('/#') ? link.href.substring(2) : 'top';
+                          handleScrollLink(e, targetId);
                         }}
                       >
                         {link.label}
                       </a>
                     ))}
-                    <Link
-                      href="/contact"
+                    <a
+                      href="/#contact"
                       className={cn(
-                        "text-lg font-medium transition-colors hover:text-primary",
-                        pathname === "/contact" ? "text-primary" : "text-muted-foreground"
+                        "cursor-pointer text-lg font-medium transition-colors hover:text-primary",
+                        "text-muted-foreground"
                       )}
-                      onClick={() => setMobileMenuOpen(false)}
+                      onClick={(e) => handleScrollLink(e, 'contact')}
                     >
                       Contact
-                    </Link>
+                    </a>
                      <p className="text-lg font-medium text-primary">Collection</p>
                       {categories.map((category) => (
                         <a

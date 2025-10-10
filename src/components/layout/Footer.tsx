@@ -9,7 +9,7 @@ export default function Footer() {
       <div className="container mx-auto grid grid-cols-1 gap-8 px-4 py-12 md:grid-cols-4">
         <div>
           <Link href="/">
-            <Image src="/logo.png" alt="DERO logo" width={120} height={48} />
+            <Image src="/logo.png" alt="Adorn atelier logo" width={120} height={48} />
           </Link>
           <p className="mt-2 text-sm text-primary-foreground/80">
             The Art of Premium Packaging.
@@ -20,20 +20,20 @@ export default function Footer() {
           <ul className="mt-4 space-y-2">
             <li><Link href="/" className="text-sm text-primary-foreground/80 hover:text-white">Home</Link></li>
             <li><Link href="/about" className="text-sm text-primary-foreground/80 hover:text-white">About Us</Link></li>
-            <li><Link href="/collection/gourmet" className="text-sm text-primary-foreground/80 hover:text-white">Collection</Link></li>
-            <li><Link href="/contact" className="text-sm text-primary-foreground/80 hover:text-white">Contact Us</Link></li>
+            <li><Link href="/#collection" className="text-sm text-primary-foreground/80 hover:text-white">Collection</Link></li>
+            <li><Link href="/#contact" className="text-sm text-primary-foreground/80 hover:text-white">Contact Us</Link></li>
           </ul>
         </div>
         <div>
           <h3 className="font-headline text-lg font-semibold">Contact</h3>
            <div className="mt-4 space-y-2">
-             <a href="mailto:xxxx@gmail.com" className="flex items-center gap-2 text-sm text-primary-foreground/80 hover:text-white">
+             <a href="mailto:adornatelier1@gmail.com" className="flex items-center gap-2 text-sm text-primary-foreground/80 hover:text-white">
                 <Mail className="h-4 w-4" />
-                <span>xxxx@gmail.com</span>
+                <span>adornatelier1@gmail.com</span>
               </a>
-              <a href="tel:+91xxxxxxxxxx" className="flex items-center gap-2 text-sm text-primary-foreground/80 hover:text-white">
+              <a href="tel:+919758500022" className="flex items-center gap-2 text-sm text-primary-foreground/80 hover:text-white">
                 <Phone className="h-4 w-4" />
-                <span>+91 XXX-XXX-XXXX</span>
+                <span>+91 9758500022</span>
               </a>
           </div>
         </div>
@@ -52,7 +52,7 @@ export default function Footer() {
               <Link href="#" className="hover:text-white">Privacy Policy</Link>
           </div>
           <p className="text-center md:text-left">
-              © 2025 DERO. All rights reserved.
+              © 2025 Adorn atelier. All rights reserved.
           </p>
         </div>
       </div>
