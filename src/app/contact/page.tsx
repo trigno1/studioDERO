@@ -49,7 +49,7 @@ export default function ContactPage() {
                   <MapPin className="mt-1 h-6 w-6 text-primary" />
                   <div>
                     <h3 className="font-semibold">Address</h3>
-                    <p className="text-muted-foreground">123 Artisan Way, Craftsville, 45678</p>
+                    <p className="text-muted-foreground">Sushant Lok, Gurgaon</p>
                   </div>
                 </div>
               </div>
