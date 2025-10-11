@@ -7,39 +7,45 @@ export default function PrivacyPage() {
           <h1 className="font-headline text-4xl font-bold text-primary md:text-5xl">
             Privacy Policy
           </h1>
+          
+          <h2 className="font-headline text-2xl font-bold text-primary">1. Overview</h2>
           <p>
-            Your privacy is important to us. It is Adorn atelier's policy to respect your privacy regarding any information we may collect from you across our website.
+            Adorn atelier respects your privacy and is committed to protecting your personal information. This policy explains how we collect, use, and safeguard your data.
           </p>
 
-          <h2 className="font-headline text-2xl font-bold text-primary">1. Information We Collect</h2>
-          <p>
-            We only ask for personal information when we truly need it to provide a service to you. We collect it by fair and lawful means, with your knowledge and consent. We also let you know why we’re collecting it and how it will be used.
-          </p>
-          
-          <h2 className="font-headline text-2xl font-bold text-primary">2. How We Use Your Information</h2>
-          <p>
-            We may use the information we collect to:
-          </p>
+          <h2 className="font-headline text-2xl font-bold text-primary">2. Information We Collect</h2>
           <ul className="list-disc space-y-2 pl-6">
-            <li>Process and fulfill your orders.</li>
-            <li>Communicate with you about your orders, products, services, and promotional offers.</li>
-            <li>Respond to your inquiries.</li>
-            <li>Improve our website and services.</li>
+            <li>Personal details such as name, email address, phone number, and shipping address.</li>
+            <li>Payment information (processed securely via our payment partners; we do not store card details).</li>
+            <li>Analytics data such as IP address, browser type, and time spent on the website (to improve user experience).</li>
           </ul>
 
-          <h2 className="font-headline text-2xl font-bold text-primary">3. Security</h2>
+          <h2 className="font-headline text-2xl font-bold text-primary">3. How We Use Your Information</h2>
+           <ul className="list-disc space-y-2 pl-6">
+            <li>To process and deliver orders.</li>
+            <li>To send order confirmations and updates.</li>
+            <li>To personalize your shopping experience.</li>
+            <li>To send occasional promotional emails (you can unsubscribe anytime).</li>
+          </ul>
+
+          <h2 className="font-headline text-2xl font-bold text-primary">4. Data Security</h2>
           <p>
-            We value your trust in providing us your Personal Information, thus we are striving to use commercially acceptable means of protecting it. But remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and we cannot guarantee its absolute security.
+            We use secure servers and SSL encryption to protect your data. No online transmission is 100% secure, but we strive to safeguard your information to the best of our ability.
           </p>
 
-          <h2 className="font-headline text-2xl font-bold text-primary">4. Links to Other Sites</h2>
+          <h2 className="font-headline text-2xl font-bold text-primary">5. Sharing of Information</h2>
           <p>
-            Our website may contain links to other sites that are not operated by us. If you click on a third-party link, you will be directed to that third party's site. We strongly advise you to review the Privacy Policy of every site you visit. We have no control over, and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services.
+            We do not sell or rent your data. We only share information with trusted service providers (e.g., payment gateways, delivery partners) necessary for fulfilling your orders.
           </p>
           
-          <h2 className="font-headline text-2xl font-bold text-primary">Contact Us</h2>
+          <h2 className="font-headline text-2xl font-bold text-primary">6. Your Rights</h2>
           <p>
-            If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at <a href="mailto:adornatelier1@gmail.com" className="text-primary hover:underline">adornatelier1@gmail.com</a>.
+            You may request correction, deletion, or review of your personal data at any time by contacting us at <a href="mailto:adornatelier1@gmail.com" className="text-primary hover:underline">adornatelier1@gmail.com</a>.
+          </p>
+
+          <h2 className="font-headline text-2xl font-bold text-primary">7. Updates to this Policy</h2>
+           <p>
+            We may update this policy periodically. Any changes will be reflected on this page. Last Updated: {new Date().toLocaleDateString()}.
           </p>
         </div>
       </div>
