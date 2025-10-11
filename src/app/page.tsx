@@ -240,7 +240,7 @@ export default function Home() {
         {renderProductSection("Premium Diwali Gifts", data.premiumDiwali_Gifts, "premium")}
       </div>
       
-      <section id="contact" className="bg-background">
+      <section id="contact" className="bg-background py-16 md:py-24">
         <div className="container mx-auto px-4">
             <div className="mb-8 text-center">
               <h1 className="font-headline text-4xl font-bold text-primary md:text-5xl">Contact Us</h1>
@@ -323,3 +323,5 @@ export default function Home() {
     </div>
   );
 }
+
+    
