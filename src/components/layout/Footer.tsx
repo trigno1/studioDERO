@@ -1,13 +1,13 @@
 
 import Link from "next/link";
-import { Instagram, Mail, Phone, Facebook, Heart } from "lucide-react";
+import { Instagram, Mail, Phone, Facebook, Heart, Clock } from "lucide-react";
 import Image from "next/image";
 
 export default function Footer() {
   return (
     <footer className="bg-primary text-primary-foreground">
-      <div className="container mx-auto grid grid-cols-1 gap-8 px-4 py-12 md:grid-cols-4">
-        <div>
+      <div className="container mx-auto grid grid-cols-1 gap-8 px-4 py-12 md:grid-cols-4 lg:grid-cols-5">
+        <div className="lg:col-span-2">
           <Link href="/">
             <Image src="/logo.png" alt="Adorn atelier logo" width={120} height={48} />
           </Link>
@@ -36,13 +36,26 @@ export default function Footer() {
                 <span>+91 9758500022</span>
               </a>
           </div>
+           <div className="mt-4">
+             <h3 className="font-headline text-lg font-semibold">Social</h3>
+            <div className="mt-2 flex space-x-4">
+              <a href="#" aria-label="Instagram" className="text-primary-foreground/80 hover:text-white"><Instagram /></a>
+              <a href="#" aria-label="Facebook" className="text-primary-foreground/80 hover:text-white"><Facebook /></a>
+            </div>
+           </div>
         </div>
         <div>
-          <h3 className="font-headline text-lg font-semibold">Social</h3>
-          <div className="mt-4 flex space-x-4">
-            <a href="#" aria-label="Instagram" className="text-primary-foreground/80 hover:text-white"><Instagram /></a>
-            <a href="#" aria-label="Facebook" className="text-primary-foreground/80 hover:text-white"><Facebook /></a>
-          </div>
+            <h3 className="font-headline text-lg font-semibold">Business Hours</h3>
+            <div className="mt-4 space-y-2 text-sm text-primary-foreground/80">
+                <div className="flex items-center gap-2">
+                    <Clock className="h-4 w-4" />
+                    <p>Mon - Sat: 10am - 8pm</p>
+                </div>
+                <div className="flex items-center gap-2">
+                    <div className="w-4" /> {/* Spacer */}
+                    <p>Sunday: Closed</p>
+                </div>
+            </div>
         </div>
       </div>
       <div className="border-t border-primary-foreground/10 py-4">
