@@ -48,8 +48,8 @@ export default function Footer() {
       <div className="border-t border-primary-foreground/10 py-4">
         <div className="container mx-auto flex flex-col-reverse items-center justify-between gap-4 px-4 text-sm text-primary-foreground/60 md:flex-row">
           <div className="flex gap-4">
-              <Link href="#" className="hover:text-white">Terms & Conditions</Link>
-              <Link href="#" className="hover:text-white">Privacy Policy</Link>
+              <Link href="/terms" className="hover:text-white">Terms & Conditions</Link>
+              <Link href="/privacy" className="hover:text-white">Privacy Policy</Link>
           </div>
           <p className="text-center md:text-left">
               © 2025 Adorn atelier. All rights reserved.
